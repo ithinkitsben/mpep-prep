@@ -6,1556 +6,1742 @@
 //   Ch. 600  (Parts, Form & Content)
 //   Ch. 1200 (Appeal)
 //   Ch. 1800 (PCT)
-// Format mirrors real exam: stem + 4 choices, "most correct" style, single best answer.
-// Each entry: { chapter, topic, q, choices:[A-D], answer:0-3, explain, cite, highYield? }
+//
+// Question-writing discipline:
+//   • All four choices written to similar length & specificity (no "longest = right" tell)
+//   • Distractors are near-misses — usually one wrong word, date, or procedural step
+//   • No fillers like "Always" / "Never" / "Cannot share inventors"
+//   • Fact patterns with dates/parties force application, not just recall
 
 window.MPEP_QUESTIONS = [
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 2100 — PATENTABILITY  (largest share of the exam)
-  // ══════════════════════════════════════════════════════════════════
-
-  // ───── 101 — Subject Matter Eligibility ─────
   {chapter:"2100", topic:"§101 Eligibility", highYield:true,
-    q:"Under the USPTO's subject-matter eligibility framework, a claim that recites an abstract idea is patent-eligible if the claim as a whole:",
+    q:"An examiner determines that a claim recites the abstract idea of hedging risk. Under the Office's two-step framework, the claim is patent-eligible if:",
     choices:[
-      "Recites the abstract idea in fewer than 25 words",
-      "Integrates the judicial exception into a practical application, or recites additional elements that amount to significantly more",
-      "Was filed by a U.S. resident",
-      "Is supported by a working example"
-    ], answer:1,
-    explain:"Step 2A Prong Two asks whether the exception is integrated into a practical application; if not, Step 2B asks whether additional elements amount to 'significantly more.' Either path saves the claim.",
+      "Step 2A Prong Two concludes the exception is integrated into a practical application",
+      "Step 2A Prong One concludes the claim falls within a statutory category",
+      "Step 2B concludes the additional elements are well-understood, routine, and conventional",
+      "Step 2A Prong One concludes the claim does not recite an abstract idea"
+    ], answer:0,
+    explain:"If Step 2A Prong One has already identified an abstract idea, the claim survives only by Prong Two integration into a practical application, or Step 2B 'significantly more.' Choice C is the inverse — well-understood/routine elements DEFEAT eligibility at Step 2B. Choice D conflates Step 1 (statutory category) with Step 2A.",
     cite:"MPEP §2106"},
 
   {chapter:"2100", topic:"§101 Eligibility", highYield:true,
-    q:"Which of the following is NOT one of the judicially-recognized exceptions to §101?",
-    choices:["Abstract ideas","Laws of nature","Natural phenomena","Improvements to computer functionality"], answer:3,
-    explain:"The three judicial exceptions are abstract ideas, laws of nature, and natural phenomena. Improvements to computer functionality are evidence that a claim is eligible (Enfish).",
+    q:"Which of the following is NOT one of the three judicially-recognized exceptions to patent-eligible subject matter?",
+    choices:[
+      "Laws of nature, such as Newton's laws of motion",
+      "Abstract ideas, such as a fundamental economic practice",
+      "Natural phenomena, such as a newly-discovered mineral",
+      "Mental processes that improve computer functionality"
+    ], answer:3,
+    explain:"The three exceptions are laws of nature, natural phenomena, and abstract ideas. 'Mental processes' is a sub-category of abstract idea, but improvements to computer functionality (Enfish) actually FAVOR eligibility under Step 2A Prong Two.",
     cite:"MPEP §2106.04"},
 
-  {chapter:"2100", topic:"§101 Eligibility", highYield:true,
-    q:"A claim reciting 'a method of hedging risk' that consists entirely of mental steps is most likely rejected because:",
-    choices:["It lacks enablement","It is directed to an abstract idea without significantly more","It is anticipated","It claims a perpetual motion machine"], answer:1,
-    explain:"Bilski-type fundamental economic practices are abstract ideas. Without additional elements integrating the idea into a practical application, the claim fails §101.",
-    cite:"MPEP §2106.04(a)"},
-
   {chapter:"2100", topic:"§101 Utility", highYield:true,
-    q:"Which utility-rejection ground is improper under MPEP §2107?",
-    choices:["Lack of specific utility","Lack of substantial utility","Lack of credible utility","Lack of commercial utility"], answer:3,
-    explain:"Commercial success or marketability is not required. Required utility is specific, substantial, and credible (the 'Brenner v. Manson' utility trio).",
+    q:"An application discloses a compound the inventor predicts may someday have therapeutic uses, with no working examples. The proper §101 utility rejection grounds are that the disclosed utility is not:",
+    choices:[
+      "Credible, though it may be specific and substantial",
+      "Commercially significant or substantial on the present record",
+      "Specific, substantial, or credible, on this record",
+      "Substantial and specific, though it may be credible"
+    ], answer:2,
+    explain:"Under Brenner v. Manson the utility must be specific (this compound vs. compounds generally), substantial (real-world use), and credible. A speculative future therapeutic use without evidence fails all three prongs. Commercial significance is never required.",
     cite:"MPEP §2107.01"},
 
-  // ───── 102 (AIA) — Novelty / Prior Art ─────
   {chapter:"2100", topic:"§102(a)(1) AIA Prior Art", highYield:true, aia:"aia",
-    q:"Under AIA 35 U.S.C. 102(a)(1), a claimed invention is anticipated if it was:",
+    q:"Under AIA 35 U.S.C. 102(a)(1), which is NOT a category of prior art?",
     choices:[
-      "Patented, described in a printed publication, in public use, on sale, or otherwise available to the public before the effective filing date",
-      "Conceived by another before the inventor",
-      "Known to the inventor before filing",
-      "Disclosed in a U.S. application filed less than one year before"
-    ], answer:0,
-    explain:"AIA §102(a)(1) lists five categories — patented, printed publication, public use, on sale, or 'otherwise available to the public' — all measured as of the effective filing date.",
+      "Patented before the effective filing date",
+      "Described in a printed publication before the effective filing date",
+      "Otherwise available to the public before the effective filing date",
+      "Known or used by others in the United States before the invention date"
+    ], answer:3,
+    explain:"Choice C is the pre-AIA §102(a) standard ('known or used by others in this country' tied to date of invention). AIA §102(a)(1) is patented, described in a printed publication, in public use, on sale, or otherwise available to the public, all keyed to the effective filing date.",
     cite:"MPEP §2152.02"},
 
   {chapter:"2100", topic:"§102(b)(1) Grace Period", highYield:true, aia:"aia",
-    q:"Inventor X publishes her invention on March 1, 2025 and files a U.S. application on February 15, 2026. A third party independently publishes the same invention on June 1, 2025. The third-party publication is:",
+    q:"Inventor X discloses her invention at a public conference on March 1, 2025. Third party Y, who learned of the invention independently, publishes a substantially identical disclosure on June 15, 2025. X files her U.S. application on January 10, 2026. With respect to X's application, Y's June 15 publication is:",
     choices:[
-      "Prior art because it pre-dates the application",
-      "Not prior art under §102(b)(1)(B) because of X's earlier disclosure within the grace period",
-      "Prior art only if it qualifies as a printed publication",
-      "Prior art because the third party did not derive it from X"
+      "Prior art under §102(a)(1) — the grace period exception does not apply when Y derived independently",
+      "Not prior art under §102(b)(1)(B) — X publicly disclosed the subject matter before Y did",
+      "Not prior art under §102(b)(1)(A) — Y published within one year of X's filing",
+      "Prior art under §102(a)(2) — Y's publication has its own earlier effective filing date"
     ], answer:1,
-    explain:"§102(b)(1)(B) excludes intervening disclosures if the subject matter was 'publicly disclosed' by the inventor (or one who obtained from inventor) before the intervening disclosure, so long as the application is filed within one year of the inventor's disclosure.",
+    explain:"§102(b)(1)(B) excludes intervening disclosures if the same subject matter was publicly disclosed by the inventor before the intervening disclosure. Independent derivation by Y is irrelevant — what matters is that X's earlier public disclosure of that subject matter shielded the application. Choice D misstates §102(b)(1)(A), which excludes only the inventor's OWN disclosures within one year.",
     cite:"MPEP §2153.02"},
 
-  {chapter:"2100", topic:"§102(b)(1) Grace Period", highYield:true, aia:"aia",
-    q:"The AIA one-year grace period applies to:",
+  {chapter:"2100", topic:"§102 On-Sale Bar", highYield:true, aia:"aia",
+    q:"On June 1, 2023, Inventor A entered into a confidential supply agreement to manufacture and sell her patented compound to one customer, who agreed to keep the compound's composition secret. A filed her U.S. application on July 15, 2024. The June 1, 2023 sale:",
     choices:[
-      "Disclosures by anyone within one year of filing",
-      "Only the inventor's own disclosures or disclosures derived from the inventor",
-      "Foreign patent filings only",
-      "Disclosures made after filing"
+      "Is excused under the §102(b)(1)(A) one-year grace period",
+      "Is §102(a)(1) prior art because secret sales still trigger the on-sale bar (Helsinn)",
+      "Is not §102(a)(1) prior art because the composition was not disclosed to the public",
+      "Is not prior art because the customer was bound by confidentiality"
     ], answer:1,
-    explain:"AIA §102(b)(1)(A) excludes only disclosures by the inventor, a joint inventor, or someone who obtained the subject matter directly or indirectly from them.",
-    cite:"MPEP §2153.01"},
-
-  {chapter:"2100", topic:"On-Sale Bar", highYield:true, aia:"aia",
-    q:"Under AIA §102(a)(1), an offer for sale that is kept confidential between buyer and seller:",
-    choices:[
-      "Is not prior art because it was not public",
-      "Can still be a §102(a)(1) on-sale bar to the inventor's own application",
-      "Triggers a §102(b)(1) grace period",
-      "Is treated as a printed publication"
-    ], answer:1,
-    explain:"Helsinn v. Teva (2019) confirmed that secret sales can still trigger the on-sale bar under AIA §102(a)(1); the sale need not publicly disclose the invention.",
+    explain:"Helsinn v. Teva (2019) held that AIA §102(a)(1) on-sale bar still applies to commercial sales even if the sale does not publicly disclose the invention. The sale here was more than one year before filing, so the §102(b)(1)(A) grace period (one year) doesn't save it.",
     cite:"MPEP §2152.02(d)"},
 
   {chapter:"2100", topic:"§102 Anticipation", highYield:true,
-    q:"For a single reference to anticipate a claim under §102, the reference must:",
+    q:"For a single prior-art reference to anticipate a claim, it must:",
     choices:[
-      "Disclose every element of the claim, arranged as in the claim",
-      "Suggest the claim's combination",
-      "Teach away from the claim",
-      "Be in the same field of endeavor"
-    ], answer:0,
-    explain:"Anticipation requires that a single prior-art reference disclose, expressly or inherently, each and every element of the claim arranged or combined as recited.",
+      "Be in the same field of endeavor as the claimed invention",
+      "Render the claim obvious to one of ordinary skill in the art",
+      "Disclose, expressly or inherently, every element of the claim arranged as in the claim",
+      "Disclose the elements of the claim, even if scattered across separate embodiments"
+    ], answer:2,
+    explain:"Anticipation requires a single reference to disclose each and every element AS arranged in the claim — not just somewhere in the reference, and not just rendering the claim obvious. Field of endeavor is the analogous-art test for §103, not anticipation.",
     cite:"MPEP §2131"},
 
   {chapter:"2100", topic:"Inherency", highYield:true,
-    q:"A feature is inherent in a prior-art reference when:",
+    q:"A prior-art reference does not expressly disclose the claimed feature X. The examiner argues that X is inherent. The examiner's position is sustainable only if X is:",
     choices:[
-      "It is probably present in the reference",
-      "It is necessarily present and would be recognized by one of ordinary skill",
-      "It is mentioned in a later patent",
-      "It is claimed in a continuation"
-    ], answer:1,
-    explain:"Inherency requires that the missing feature be necessarily present — not merely possibly or probably present — in the prior art.",
+      "Capable of being achieved if a skilled artisan optimized the disclosure",
+      "Probably present in the prior-art process under normal conditions",
+      "Disclosed in a related reference cited in the same office action",
+      "Necessarily present as the natural result of the disclosed process"
+    ], answer:3,
+    explain:"Inherency requires NECESSARY presence — not 'probably,' not 'could be.' If the missing feature is the natural and inevitable result of the prior-art teaching, it is inherent and anticipates.",
     cite:"MPEP §2112"},
 
   {chapter:"2100", topic:"Printed Publication", highYield:true,
-    q:"A thesis cataloged and shelved in a university library is a 'printed publication' when:",
+    q:"A graduate thesis was deposited in a single university library, indexed by subject, and shelved on January 1, 2024. The thesis is a 'printed publication' as of:",
     choices:[
-      "It is bound","It is published in a journal",
-      "It is sufficiently accessible to the public interested in the art",
-      "It is in English"
+      "The date the institution conferred the degree on the author",
+      "The date a third party first requested a copy",
+      "The date of cataloging and shelving — sufficient public accessibility",
+      "The date the thesis was peer-reviewed and approved"
     ], answer:2,
-    explain:"Public accessibility is the touchstone. A reference is a printed publication when it has been disseminated or otherwise made available such that interested skilled artisans could locate it through reasonable diligence.",
+    explain:"Public accessibility is the touchstone. A thesis indexed and shelved such that interested skilled artisans could locate it through reasonable diligence is a printed publication as of that date. Degree-conferral, peer review, and actual requests are not the trigger.",
     cite:"MPEP §2128"},
 
-  {chapter:"2100", topic:"§102(a)(2)", highYield:true, aia:"aia",
-    q:"Under AIA §102(a)(2), a U.S. patent application by another that was filed before the claimed invention's effective filing date but published after is prior art:",
+  {chapter:"2100", topic:"§102(a)(2) Reference Date", aia:"aia",
+    q:"An AIA application has an effective filing date of March 10, 2024. A U.S. patent cited against it issued February 15, 2024, claims foreign priority to a Japanese application filed April 1, 2022, and the subject matter relied upon is fully supported in the Japanese application. The patent is §102(a)(2) prior art effective:",
     choices:[
-      "Only after the application publishes",
-      "As of its actual filing date (or earliest priority date for which it was effectively filed)",
-      "Only if the claims overlap",
-      "Never"
-    ], answer:1,
-    explain:"§102(a)(2) prior art is effective as of the earlier-filing date, not the publication date. This is the AIA analog of pre-AIA §102(e).",
-    cite:"MPEP §2154"},
+      "February 15, 2024 — the issue date of the cited U.S. patent",
+      "The actual U.S. filing date of the cited reference, regardless of its foreign priority",
+      "April 1, 2022 — the earliest date for which the relied-upon subject matter was effectively filed",
+      "March 10, 2024 — the application's own effective filing date, by operation of §102(d)"
+    ], answer:2,
+    explain:"§102(d) — a §102(a)(2) reference is effective as of the earliest priority date for which the relied-upon subject matter was effectively filed, including foreign priority under §119. The issue date and the application's own filing date are not the controlling dates.",
+    cite:"MPEP §2154.01(b)"},
 
   {chapter:"2100", topic:"§102(b)(2)(C) Common Ownership", highYield:true, aia:"aia",
-    q:"A prior-filed U.S. application by another is excepted from §102(a)(2) prior art if:",
+    q:"A prior-filed U.S. application by another, otherwise §102(a)(2) prior art, is excepted from §102(a)(2) when:",
     choices:[
-      "It claims a different invention",
-      "Both applications were owned by the same entity (or subject to obligation of assignment) by the effective filing date",
-      "It was abandoned",
-      "It was filed in a different art unit"
-    ], answer:1,
-    explain:"§102(b)(2)(C) removes commonly-owned subject matter from §102(a)(2). Ownership/obligation must exist by the effective filing date of the later claim.",
+      "Both applications were assigned to the same entity on or before the issue date",
+      "Both applications were filed by the same inventor under a joint research agreement",
+      "Both applications were commonly owned not later than the effective filing date of the claimed invention",
+      "Both applications claimed an effective filing date earlier than March 16, 2013"
+    ], answer:2,
+    explain:"§102(b)(2)(C) removes commonly-owned subject matter from §102(a)(2). The ownership/obligation must exist not later than the effective filing date of the later claim — not later assignment, and not tied to inventor identity. Choice D conflates AIA effective date.",
     cite:"MPEP §2154.02(c)"},
 
-  // ───── 103 — Obviousness ─────
-  {chapter:"2100", topic:"Graham Factors", highYield:true,
-    q:"The Graham v. Deere obviousness inquiry requires the examiner to determine all of the following EXCEPT:",
+  {chapter:"2100", topic:"Public Use", highYield:true,
+    q:"To establish that pre-filing use was experimental and not a public-use bar, applicant should rely on facts including:",
     choices:[
-      "Scope and content of the prior art",
-      "Differences between the prior art and claims",
-      "Level of ordinary skill in the art",
-      "Whether the inventor used a computer simulation"
+      "The use occurred outside business hours and was not advertised",
+      "The use lasted less than one year before the application was filed",
+      "Only one of ordinary skill in the art could have observed the relevant features",
+      "The inventor controlled the use, maintained records, and used confidentiality where feasible"
     ], answer:3,
-    explain:"Graham factors: (1) scope and content of prior art; (2) differences from claims; (3) level of ordinary skill; (4) secondary considerations. The inventor's tools are not part of the analysis.",
+    explain:"Experimental-use indicia: inventor's control, monitoring/records, confidentiality obligations where practical, necessity of public testing, and that experimentation (not commercial exploitation) was the primary purpose. Duration alone is not the test.",
+    cite:"MPEP §2133.03(e)"},
+
+  {chapter:"2100", topic:"Graham Factors", highYield:true,
+    q:"The Graham v. John Deere obviousness analysis requires the examiner to make factual determinations on all of the following EXCEPT:",
+    choices:[
+      "Level of ordinary skill in the pertinent art at the time",
+      "Scope and content of the prior art at the time of the invention",
+      "Whether the inventor had access to the cited references",
+      "Differences between the claimed invention and the prior art"
+    ], answer:2,
+    explain:"Graham factors: scope/content of prior art, differences from claims, level of ordinary skill, plus secondary considerations. Whether the inventor personally saw the references is irrelevant — obviousness is judged from the perspective of a hypothetical person of ordinary skill.",
     cite:"MPEP §2141"},
 
   {chapter:"2100", topic:"KSR Rationales", highYield:true,
-    q:"Which is NOT one of the seven KSR rationales for an obviousness rejection?",
+    q:"Which is NOT among the rationales identified in MPEP §2143 for supporting a §103 rejection?",
     choices:[
+      "Reliance on the commercial value of the combination to a competitor",
       "Combining prior art elements according to known methods to yield predictable results",
-      "Simple substitution of one known element for another",
-      "Obvious to try — choosing from a finite number of identified, predictable solutions",
-      "Reliance on commercial considerations"
-    ], answer:3,
-    explain:"The seven KSR/MPEP rationales include known combinations, simple substitution, use of known technique, applying known technique to a known device ready for improvement, obvious to try, design incentives/market forces, and TSM. Commercial considerations alone are not a rationale.",
+      "Simple substitution of one known element for another with predictable results",
+      "Use of known technique to improve similar devices in the same way"
+    ], answer:0,
+    explain:"The seven §2143 rationales: combination of known elements, simple substitution, use of known technique, applying known technique to improve a ready-for-improvement device, obvious to try (finite predictable solutions), known design incentives/market forces, and TSM. Competitor's commercial valuation is not a rationale.",
     cite:"MPEP §2143"},
 
   {chapter:"2100", topic:"Teaching Away", highYield:true,
-    q:"A reference 'teaches away' from a proposed combination when it:",
+    q:"A reference is properly characterized as 'teaching away' from a claimed combination when it:",
     choices:[
-      "Is silent on the relevant feature",
-      "Criticizes, discredits, or otherwise discourages following the claimed path",
-      "Is older than 10 years",
-      "Is in a different USPTO art unit"
+      "Was published more than a decade before the claimed invention",
+      "Criticizes, discredits, or otherwise discourages the path the claim takes",
+      "Recommends a different solution to a similar but distinct problem",
+      "Does not address the specific combination at issue"
     ], answer:1,
-    explain:"Mere silence is not teaching away. The reference must actually discourage one of ordinary skill from the path the claim takes.",
+    explain:"Teaching away requires actual discouragement — criticism, discrediting, or steering the artisan away from the claim's approach. Mere silence, alternative recommendations for a different problem, or age of the reference do not qualify.",
     cite:"MPEP §2145"},
 
   {chapter:"2100", topic:"Secondary Considerations", highYield:true,
     q:"Which is NOT a recognized objective indicium of non-obviousness?",
-    choices:["Commercial success","Long-felt but unsolved need","Failure of others","Inventor's personal financial investment"], answer:3,
-    explain:"Recognized indicia: commercial success, long-felt need, failure of others, copying, unexpected results, skepticism, industry praise, licensing. Personal investment is not.",
+    choices:[
+      "Long-felt but unsolved need in the relevant industry",
+      "Commercial success with a nexus to the claimed features",
+      "The inventor's individual creativity or insight in conceiving the claim",
+      "Failure of others to achieve the claimed result"
+    ], answer:2,
+    explain:"Recognized indicia (objective evidence): long-felt need, commercial success with nexus, failure of others, copying, unexpected results, industry skepticism, industry praise, and licensing. The inventor's subjective creativity is not an objective indicium.",
     cite:"MPEP §2145"},
 
   {chapter:"2100", topic:"Nexus", highYield:true,
-    q:"For commercial success to overcome obviousness, the patentee must show:",
+    q:"Patentee submits commercial-success evidence to rebut an obviousness rejection. To be probative, the success must be tied to:",
     choices:[
-      "Sales exceeded one million dollars",
-      "A nexus between the success and the claimed invention's novel features",
-      "The product was advertised",
-      "The product won an industry award"
-    ], answer:1,
-    explain:"Commercial success must be tied (nexus) to what is claimed and novel — not to features in the prior art, marketing, or unrelated factors.",
+      "Any feature recited in any claim of the patent at issue",
+      "Features that were aggressively marketed by the patentee",
+      "Sales figures exceeding $1 million in the first year of release",
+      "The novel features that distinguish the claim from the prior art"
+    ], answer:3,
+    explain:"The nexus requirement: commercial success must be attributable to the novel and unobvious features of the claim — not to features already in the prior art, not to marketing alone, and not to arbitrary sales thresholds.",
     cite:"MPEP §716.03"},
 
   {chapter:"2100", topic:"Analogous Art", highYield:true,
-    q:"Two-prong test for analogous art asks whether the reference is:",
+    q:"A reference is analogous prior art for §103 purposes if it satisfies:",
     choices:[
-      "From the same field of endeavor OR reasonably pertinent to the inventor's problem",
-      "Cited in the IDS AND published in English",
-      "Filed in the U.S. AND less than 10 years old",
-      "From the same company AND the same inventor"
-    ], answer:0,
-    explain:"Analogous art: (1) same field of endeavor regardless of the problem, OR (2) reasonably pertinent to the particular problem.",
+      "Both prongs: same field of endeavor AND reasonably pertinent to the problem",
+      "The TSM test as it existed prior to KSR v. Teleflex",
+      "Either prong: same field of endeavor OR reasonably pertinent to the problem",
+      "Citation in the applicant's own information disclosure statement"
+    ], answer:2,
+    explain:"Two-prong test, satisfied by EITHER prong: (1) same field of endeavor, regardless of the problem, OR (2) reasonably pertinent to the particular problem the inventor was trying to solve. Choice A wrongly demands both.",
     cite:"MPEP §2141.01(a)"},
 
   {chapter:"2100", topic:"Prima Facie Obviousness", highYield:true,
-    q:"A prima facie case of obviousness requires the examiner to articulate:",
+    q:"To establish a prima facie case of obviousness after KSR, the examiner must articulate:",
     choices:[
-      "A specific motivation in the prior art",
+      "A specific teaching, suggestion, or motivation found expressly in the prior art",
+      "A working example of the combination in the cited references",
       "Some articulated reasoning with rational underpinning to combine the references",
-      "Proof that one of skill would have built the combination",
-      "A working example in the prior art"
-    ], answer:1,
-    explain:"After KSR, the examiner must provide articulated reasoning with rational underpinning. A specific TSM in the prior art is not required.",
+      "Evidence that one of ordinary skill actually built the proposed combination"
+    ], answer:2,
+    explain:"KSR rejected a rigid TSM-only test. The examiner must articulate reasoning with rational underpinning, but a specific in-the-reference motivation is not required. Actual construction or a working example in the prior art is not required either.",
     cite:"MPEP §2142, §2143"},
 
   {chapter:"2100", topic:"Obvious-to-Try", highYield:true,
-    q:"'Obvious to try' supports an obviousness rejection when there is:",
+    q:"An 'obvious to try' rationale under §2143 properly supports a §103 rejection when:",
     choices:[
-      "A finite number of identified, predictable solutions with a reasonable expectation of success",
-      "Any number of theoretical solutions",
-      "An unsolved long-felt need",
-      "Industry skepticism"
-    ], answer:0,
-    explain:"KSR allowed 'obvious to try' when there are a finite, known set of identified solutions and a reasonable expectation of success — not throwing darts at unpredictable variables.",
+      "The artisan could have varied parameters across an unpredictable design space",
+      "The artisan would have had a finite number of identified, predictable solutions",
+      "Any number of theoretical approaches existed in the relevant art",
+      "The applicant has not yet shown actual evidence of unexpected results"
+    ], answer:1,
+    explain:"KSR endorsed 'obvious to try' only where a finite, known set of identified predictable solutions exists with a reasonable expectation of success — not throwing darts at an unpredictable space.",
     cite:"MPEP §2143(I)(E)"},
 
-  {chapter:"2100", topic:"Reasonable Expectation", highYield:true,
-    q:"Absolute predictability of success is required for an obviousness combination:",
-    choices:["Always","Only in unpredictable arts","Never — a reasonable expectation of success suffices","Only for chemical inventions"], answer:2,
-    explain:"Only a reasonable, not absolute, expectation of success is required.",
+  {chapter:"2100", topic:"Reasonable Expectation of Success", highYield:true,
+    q:"For a §103 combination to be sustainable, the level of predictability required is:",
+    choices:[
+      "Reasonable expectation of success, not absolute predictability",
+      "Working examples in the prior art confirming the combination",
+      "Absolute certainty that the combination would achieve the claimed result",
+      "Probability greater than 95% that the combination would work"
+    ], answer:0,
+    explain:"Reasonable expectation of success — not absolute certainty — is the bar. Absolute predictability is too high; theoretical possibility is too low.",
     cite:"MPEP §2143.02"},
 
-  // ───── 112 — Specification & Claims ─────
   {chapter:"2100", topic:"§112(a) Written Description", highYield:true,
-    q:"To satisfy the written description requirement, the specification must:",
+    q:"To satisfy the written description requirement for a later-presented claim, the original disclosure must:",
     choices:[
-      "Use the exact words of the later-presented claim",
-      "Convey to one skilled in the art that the inventor had possession of the claimed invention at the filing date",
-      "Provide a working example",
-      "Include drawings"
-    ], answer:1,
-    explain:"Possession at the filing date is the test. Verbatim support is not required, but the disclosure must reasonably convey possession of the full scope.",
+      "Reasonably convey to a skilled artisan that the inventor possessed the claimed subject matter",
+      "Use the verbatim language of the later claim somewhere in the specification",
+      "Disclose at least one working example for every element of the claim",
+      "Provide enough detail to enable practice without undue experimentation"
+    ], answer:0,
+    explain:"Possession at the filing date is the test. Verbatim support is not required; a working example for every element is not required; and enablement (choice D) is a separate §112(a) requirement, not the written-description test.",
     cite:"MPEP §2163"},
 
   {chapter:"2100", topic:"§112(a) Enablement", highYield:true,
-    q:"The Wands factors are used to determine:",
-    choices:["Definiteness under §112(b)","Whether experimentation needed to practice the claim is undue","Subject-matter eligibility","Restriction propriety"], answer:1,
-    explain:"In re Wands sets out eight factors (quantity of experimentation, direction, examples, nature of invention, state of art, skill, predictability, breadth of claims) for assessing undue experimentation.",
+    q:"The Wands factors are used by the examiner to assess:",
+    choices:[
+      "Whether the inventor was in possession of the claimed invention at filing",
+      "Whether undue experimentation would be needed to practice the full claim scope",
+      "Whether the claim recites patent-eligible subject matter under §101",
+      "Whether claim terms are sufficiently definite under §112(b)"
+    ], answer:1,
+    explain:"In re Wands sets out eight factors (quantity of experimentation, direction, examples, nature of invention, state of art, skill, predictability, breadth of claims) for evaluating undue experimentation under enablement. Possession is §112(a) written description; definiteness is §112(b); eligibility is §101.",
     cite:"MPEP §2164.01(a)"},
 
   {chapter:"2100", topic:"§112(a) Best Mode", highYield:true, aia:"aia",
-    q:"After the AIA, failure to disclose best mode:",
+    q:"After the AIA, the best-mode requirement is:",
     choices:[
-      "Is still a basis for rejection during examination but is no longer a basis for invalidity in litigation",
-      "Has been completely eliminated",
-      "Is fatal to the application",
-      "Is enforced only for biotech inventions"
-    ], answer:0,
-    explain:"AIA §15 left best mode as a §112(a) requirement (still a basis for examiner rejection in theory, though rarely raised) but eliminated it as a defense in litigation under §282.",
+      "Still a basis for invalidity, but no longer required during examination",
+      "Eliminated for both examination and litigation purposes",
+      "Still required during examination, but no longer a basis for invalidity in litigation",
+      "Required only for applications subject to a foreign priority claim"
+    ], answer:2,
+    explain:"AIA §15 left best mode as a §112(a) requirement during examination (rarely raised in practice), but eliminated it as a defense to validity in litigation under §282. Not eliminated entirely; not tied to foreign priority.",
     cite:"MPEP §2165"},
 
   {chapter:"2100", topic:"§112(b) Definiteness", highYield:true,
-    q:"Under §112(b), a claim is indefinite when:",
+    q:"Under Nautilus v. Biosig, a claim is indefinite when:",
     choices:[
-      "Any term is broad",
-      "A skilled person, reading the claim in light of the specification, cannot ascertain the scope with reasonable certainty",
-      "It contains relative terms",
-      "It uses functional language"
-    ], answer:1,
-    explain:"Nautilus v. Biosig set the 'reasonable certainty' standard. Breadth is not indefiniteness; ambiguity is.",
+      "Any term in the claim is reasonably susceptible to two or more meanings",
+      "The claim uses relative terms such as 'about' or 'substantially'",
+      "The claim recites broad functional language without any structural limitation",
+      "A skilled artisan reading the specification cannot ascertain the scope with reasonable certainty"
+    ], answer:3,
+    explain:"The Nautilus 'reasonable certainty' standard governs. Multiple meanings (insolubly ambiguous) is outdated language. Broad functional language and relative terms are not per se indefinite.",
     cite:"MPEP §2173.02"},
 
-  {chapter:"2100", topic:"§112(d) Improper Dependent", highYield:true,
-    q:"A dependent claim is improper under §112(d) if it:",
+  {chapter:"2100", topic:"§112(d) Dependent Claim", highYield:true,
+    q:"A dependent claim is improper under §112(d) when it:",
     choices:[
+      "Repeats limitations already recited in the claim from which it depends",
       "Fails to further limit the claim from which it depends",
-      "Repeats limitations from the parent",
-      "Is longer than the independent claim",
-      "Uses 'comprising'"
-    ], answer:0,
-    explain:"§112(d) requires a dependent claim to specify a further limitation. A claim that broadens or fails to narrow is improper.",
+      "Uses 'comprising' rather than 'consisting of' as its transition",
+      "Refers to more than one independent claim in the alternative"
+    ], answer:1,
+    explain:"§112(d) requires the dependent claim to specify a further limitation. Repeating limitations is permitted; transition phrase choice doesn't make a dependent claim improper; multiple-dependency in the alternative is permitted under §112(e).",
     cite:"MPEP §608.01(n)"},
 
   {chapter:"2100", topic:"§112(f) Means-Plus-Function", highYield:true,
-    q:"A claim element invokes §112(f) when it:",
+    q:"Which claim element most clearly invokes §112(f) construction?",
     choices:[
-      "Uses any functional language",
-      "Uses 'means for' or a nonce word coupled with functional language and no sufficient structure",
-      "Recites a step",
-      "Recites a system"
-    ], answer:1,
-    explain:"The 'means for' presumption (and nonce-word equivalents like 'module for') invokes §112(f), construed to cover the corresponding structure in the specification and its equivalents.",
+      "A processor configured to compute a hash of the input data",
+      "A hashing module that receives the input data and outputs a hash value",
+      "Means for computing a hash of the input data",
+      "A computer-implemented step of generating a hash from input data"
+    ], answer:2,
+    explain:"'Means for [function]' creates the presumption that §112(f) applies. 'Module' is a nonce word that MIGHT invoke §112(f) if there's no recited structure, but 'means for' is the clearer trigger. A processor 'configured to' typically recites sufficient structure to avoid §112(f). Method-step claims are governed by §112(f)'s 'step for' formulation, not 'computer-implemented step.'",
     cite:"MPEP §2181"},
 
   {chapter:"2100", topic:"Broadest Reasonable Interpretation", highYield:true,
-    q:"During examination, claims are given their:",
-    choices:["Narrowest interpretation","Plain and ordinary meaning only","Broadest reasonable interpretation consistent with the specification","Same construction as in litigation"], answer:2,
-    explain:"BRI applies in examination — read the claim broadly but reasonably in light of the specification, as one of ordinary skill would.",
+    q:"During examination, the examiner construes pending claims under:",
+    choices:[
+      "The narrowest construction supported by the specification's working examples",
+      "Their broadest reasonable interpretation in light of the specification",
+      "The same Phillips claim construction standard used in district court litigation",
+      "Their plain and ordinary meaning to one of ordinary skill, ignoring the specification"
+    ], answer:1,
+    explain:"BRI during examination — broad but reasonable, read in light of the specification as understood by one of ordinary skill. Phillips applies to issued patents in litigation, not examination.",
     cite:"MPEP §2111"},
 
   {chapter:"2100", topic:"Transitional Phrases", highYield:true,
-    q:"The transitional phrase 'consisting of' in a claim means:",
+    q:"A claim using the transition phrase 'consisting of' is best characterized as:",
     choices:[
-      "Open — additional unrecited elements may be present",
-      "Closed — excludes any element not specified",
-      "Partially closed — only unrelated additions permitted",
-      "Same as 'comprising'"
-    ], answer:1,
-    explain:"'Comprising' is open. 'Consisting of' is closed. 'Consisting essentially of' permits only those additions that do not materially affect the basic and novel characteristics.",
+      "Closed — additional unrecited elements are excluded",
+      "Partially closed — only elements not affecting the basic characteristics permitted",
+      "Equivalent to 'comprising' for infringement purposes",
+      "Open — additional unrecited elements may be present"
+    ], answer:0,
+    explain:"'Consisting of' is closed. 'Comprising' is open. 'Consisting essentially of' is partially closed (choice C describes that phrase, not 'consisting of').",
     cite:"MPEP §2111.03"},
 
   {chapter:"2100", topic:"Consisting Essentially Of",
-    q:"'Consisting essentially of' permits additional unrecited elements:",
+    q:"A claim using 'consisting essentially of' permits unrecited additional ingredients only if those additions:",
     choices:[
-      "Without limit",
-      "Only if they do not materially affect the basic and novel characteristics of the claimed invention",
-      "Never",
-      "Only if specifically claimed"
+      "Are listed in the specification's preferred-embodiment section",
+      "Do not materially affect the basic and novel characteristics of the claimed invention",
+      "Constitute less than 10% by weight of the claimed composition",
+      "Are functionally equivalent to the recited ingredients"
     ], answer:1,
-    explain:"Partially closed — extra elements allowed only if they do not materially affect the basic and novel characteristics.",
+    explain:"Partially closed: additions are allowed only if they do not materially affect the basic and novel characteristics. There is no embodiment-list rule, no equivalence rule, and no fixed weight threshold.",
     cite:"MPEP §2111.03"},
 
   {chapter:"2100", topic:"Preamble", highYield:true,
-    q:"A preamble limits the claim when it:",
+    q:"A preamble is given patentable weight when it:",
     choices:[
-      "Is recited at all",
-      "Recites essential structure or steps, or breathes life and meaning into the claim",
-      "Mentions the field of invention",
-      "Uses 'an apparatus'"
-    ], answer:1,
-    explain:"A preamble is limiting when it gives life, meaning, and vitality to the claim — e.g., it is essential to understanding terms in the body or recites structure later relied upon.",
+      "Appears at the start of the claim before the transition phrase",
+      "States an intended use that the apparatus can perform",
+      "Describes the field of use for the claimed apparatus",
+      "Recites essential structure or breathes life and meaning into the claim"
+    ], answer:3,
+    explain:"A preamble is limiting only when it gives life, meaning, and vitality to the claim — e.g., recites essential structure, antecedent basis for terms used later, or limitations relied on during prosecution. Field of use and intended use are typically not limiting.",
     cite:"MPEP §2111.02"},
 
   {chapter:"2100", topic:"Markush", highYield:true,
-    q:"A proper Markush group recites alternatives:",
+    q:"Which is the proper Markush format?",
     choices:[
-      "Selected from the group consisting of A, B, and C",
-      "Including A, B, and C",
-      "A or B or C or others",
-      "Such as A, B, or C"
-    ], answer:0,
-    explain:"Proper Markush form: 'selected from the group consisting of...' — a closed list of alternatives.",
+      "Wherein X is one of A, B, C, or any analog thereof",
+      "Wherein X comprises at least one of A, B, or C",
+      "Wherein X is A, B, C, or other equivalent compounds",
+      "Wherein X is selected from the group consisting of A, B, and C"
+    ], answer:3,
+    explain:"Proper Markush form is 'selected from the group consisting of [closed list of alternatives].' Open-ended language like 'comprises,' 'or analog thereof,' and 'or other' destroys the closed-group structure.",
     cite:"MPEP §2117"},
 
   {chapter:"2100", topic:"Product-by-Process", highYield:true,
-    q:"In a product-by-process claim, patentability of the product is determined by:",
+    q:"A claim recites 'a polymer prepared by [process steps].' Patentability of the polymer is determined by:",
     choices:[
-      "The process steps recited",
-      "The product itself, regardless of how it is made",
-      "The product and the process together",
-      "The intended use"
-    ], answer:1,
-    explain:"A product-by-process claim is patentable based on the structural product. If the prior-art product is the same, the claim is anticipated even if made by a different process.",
+      "The combination of the process steps and the recited polymer composition",
+      "The recited process steps and any unique product features they impart",
+      "The structural identity of the polymer itself, regardless of how it is made",
+      "Whether the process steps would have been obvious in view of the prior art"
+    ], answer:2,
+    explain:"Product-by-process patentability is based on the structural identity of the product. If the prior-art polymer is structurally the same, the claim is anticipated even if the prior art used a different process.",
     cite:"MPEP §2113"},
 
   {chapter:"2100", topic:"Intended Use",
-    q:"A statement of intended use in the preamble of an apparatus claim is generally:",
+    q:"An apparatus claim's preamble states the device is 'for filtering airborne particulates.' A prior-art device is structurally identical but is described as a coffee filter. The claim is:",
     choices:[
-      "A limitation that distinguishes the prior art",
-      "Not a limitation if the prior-art apparatus is capable of the use",
-      "A basis for rejection under §101",
-      "Required to be supported by a working example"
+      "Not anticipated — intended use limits the apparatus to the recited context",
+      "Anticipated — the prior-art device is structurally capable of the recited use",
+      "Anticipated only if the prior art expressly disclosed air filtration",
+      "Not anticipated — the prior-art device was used for a different purpose"
     ], answer:1,
-    explain:"Apparatus claims cover what a device is, not what it does. If the prior-art structure can perform the recited use, the claim is anticipated.",
+    explain:"Apparatus claims cover what the device IS, not what it is intended for. If the prior-art structure is capable of the recited use, the claim is anticipated regardless of the prior art's stated purpose.",
     cite:"MPEP §2114"},
 
-  {chapter:"2100", topic:"Functional Language",
-    q:"In an apparatus claim, functional language without corresponding structure typically:",
-    choices:[
-      "Is improper and indefinite",
-      "May invoke §112(f) and be limited to structures disclosed in the specification",
-      "Always broadens the claim",
-      "Is treated as a method step"
-    ], answer:1,
-    explain:"Functional language coupled with 'means' (or nonce term) and no recited structure invokes §112(f), limiting the claim to disclosed structures and their equivalents.",
-    cite:"MPEP §2181"},
-
   {chapter:"2100", topic:"Range Anticipation",
-    q:"A claimed range is anticipated by a single point of the prior-art range when:",
+    q:"A claim recites a temperature 'between 100 °C and 200 °C.' A prior-art reference discloses a single working example at 150 °C. The claim is:",
     choices:[
-      "The point falls within the claimed range",
-      "The point is critical",
-      "The range is narrow",
-      "The reference is a U.S. patent"
+      "Anticipated by the 150 °C example — a single point in the range anticipates",
+      "Rendered obvious by the example, but not technically anticipated as a matter of law",
+      "Anticipated only when the prior-art example is identified as a preferred embodiment",
+      "Not anticipated unless the prior art expressly discloses the full claimed range"
     ], answer:0,
-    explain:"A single prior-art example within the claimed range anticipates. A prior-art range that overlaps may render the claim obvious but does not strictly anticipate.",
+    explain:"A single prior-art point falling within the claimed range anticipates. A prior-art range that merely overlaps may render the claim obvious (not anticipated), but an actual disclosed point within the range anticipates.",
     cite:"MPEP §2131.03"},
 
   {chapter:"2100", topic:"Genus/Species",
-    q:"Disclosure of a species in the prior art:",
-    choices:["Does not anticipate a generic claim","Anticipates a generic claim covering it","Always renders the genus obvious","Triggers double patenting"], answer:1,
-    explain:"A species anticipates the genus that encompasses it. (Conversely, the genus does not necessarily anticipate every species.)",
+    q:"A claim is directed to a generic class of compounds. A prior-art reference discloses a single specific compound within that class. The claim is:",
+    choices:[
+      "Not anticipated, because the prior-art species does not disclose the full generic scope",
+      "Anticipated by the species — disclosure of any species anticipates the genus",
+      "Rendered obvious but not anticipated, because the species is narrower than the genus",
+      "Anticipated only if the prior-art reference identifies the species as a preferred embodiment"
+    ], answer:1,
+    explain:"A species in the prior art anticipates the generic claim that encompasses it. The reverse is not true — disclosure of a genus does not always anticipate every species within it.",
     cite:"MPEP §2131.02"},
 
-  {chapter:"2100", topic:"Swearing Behind (pre-AIA only)", aia:"pre-aia",
-    q:"For an application subject to pre-AIA §102, a Rule 1.131 affidavit may be used to:",
+  {chapter:"2100", topic:"Swearing Behind", aia:"pre-aia",
+    q:"In an application subject to pre-AIA §102, a Rule 1.131 affidavit may be used to:",
     choices:[
-      "Antedate a reference that is not a statutory bar by showing prior invention",
-      "Overcome any §102(b) statutory bar",
-      "Overcome §103 by removing the inventor's own work",
-      "Establish best mode"
-    ], answer:0,
-    explain:"Rule 131 swearing-behind antedates non-statutory bars under pre-AIA §102(a) and (e). It cannot overcome §102(b) absolute bars. Not available for AIA applications.",
+      "Remove the inventor's own work from §102(a) prior art",
+      "Establish a foreign priority date earlier than the actual filing",
+      "Antedate a §102(a) or §102(e) reference by showing prior invention",
+      "Overcome a statutory bar under pre-AIA §102(b)"
+    ], answer:2,
+    explain:"Rule 1.131 (only for pre-AIA applications) antedates non-statutory bars under §102(a) and §102(e). It cannot overcome a §102(b) statutory bar, does not establish foreign priority (that's §119), and removing one's own work from prior art is now handled by §102(b) exceptions under the AIA.",
     cite:"MPEP §715"},
 
   {chapter:"2100", topic:"Rule 1.132 Declaration", highYield:true,
-    q:"A Rule 1.132 declaration may be used to:",
+    q:"A Rule 1.132 declaration is most commonly used to submit:",
     choices:[
-      "Antedate a reference",
-      "Submit evidence of unexpected results, commercial success, or non-analogous art",
-      "Establish inventorship",
-      "Replace an IDS"
-    ], answer:1,
-    explain:"Rule 1.132 declarations submit evidence relevant to patentability — typically unexpected results, secondary considerations, or to rebut an examiner's factual finding.",
+      "Evidence of unexpected results to rebut an obviousness rejection",
+      "An English translation of a non-English prior-art reference",
+      "Evidence of prior invention to antedate a §102(a) reference",
+      "A certified copy of a foreign priority application"
+    ], answer:0,
+    explain:"Rule 1.132 declarations submit evidence relevant to patentability — typically unexpected results, secondary considerations, or factual rebuttals of the examiner's findings. Prior invention is Rule 1.131; foreign priority is handled under §119; translations have their own format.",
     cite:"MPEP §716"},
 
   {chapter:"2100", topic:"Unexpected Results",
-    q:"Evidence of unexpected results must show a difference that is:",
+    q:"To rebut a §103 rejection with unexpected-results evidence, the applicant must show a difference that is:",
     choices:[
-      "Any difference",
-      "Of a difference in kind or in degree that would not have been expected",
-      "Commercially significant",
-      "Recognized by an industry award"
-    ], answer:1,
-    explain:"The results must be unexpectedly different in kind, or unexpectedly different in degree, compared to the closest prior art. Mere differences are not enough.",
+      "Sustained across all commercial embodiments of the claim",
+      "Of any measurable magnitude compared to the prior art",
+      "Recognized by an industry award or third-party publication",
+      "Unexpectedly different in kind or in degree from what one of skill would predict"
+    ], answer:3,
+    explain:"The results must be unexpected — different in kind, or in degree, beyond what one of ordinary skill would have predicted. Mere differences and external recognition do not suffice.",
     cite:"MPEP §716.02"},
 
   {chapter:"2100", topic:"Comparative Testing",
     q:"Comparative test data submitted to rebut obviousness must compare the claimed invention to:",
-    choices:["A randomly chosen reference","The closest prior art","The earliest cited reference","A prior product of the inventor"], answer:1,
-    explain:"Showings of unexpected results must compare against the closest prior art, not just any reference.",
+    choices:[
+      "The earliest-cited prior-art reference in the rejection",
+      "The closest prior art identified by the examiner",
+      "A randomly chosen reference within the same technology",
+      "A commercial product sold by the same applicant"
+    ], answer:1,
+    explain:"Comparisons must be against the closest prior art identified by the examiner — not the earliest cited, a random reference, or the applicant's own prior product.",
     cite:"MPEP §716.02(e)"},
 
-  {chapter:"2100", topic:"Double Patenting", highYield:true,
-    q:"Nonstatutory (obviousness-type) double patenting can be overcome by:",
+  {chapter:"2100", topic:"Obviousness-Type Double Patenting", highYield:true,
+    q:"Obviousness-type double patenting between a pending application and an earlier commonly-owned patent is overcome by:",
     choices:[
-      "A terminal disclaimer tying the term and ownership of the later patent to the earlier",
-      "Antedating the earlier patent",
-      "Filing a continuation",
-      "Filing an IDS"
+      "Filing a terminal disclaimer tying expiration and common ownership to the earlier patent",
+      "Antedating the earlier patent under Rule 1.131",
+      "Filing a continuation application claiming the same priority",
+      "Amending the claims to add limitations not present in the earlier patent"
     ], answer:0,
-    explain:"A terminal disclaimer (37 CFR 1.321) addresses ODP by ensuring the later patent expires with the earlier and remains commonly owned. Statutory (same-invention) double patenting cannot be cured by a terminal disclaimer.",
+    explain:"A terminal disclaimer under 37 CFR 1.321 cures obviousness-type DP. Statutory (same-invention) DP under §101 cannot be cured by terminal disclaimer. Amendments and continuations don't, by themselves, resolve the DP issue.",
     cite:"MPEP §804"},
 
   {chapter:"2100", topic:"Statutory Double Patenting",
     q:"Statutory double patenting under §101 arises when:",
     choices:[
-      "Two patents to the same inventive entity claim patentably indistinct subject matter",
-      "Two patents have the same title",
-      "Two patents share an inventor",
-      "Two patents are commonly owned"
-    ], answer:0,
-    explain:"§101 statutory DP applies when two claims are directed to the same invention (i.e., the same claim scope). It cannot be overcome by terminal disclaimer.",
+      "Two patents to the same inventive entity have obvious variations of one another",
+      "Two patents to the same inventive entity have identical scope on the same invention",
+      "Two patents are commonly owned but claim different inventions",
+      "A patent and a published application overlap in their disclosures"
+    ], answer:1,
+    explain:"§101 statutory DP requires claims to the same invention (same scope). Obvious variations are obviousness-type DP. Mere common ownership without identical-scope claims is not DP at all.",
     cite:"MPEP §804(II)(A)"},
 
-  {chapter:"2100", topic:"In re Schreiber",
-    q:"Where prior art structure is identical to claimed structure, the burden to show the prior art does not inherently possess the claimed property is on the:",
-    choices:["Examiner","Applicant","Public","Inventor's attorney only"], answer:1,
-    explain:"Once the examiner shows the prior-art product appears to be the same, the burden shifts to the applicant to prove it does not inherently possess the claimed property.",
+  {chapter:"2100", topic:"Burden of Proof — Inherency",
+    q:"An examiner establishes that a claimed product appears structurally identical to a prior-art product. The burden then shifts to:",
+    choices:[
+      "The applicant to submit unexpected results compared to the closest prior art",
+      "The examiner to prove the claimed property is inherently present in the prior art",
+      "The applicant to prove the prior-art product does not inherently possess the claimed property",
+      "The examiner to provide a working example of the claimed property"
+    ], answer:2,
+    explain:"Once the examiner shows the structures appear identical, the burden shifts to the applicant to prove a structural or functional difference. Unexpected results address obviousness, not inherent anticipation.",
     cite:"MPEP §2112(V)"},
 
-  {chapter:"2100", topic:"Reference Date", aia:"aia",
-    q:"A U.S. patent's effective date as a §102(a)(2) reference for an examined claim is:",
+  {chapter:"2100", topic:"AIA Effective Date Transition", aia:"aia",
+    q:"An application filed March 15, 2013 contains some claims with priority to a 2012 provisional and other claims drawn to newly-added subject matter. The application is subject to:",
     choices:[
-      "Its issue date","Its publication date","Its effective filing date in the U.S.","Its priority date in any country if validly claimed"
-    ], answer:3,
-    explain:"Under AIA §102(d), the reference is effective as of the earliest date for which it was 'effectively filed' — including foreign priority — for the subject matter relied upon.",
-    cite:"MPEP §2154.01(b)"},
-
-  {chapter:"2100", topic:"§102 Public Use",
-    q:"Use of an invention by the inventor in a public place can be 'experimental use' (and not a public-use bar) if:",
-    choices:[
-      "The inventor took notes",
-      "The use was primarily for experimentation, with indicia such as control, monitoring, and confidentiality where possible",
-      "The use was funded by the government",
-      "The use was outside the United States"
+      "AIA §102 in full — filing date is on or after March 16, 2013",
+      "Pre-AIA §102 for all claims because the application was filed before March 16, 2013",
+      "Pre-AIA §102 in full — at least one claim has pre-AIA priority",
+      "AIA §102 for all claims because new subject matter was added"
     ], answer:1,
-    explain:"Experimental use must be primarily for the inventor's testing — control over use, records, secrecy where feasible, and necessity for development are factors.",
-    cite:"MPEP §2133.03(e)"},
+    explain:"The AIA effective date is March 16, 2013. An application FILED before that date is wholly pre-AIA, regardless of whether new matter was later added. (After March 16, 2013, a transitional/mixed application that EVER contains an AIA-effective claim is subject to AIA across the board.)",
+    cite:"MPEP §2159"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 700 — EXAMINATION  (heavily tested)
-  // ══════════════════════════════════════════════════════════════════
-
-  {chapter:"700", topic:"Reply Period", highYield:true,
-    q:"The statutory maximum period for reply to an Office action is:",
-    choices:["3 months","6 months","12 months","No fixed maximum"], answer:1,
-    explain:"35 U.S.C. 133 — the statutory maximum is 6 months. The SSP is usually 3 months, extendable up to 6 months with fees under 37 CFR 1.136(a).",
+  {chapter:"700", topic:"Reply Period Statutory Cap", highYield:true,
+    q:"The statutory maximum period for reply to an Office action is set by 35 U.S.C. 133 at:",
+    choices:[
+      "Whatever period the examiner specifies in the action, as a matter of discretion",
+      "Six months from the mailing date, the absolute statutory cap",
+      "Twelve months from the mailing date, the same as foreign-priority deadline",
+      "Three months from the mailing date, extendable for cause under 1.136(b)"
+    ], answer:1,
+    explain:"35 U.S.C. 133 sets a six-month statutory maximum. The shortened statutory period (SSP) is usually 3 months, extendable up to the six-month cap under 1.136(a).",
     cite:"MPEP §710.02"},
 
-  {chapter:"700", topic:"Reply Period", highYield:true,
-    q:"An applicant receives a non-final Office action dated April 1 with a 3-month SSP. Without filing for extensions, the reply is due:",
-    choices:["May 1","July 1","October 1","Any time within 12 months"], answer:1,
-    explain:"3-month SSP measured from the mail date — July 1. Up to 3 additional months of extensions available under 1.136(a) (paid by the time of reply).",
+  {chapter:"700", topic:"SSP and Extensions", highYield:true,
+    q:"An Office action with a 3-month shortened statutory period is mailed April 1. Without paying any extension fees, applicant's reply is due no later than:",
+    choices:[
+      "May 1 — one month from the mailing date",
+      "July 1 — three months from the mailing date",
+      "October 1 — six months from the mailing date",
+      "July 1 only if extensions are paid in advance"
+    ], answer:1,
+    explain:"The 3-month SSP expires three months from mail date — July 1. Without extension fees, reply is due by then. Up to three months of additional extensions are available under 1.136(a) (paid at time of reply, not in advance).",
     cite:"MPEP §710.02"},
 
-  {chapter:"700", topic:"Extension of Time", highYield:true,
+  {chapter:"700", topic:"1.136(a) Extensions", highYield:true,
     q:"An extension of time under 37 CFR 1.136(a):",
     choices:[
-      "Must be filed before the SSP runs",
-      "May be filed up to the day the reply is filed, even after the SSP, as long as total time does not exceed 6 months and a fee is paid",
-      "Requires examiner approval",
-      "Is not available for after-final replies"
-    ], answer:1,
-    explain:"1.136(a) extensions are automatic and may be requested with the reply itself, so long as the total reply period does not exceed 6 months.",
+      "Must be requested before the original SSP expires, with the fee paid in advance",
+      "Is available only for the first reply to any given Office action",
+      "Requires examiner approval based on a showing of sufficient cause",
+      "May be requested at the time of reply, with the fee paid then, up to the 6-month statutory cap"
+    ], answer:3,
+    explain:"1.136(a) extensions are automatic upon fee payment and may be requested with the reply itself, so long as the total reply period does not exceed six months. No examiner approval is required (that's 1.136(b)). The first-reply restriction is not a feature of 1.136(a).",
     cite:"MPEP §710.02(e)"},
 
-  {chapter:"700", topic:"Extension Limits",
-    q:"37 CFR 1.136(b) extensions of time:",
+  {chapter:"700", topic:"1.136(b) Extensions",
+    q:"An extension under 37 CFR 1.136(b) differs from 1.136(a) in that 1.136(b):",
     choices:[
-      "Are automatic upon fee payment",
-      "Require a showing of sufficient cause and are granted at the examiner's discretion",
-      "Are unlimited",
-      "Apply only after final"
-    ], answer:1,
-    explain:"1.136(b) requires a showing of sufficient cause. Used when 1.136(a) is unavailable (e.g., when the Office sets a time period that is not extendable under (a)).",
+      "May be used only after a final rejection has been issued",
+      "Is automatic upon payment of the prescribed fee",
+      "Extends the statutory six-month maximum reply period",
+      "Requires a showing of sufficient cause and is granted in the examiner's discretion"
+    ], answer:3,
+    explain:"1.136(b) requires a showing of sufficient cause and is discretionary. It is used where 1.136(a) is unavailable (e.g., periods the Office has designated as non-extendable under (a)). Neither extension can exceed the statutory cap.",
     cite:"MPEP §710.02(c)"},
 
-  {chapter:"700", topic:"Final Rejection", highYield:true,
-    q:"After a final rejection, which amendment is generally NOT entered as a matter of right?",
+  {chapter:"700", topic:"After-Final Amendments", highYield:true,
+    q:"After a final rejection, which amendment is NOT entered as a matter of right?",
     choices:[
-      "Cancellation of claims",
-      "Adoption of suggestions made by the examiner",
-      "Presentation of claims in better form for appeal",
-      "Amendment requiring further search or raising new issues"
-    ], answer:3,
-    explain:"After final, amendments that require further search/consideration or raise new issues are not entered as of right. RCE or after-final practice (AFCP 2.0) may be needed.",
-    cite:"MPEP §714.13"},
-
-  {chapter:"700", topic:"After Final", highYield:true,
-    q:"Filing an amendment after final that is not entered:",
-    choices:[
-      "Tolls the SSP","Restarts the SSP","Does not toll the SSP — applicant must still respond within statutory period","Automatically converts to an RCE"
-    ], answer:2,
-    explain:"The 3-month period continues to run regardless of an unentered after-final amendment. Applicant must take further action (RCE, appeal, etc.) within the 6-month statutory cap.",
-    cite:"MPEP §714.13"},
-
-  {chapter:"700", topic:"RCE", highYield:true,
-    q:"A Request for Continued Examination requires:",
-    choices:[
-      "A new oath","A submission and the prescribed fee, filed before payment of issue fee or abandonment",
-      "A different inventor","Examiner approval"
+      "An amendment that adopts an examiner suggestion from the final action",
+      "An amendment that raises new issues requiring further search or consideration",
+      "An amendment that cancels claims under rejection",
+      "An amendment that presents the claims in a form better suited for appeal"
     ], answer:1,
-    explain:"37 CFR 1.114 — RCE requires a submission (amendment, IDS, evidence, or arguments) and the fee, filed prior to payment of the issue fee, abandonment, or termination of proceedings.",
+    explain:"After final, amendments raising new issues, requiring further search, or otherwise not in compliance with 37 CFR 1.116 are not entered as of right. Cancellation, adopting examiner suggestions, and clarifying-for-appeal amendments generally are entered.",
+    cite:"MPEP §714.13"},
+
+  {chapter:"700", topic:"Period Tolling After Final", highYield:true,
+    q:"Applicant files an amendment two weeks after a final rejection. The examiner notifies applicant that the amendment will not be entered. The original 3-month period for reply:",
+    choices:[
+      "Is restarted when applicant receives the non-entry advisory action",
+      "Is automatically extended by one month to account for the back-and-forth",
+      "Is tolled from the date the amendment was filed until the examiner's notice",
+      "Continues to run — the unentered amendment does not toll or restart the period"
+    ], answer:3,
+    explain:"Filing a non-compliant after-final amendment does not toll or restart the reply period. Applicant must take further action (compliant reply, RCE, appeal, etc.) within the statutory six-month cap.",
+    cite:"MPEP §714.13"},
+
+  {chapter:"700", topic:"RCE Requirements", highYield:true,
+    q:"A Request for Continued Examination under 37 CFR 1.114 requires:",
+    choices:[
+      "A submission and the prescribed fee, filed before issue-fee payment or abandonment",
+      "A specific reference to the prior application, a new ADS, and a benefit claim",
+      "Examiner authorization, the RCE fee, and a statement of unintentional delay",
+      "A new inventor's oath, the prescribed RCE fee, and a continuation cover sheet"
+    ], answer:0,
+    explain:"RCE under 1.114 requires (1) a submission (amendment, IDS, arguments, or evidence) and (2) the prescribed fee, filed before payment of the issue fee, abandonment, or termination of proceedings. No new oath, no examiner authorization, and no unintentional-delay showing.",
     cite:"MPEP §706.07(h)"},
 
   {chapter:"700", topic:"RCE Eligibility",
-    q:"An RCE may NOT be filed in which type of application?",
-    choices:["Utility nonprovisional","Plant","Design","Reissue"], answer:2,
-    explain:"RCEs are not available in design applications, provisional applications, applications already issued/abandoned, or reexamination proceedings.",
+    q:"A Request for Continued Examination is not available in which type of application?",
+    choices:[
+      "A national stage application entered under 35 U.S.C. 371",
+      "A design application under 35 U.S.C. 171",
+      "A nonprovisional utility application under 35 U.S.C. 111(a)",
+      "A plant patent application under 35 U.S.C. 161"
+    ], answer:1,
+    explain:"RCEs are not available in design applications, provisional applications, applications already issued, or reexamination proceedings. Utility, national-stage, and plant applications all may use RCEs.",
     cite:"MPEP §706.07(h)(I)"},
 
-  {chapter:"700", topic:"First Action Final",
-    q:"A first Office action in a continuation may be made final when:",
+  {chapter:"700", topic:"First-Action Final", highYield:true,
+    q:"A first Office action in a continuation application may be made final when:",
     choices:[
-      "Always — examiners may make any action final",
-      "All claims are drawn to the same invention as a finally-rejected claim in the parent and would have been properly final in the parent",
-      "The applicant pays a fee","Never"
-    ], answer:1,
-    explain:"First-action final is allowed in a continuation where the claims would have been properly finally rejected on the prior art of record in the parent.",
+      "The continuation was filed within three months of the parent's final rejection",
+      "The applicant did not file an amendment along with the continuation",
+      "All claims would have been properly finally rejected on the prior art of record in the parent",
+      "The continuation adds claims not previously presented in the parent"
+    ], answer:2,
+    explain:"First-action final is proper in a continuation when the claims would have been properly finally rejected in the parent on the prior art of record. The other choices describe conditions that are neither sufficient nor required.",
     cite:"MPEP §706.07(b)"},
 
-  {chapter:"700", topic:"Suspension",
-    q:"An applicant may request suspension of action under 37 CFR 1.103 for:",
+  {chapter:"700", topic:"Suspension of Action",
+    q:"An applicant may request suspension of action under 37 CFR 1.103(a) for up to:",
     choices:[
-      "Up to 3 years","Up to 6 months for good and sufficient cause","Unlimited time","Only with examiner consent"
-    ], answer:1,
-    explain:"1.103(a) allows up to 6 months of suspension for good and sufficient cause; 1.103(d) suspension in a CON/CIP filed under 1.53(b) may be up to 3 years from earliest claimed benefit date.",
+      "Six months, upon showing of good and sufficient cause",
+      "Three months, upon showing of sufficient cause",
+      "Twelve months, upon payment of the suspension fee",
+      "Three years, automatic upon request in a continuation"
+    ], answer:0,
+    explain:"1.103(a) allows up to six months of suspension for good and sufficient cause. 1.103(d) (different rule) allows up to three years in certain continuations filed under 1.53(b).",
     cite:"MPEP §709"},
 
   {chapter:"700", topic:"Petition to Revive", highYield:true, aia:"aia",
-    q:"An application abandoned for failure to reply timely may be revived under 37 CFR 1.137(a) by showing the delay was:",
+    q:"After implementation of the Patent Law Treaty, a petition to revive an abandoned application under 37 CFR 1.137(a) requires a showing that the entire delay was:",
     choices:[
-      "Unavoidable","Unintentional, with a petition, the required reply, and the petition fee",
-      "Excusable","Reasonable"
-    ], answer:1,
-    explain:"Post-2013 Patent Law Treaty implementation: petition to revive uses an 'unintentional' standard. Petition + fee + reply + statement of unintentional delay.",
+      "Unintentional, accompanied by the petition, required reply, and petition fee",
+      "Unavoidable despite reasonable diligence by the applicant",
+      "Excusable in light of the circumstances giving rise to the abandonment",
+      "Beyond the applicant's reasonable control, with supporting affidavit"
+    ], answer:0,
+    explain:"After the 2013 PLT implementation, the standard is 'unintentional' delay. 'Unavoidable' was the prior standard, abolished by the PLT. Choices C and D are fictional standards.",
     cite:"MPEP §711.03(c)"},
 
   {chapter:"700", topic:"Abandonment", highYield:true,
     q:"An application becomes abandoned for failure to reply when:",
     choices:[
-      "The shortened statutory period expires",
-      "The statutory maximum (6 months) expires without a complete reply",
-      "The examiner closes the file",
-      "The first Office action issues"
-    ], answer:1,
-    explain:"Abandonment occurs at the end of the statutory period (typically 6 months) if no complete reply is filed. The SSP itself does not abandon the application if extensions are available.",
+      "The shortened statutory period (typically 3 months) expires without a reply",
+      "The applicant fails to pay extension fees at the time of reply",
+      "The examiner closes the file at the end of the SSP",
+      "The full statutory period (typically 6 months) expires without a complete reply"
+    ], answer:3,
+    explain:"Abandonment occurs when the statutory period (typically six months) expires without a complete reply. The SSP itself does not abandon the application — extensions under 1.136(a) remain available up to the cap.",
     cite:"MPEP §711"},
 
-  {chapter:"700", topic:"Complete Reply",
-    q:"A reply that addresses every ground of rejection but omits to address one objection is:",
-    choices:["Treated as complete","A bona fide attempt that may be given 1 month to correct","Ignored","Abandons the application immediately"], answer:1,
-    explain:"A bona fide attempt to respond, missing only minor items, may be given a 1-month period (or remainder of the SSP, whichever is longer) to complete.",
+  {chapter:"700", topic:"Bona Fide Attempt",
+    q:"Applicant files a reply that addresses every ground of rejection but inadvertently fails to respond to an objection to the drawings. The examiner should:",
+    choices:[
+      "Enter the reply but make the next action final on the unresolved objection",
+      "Treat the reply as a bona fide attempt and give time to correct the omission",
+      "Treat the application as abandoned for an incomplete reply",
+      "Hold the reply in abeyance until the applicant files a continuation"
+    ], answer:1,
+    explain:"A bona fide attempt with a minor omission may be treated under 37 CFR 1.135(c) — the examiner gives the applicant a one-month period (or remainder of SSP, whichever is longer) to correct the omission.",
     cite:"MPEP §714.03"},
 
-  {chapter:"700", topic:"Interview", highYield:true,
-    q:"Examiner interviews after a final rejection are:",
-    choices:["A matter of right","At the examiner's discretion","Prohibited","Only by phone"], answer:1,
-    explain:"Pre-final interviews are generally as of right (once examination has begun). Post-final interviews are at the examiner's discretion.",
+  {chapter:"700", topic:"Examiner Interviews", highYield:true,
+    q:"With respect to examiner interviews:",
+    choices:[
+      "Interviews are prohibited once the application has been allowed",
+      "Pre-final interviews are generally as of right; post-final interviews are at the examiner's discretion",
+      "Pre-final interviews require examiner approval; post-final interviews are as of right",
+      "Both pre-final and post-final interviews are granted as a matter of right"
+    ], answer:1,
+    explain:"Once examination has begun, pre-final interviews are generally granted as of right. After final rejection, interviews are at the examiner's discretion. Allowance does not bar interviews entirely.",
     cite:"MPEP §713.09"},
 
   {chapter:"700", topic:"Interview Summary",
-    q:"After an interview, an interview summary is required:",
+    q:"After a substantive examiner interview, an interview summary must be:",
     choices:[
-      "Only when an agreement is reached",
-      "For every substantive interview, prepared by the examiner; applicant must also file a summary if no examiner summary is attached",
-      "Only at applicant's request","Never"
-    ], answer:1,
-    explain:"Examiner completes a summary for every substantive interview. Applicant must also file a summary if the interview was held before first Office action or if no examiner summary was provided.",
+      "Prepared by the applicant only when the interview resolves all outstanding issues",
+      "Prepared by both the examiner and the applicant in every substantive interview",
+      "Prepared by the examiner; applicant must also file one if the interview was before first OA",
+      "Filed by the applicant only if no examiner summary is included in the file"
+    ], answer:2,
+    explain:"Examiner prepares a summary for every substantive interview. Applicant must also file a summary if the interview occurred BEFORE the first Office action or the examiner did not attach a summary.",
     cite:"MPEP §713.04"},
 
   {chapter:"700", topic:"New Matter", highYield:true,
-    q:"An amendment adding subject matter not described in the original disclosure is:",
-    choices:["Allowable with a fee","New matter and not permitted","Treated as a continuation-in-part","Allowable if obvious"], answer:1,
-    explain:"35 U.S.C. 132(a) bars new matter. The amendment is not entered as to the new matter. To add new matter, a CIP must be filed.",
+    q:"An amendment introduces subject matter not described in the original disclosure. The proper response is:",
+    choices:[
+      "Allow the amendment but issue an objection requiring an affidavit of support",
+      "Refuse entry as new matter and require deletion or filing of a CIP",
+      "Allow the amendment if it is supported by an inventor declaration",
+      "Allow the amendment and treat the new disclosure as part of the specification"
+    ], answer:1,
+    explain:"35 U.S.C. 132(a) bars new matter. The amendment is not entered. To add new matter, a continuation-in-part must be filed.",
     cite:"MPEP §608.04"},
 
-  {chapter:"700", topic:"Prior Art Citation",
-    q:"Information disclosed in an IDS is considered by the examiner if:",
+  {chapter:"700", topic:"IDS Timing — Free Window", highYield:true,
+    q:"Without paying any fee or filing any statement, an Information Disclosure Statement is timely if filed:",
     choices:[
-      "It is submitted in any form",
-      "It complies with 37 CFR 1.97 and 1.98 — timing, list, and copies/translations as required",
-      "It is mentioned in the specification",
-      "It is in English"
-    ], answer:1,
-    explain:"1.97/1.98 govern IDS — timing (before first action, after first action with fee/statement, after final/Notice of Allowance with stricter requirements), the required list, and any copies/translations.",
-    cite:"MPEP §609"},
-
-  {chapter:"700", topic:"IDS Timing", highYield:true,
-    q:"An IDS filed more than three months after filing but before the first Office action is considered without a fee or statement if:",
-    choices:[
-      "It is filed within 3 months of the U.S. application's filing date",
-      "It is filed before the mailing of any Office action on the merits",
-      "It is fewer than 10 references",
-      "It includes an English summary"
-    ], answer:1,
-    explain:"Per 1.97(b), an IDS is considered without fee/statement if filed within 3 months of filing date OR before the first Office action on the merits, whichever is later.",
+      "Within three months of the U.S. application's filing date, regardless of OA status",
+      "At any time during pendency, so long as the references are non-cumulative",
+      "Before payment of the issue fee, regardless of when references were known",
+      "Within three months of the U.S. filing date OR before first OA on the merits, whichever is later"
+    ], answer:3,
+    explain:"37 CFR 1.97(b) — IDS is considered without fee or statement if filed within 3 months of the U.S. filing date OR before the first OA on the merits, whichever is LATER. After that, fees and/or statements are required.",
     cite:"MPEP §609.04(b)"},
 
-  {chapter:"700", topic:"Information Disclosure",
-    q:"An IDS filed after the Notice of Allowance but before issue fee payment requires:",
+  {chapter:"700", topic:"IDS After Allowance",
+    q:"An IDS submitted after a Notice of Allowance but before issue-fee payment is considered if applicant:",
     choices:[
-      "Only the listing","Either the 1.97(e) statement and the fee, or a withdrawal from issue and an RCE",
-      "Examiner consent","A new oath"
-    ], answer:1,
-    explain:"After NOA, the applicant must either file with a 1.97(e) statement plus fee under 1.17(p), or withdraw from issue (typically via RCE) to have the IDS considered.",
+      "Files the IDS list alone — no fee or statement is required after allowance",
+      "Petitions the Director for late submission with the petition fee",
+      "Files the 1.97(e) statement and pays the 1.17(p) fee, or withdraws from issue via RCE",
+      "Submits the IDS together with an inventor's declaration of materiality"
+    ], answer:2,
+    explain:"Post-NOA, the IDS is considered if filed with a 1.97(e) statement plus 1.17(p) fee, or by withdrawing from issue (typically by RCE) and resubmitting the IDS during continued examination.",
     cite:"MPEP §609.04(b)"},
 
-  {chapter:"700", topic:"Affidavit Timing",
-    q:"After final rejection, a Rule 1.132 affidavit is entered:",
+  {chapter:"700", topic:"Affidavits After Final",
+    q:"Applicant files a Rule 1.132 declaration after final rejection. The declaration:",
     choices:[
-      "As a matter of right",
-      "Only if it presents no new issue and is timely under 1.116(b)",
-      "Never","Only by petition"
+      "Is entered as a matter of right under 37 CFR 1.116(a), as with any timely reply",
+      "Is entered when no new issue is raised and the case is placed in condition for allowance",
+      "Is held in abeyance until applicant requests continued examination under 1.114",
+      "Is treated as a request for reconsideration under 37 CFR 1.181 to the Director"
     ], answer:1,
-    explain:"After final, evidence under 1.132 is subject to 1.116 — entered only if it places the application in condition for allowance or is justified by why it was not earlier presented.",
+    explain:"After final, evidence is governed by 1.116(b) — entered only if it raises no new issue, requires no further search, and either places the case in condition for allowance or shows why it was not earlier presented.",
     cite:"MPEP §715.09"},
 
-  {chapter:"700", topic:"Notice of Allowance",
-    q:"After a Notice of Allowance, the issue fee must be paid within:",
-    choices:["1 month, non-extendable","3 months, non-extendable","3 months, extendable","6 months"], answer:1,
-    explain:"35 U.S.C. 151 — the issue fee is due within 3 months of the NOA mailing date. This period is NOT extendable.",
+  {chapter:"700", topic:"Notice of Allowance — Issue Fee", highYield:true,
+    q:"The issue fee period following a Notice of Allowance is:",
+    choices:[
+      "One month, with payment due no later than the date of formal allowance",
+      "Six months, extendable upon a showing of sufficient cause under 1.136(b)",
+      "Three months, non-extendable; failure to pay results in abandonment",
+      "Three months, extendable in one-month increments under 37 CFR 1.136(a)"
+    ], answer:2,
+    explain:"35 U.S.C. 151 — the issue fee is due within 3 months of the NOA mailing date and the period is NON-EXTENDABLE. Failure to pay = abandonment.",
     cite:"MPEP §1306"},
 
   {chapter:"700", topic:"Examiner's Amendment",
-    q:"An examiner's amendment after agreement with applicant is appropriate when:",
+    q:"An examiner's amendment to place the application in condition for allowance is proper when:",
     choices:[
-      "It places the application in condition for allowance and the applicant authorizes it (usually orally)",
-      "It introduces new matter","It is contested","It restricts the claims"
-    ], answer:0,
-    explain:"Examiner's amendments are used in connection with an allowance after authorization. Form is documented in the file (often a phone interview record).",
+      "The application has at least one independent claim allowed of record",
+      "The applicant has authorized the changes, typically by interview",
+      "The examiner has independently determined the amendment is in the applicant's interest",
+      "The amendment is filed by the applicant on the same day as the NOA"
+    ], answer:1,
+    explain:"Examiner's amendments require applicant authorization (usually documented via interview summary or written authorization). The examiner cannot unilaterally amend.",
     cite:"MPEP §1302.04"},
 
-  {chapter:"700", topic:"Restriction (in 700 examination)", highYield:true,
-    q:"After a restriction requirement, the applicant's election:",
+  {chapter:"700", topic:"Restriction in Practice", highYield:true,
+    q:"After a restriction requirement, applicant must elect one invention to obtain examination. The election:",
     choices:[
-      "Must be without traverse","Must be with traverse",
-      "May be with or without traverse; election is required to obtain examination of any claim",
-      "May be deferred until appeal"
-    ], answer:2,
-    explain:"Applicant must elect to allow examination to proceed; the election may be with or without traverse. With traverse preserves the right to petition the restriction.",
+      "May be made with or without traverse; election is required either way",
+      "Must be made without traverse to preserve later prosecution rights",
+      "May be deferred until the first reply on the merits is due",
+      "Must be made with traverse if a divisional is anticipated"
+    ], answer:0,
+    explain:"Election is mandatory to obtain examination. May be with or without traverse — with traverse preserves the right to petition the restriction under 1.144 (provided the requirement is later made final).",
     cite:"MPEP §818"},
 
-  {chapter:"700", topic:"Improper Restriction",
-    q:"Applicant's remedy when a restriction is believed improper is to:",
+  {chapter:"700", topic:"Petition to Review Restriction",
+    q:"To petition the propriety of a restriction requirement that has been made final, applicant must have:",
     choices:[
-      "Refuse to elect",
-      "Elect with traverse and, if maintained final, petition the requirement under 37 CFR 1.144",
-      "File a continuation","Appeal to PTAB"
-    ], answer:1,
-    explain:"Election with traverse preserves the right to petition under 1.144 (timely petition, generally within 2 months of the action making restriction final).",
+      "Elected with traverse and petitioned under 1.144 within two months of the final action",
+      "Cancelled all non-elected claims before petitioning",
+      "Filed a divisional application within two months of the restriction being made final",
+      "Filed a reply continuing to argue the restriction was improper"
+    ], answer:0,
+    explain:"To preserve the right to petition under 37 CFR 1.144, applicant must have elected with traverse and timely file the petition (generally within 2 months of the action making the restriction final).",
     cite:"MPEP §818.03"},
 
   {chapter:"700", topic:"Reopening Prosecution",
-    q:"Prosecution may be reopened after appeal brief filing by:",
+    q:"After an appeal brief has been filed, the examiner may reopen prosecution to issue a new ground of rejection:",
     choices:[
-      "The examiner with the supervisor's approval, to issue a new ground of rejection",
-      "Only by PTAB","Only by petition","Not at all"
-    ], answer:0,
-    explain:"With TC Director or SPE approval, the examiner can reopen prosecution to issue a new ground of rejection after the appeal brief.",
+      "Without any supervisor approval, as a matter of examiner discretion",
+      "Only after the Patent Trial and Appeal Board has remanded the application",
+      "With approval of the supervisor (TC Director or SPE)",
+      "Only by filing a request for rehearing with the Board"
+    ], answer:2,
+    explain:"Reopening prosecution to add a new ground requires supervisor approval (TC Director or SPE). It is not the examiner's unilateral choice and does not require Board involvement.",
     cite:"MPEP §1207.04"},
 
-  {chapter:"700", topic:"Quayle Action",
+  {chapter:"700", topic:"Ex Parte Quayle Action",
     q:"An Ex parte Quayle action is issued when:",
     choices:[
-      "All claims are allowable but formal matters remain",
-      "All claims are rejected","An interview is needed","Restriction is required"
-    ], answer:0,
-    explain:"A Quayle action closes prosecution on the merits — only formal matters (drawings, oath, etc.) remain. Short 2-month SSP, extendable.",
+      "The application has been allowed and the issue fee is now due",
+      "All claims are allowable but formal matters remain to be addressed",
+      "The examiner requires further information under 37 CFR 1.105",
+      "All claims have been finally rejected and the applicant is preparing to appeal"
+    ], answer:1,
+    explain:"A Quayle action closes prosecution on the merits — only formal matters (drawings, oath, formal claim issues) remain. Two-month SSP, extendable.",
     cite:"MPEP §714.14"},
 
-  {chapter:"700", topic:"Reply Brief",
-    q:"After receipt of an examiner's answer in an appeal, applicant may file a reply brief within:",
-    choices:["2 months, non-extendable, except for new ground rejections","30 days","6 months","No reply brief is permitted"], answer:0,
-    explain:"Reply brief is due 2 months from the examiner's answer date, non-extendable. If the answer designates a new ground of rejection, different time periods may apply.",
+  {chapter:"700", topic:"Reply Brief Timing",
+    q:"A reply brief responding to an Examiner's Answer must be filed within:",
+    choices:[
+      "Sixty days from the Examiner's Answer, non-extendable under any circumstances",
+      "Two months from the Examiner's Answer, extendable for cause under 1.136(a)",
+      "Two months from the Examiner's Answer, generally non-extendable under the rules",
+      "Three months from the Examiner's Answer, extendable in one-month increments"
+    ], answer:2,
+    explain:"Reply brief is due 2 months from the Examiner's Answer and is generally non-extendable, with limited exceptions for new grounds of rejection in the answer.",
     cite:"MPEP §1208"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 600 — PARTS, FORM & CONTENT OF APPLICATION
-  // ══════════════════════════════════════════════════════════════════
-
-  {chapter:"600", topic:"Filing Date", highYield:true, aia:"aia",
-    q:"For a nonprovisional utility application filed on or after Dec 18, 2013, the filing date is granted upon receipt of:",
+  {chapter:"600", topic:"Filing Date — Nonprovisional", highYield:true, aia:"aia",
+    q:"For a nonprovisional utility application filed today, an immediate filing date is accorded upon receipt of:",
     choices:[
-      "Specification (with at least one claim formerly required; now claims may be supplied later) and any drawings",
-      "Only a specification","Only claims","An oath and a fee"
-    ], answer:0,
-    explain:"Under PLT-implementing changes, a U.S. nonprovisional filing date is accorded when a specification (with or without claims) and any necessary drawings are filed. Claims/oath/fee can be supplied later upon notice.",
+      "Specification, claims, oath, drawings if needed, and the basic filing fee",
+      "Specification and any necessary drawings; claims, oath, and fees may follow with surcharge",
+      "Specification, at least one claim, and any necessary drawings — no oath required",
+      "Specification, claims, and drawings, with the oath filed within one month"
+    ], answer:1,
+    explain:"Under PLT-implementing changes, a U.S. nonprovisional gets a filing date with a specification and any necessary drawings. Claims, oath, and fees can be supplied later (with surcharge) following a notice.",
     cite:"MPEP §601.01(a)"},
 
   {chapter:"600", topic:"Filing Date — Provisional",
-    q:"For a provisional application, the filing date requires:",
+    q:"A provisional application receives a filing date when applicant submits:",
     choices:[
-      "Specification, drawings if needed, and the cover sheet identifying the application as provisional",
-      "Specification and claims","Oath and fee","English language only"
+      "Specification, any necessary drawings, and the cover sheet identifying it as provisional",
+      "Specification, at least one claim, and any necessary drawings",
+      "Specification, oath, and the basic provisional filing fee",
+      "Specification only — claims, oath, and fees may all be deferred"
     ], answer:0,
-    explain:"Provisional filing requires the specification per 1.51(c)(1), any drawings, and a cover sheet identifying it as provisional with inventor info. Claims and oath are NOT required.",
+    explain:"A provisional needs a §112(a)-compliant specification, any necessary drawings, and a cover sheet identifying it as provisional with inventor information. No claim is required; no oath required.",
     cite:"MPEP §601.01(b)"},
 
-  {chapter:"600", topic:"Specification", highYield:true,
-    q:"The specification must comply with all of the following under §112(a) EXCEPT:",
-    choices:["Written description","Enablement","Best mode","Commercial success"], answer:3,
-    explain:"§112(a) requires written description, enablement, and best mode. Commercial success is a secondary consideration for §103, not a specification requirement.",
+  {chapter:"600", topic:"§112(a) Specification Components", highYield:true,
+    q:"35 U.S.C. 112(a) requires the specification to satisfy all of the following EXCEPT:",
+    choices:[
+      "Written description of the invention",
+      "Enablement of one of ordinary skill to make and use the invention",
+      "Industrial applicability of the claimed invention",
+      "Best mode contemplated by the inventor for carrying out the invention"
+    ], answer:2,
+    explain:"§112(a) requires written description, enablement, and best mode. 'Industrial applicability' is a European/PCT concept, not a U.S. §112 requirement (the U.S. analog is §101 utility).",
     cite:"MPEP §608.01"},
 
   {chapter:"600", topic:"Drawings", highYield:true,
-    q:"Drawings are required for a utility application when:",
+    q:"Drawings are required in a utility application when:",
     choices:[
-      "The invention is mechanical only","The applicant requests them",
-      "Necessary for the understanding of the subject matter sought to be patented","Always"
+      "The claims recite specific physical dimensions or proportions",
+      "The invention contains any mechanical or structural elements",
+      "They are necessary for the understanding of the subject matter sought to be patented",
+      "The applicant chooses to include them in support of any claim limitation"
     ], answer:2,
-    explain:"35 U.S.C. 113 — drawings are required where necessary for understanding. Many chemical/process inventions need none; drawings cannot cure §112(a) defects in the specification.",
+    explain:"35 U.S.C. 113 — drawings are required only where necessary for understanding the invention. Many chemical and process inventions need none. Drawings cannot cure §112(a) defects in the specification.",
     cite:"MPEP §608.02"},
 
   {chapter:"600", topic:"Color Drawings",
-    q:"Color drawings or photographs in a utility application require:",
+    q:"To submit color drawings in a utility application, applicant must provide:",
     choices:[
-      "Nothing — they are accepted by default",
-      "A petition under 37 CFR 1.84(a)(2), fee, and three sets of color drawings (plus a specification statement)",
-      "Examiner approval","A continuation"
+      "An affidavit from the inventor that the color is material to patentability",
+      "A petition explaining necessity, the petition fee, three sets of drawings, and a specification statement",
+      "A statement in the specification acknowledging color and three sets of color drawings",
+      "A request that the Office substitute black-and-white halftones at publication"
     ], answer:1,
-    explain:"Color drawings require a petition explaining why they are necessary, the petition fee, three sets of color drawings/photographs, and a specification reference acknowledging the color.",
+    explain:"37 CFR 1.84(a)(2) — color drawings require (1) a petition explaining why color is necessary, (2) the petition fee, (3) three sets of drawings, and (4) a statement in the specification acknowledging color.",
     cite:"MPEP §608.02(VII)"},
 
-  {chapter:"600", topic:"Claims — Independent vs Dependent", highYield:true,
-    q:"An independent claim:",
+  {chapter:"600", topic:"Independent vs. Dependent Claims", highYield:true,
+    q:"An independent claim is a claim that:",
     choices:[
-      "Refers to and further limits another claim",
-      "Stands on its own and does not refer to another claim",
-      "Is in Jepson form","Must come first in the claim listing"
-    ], answer:1,
-    explain:"An independent claim does not refer to any other claim. A dependent claim refers to and further limits another claim.",
+      "Stands on its own without reference to any other claim",
+      "Appears before any dependent claim in the claim listing",
+      "Refers to and further limits another claim in the application",
+      "Recites only structural, not functional, limitations"
+    ], answer:0,
+    explain:"An independent claim does not refer to any other claim. A dependent claim refers to and further limits another claim. Whether limitations are functional or structural, and ordering within the listing, is irrelevant.",
     cite:"MPEP §608.01(n)"},
 
   {chapter:"600", topic:"Multiple Dependent Claims", highYield:true,
-    q:"A proper multiple dependent claim:",
+    q:"Which is NOT permitted under 35 U.S.C. 112(e) for multiple dependent claims?",
     choices:[
-      "May refer to multiple claims cumulatively",
-      "May refer to multiple claims only in the alternative, and may not depend from another multiple dependent claim",
-      "Must be presented first","Counts as one claim for fees"
+      "Further limiting only one of the referenced claims",
+      "Referring to multiple preceding claims cumulatively (e.g., 'claims 1 and 2')",
+      "Being counted as multiple claims for fee purposes",
+      "Referring to multiple preceding claims in the alternative"
     ], answer:1,
-    explain:"35 U.S.C. 112(e) — in the alternative only; cannot serve as a basis for another multiple dependent claim. For fees, each claim referred to by an MDC counts separately.",
+    explain:"§112(e) requires multiple-dependent claims to reference other claims 'in the alternative only' — never cumulatively. They also cannot serve as a basis for another multiple-dependent claim. For fees, each claim referenced counts separately.",
     cite:"MPEP §608.01(n)"},
 
-  {chapter:"600", topic:"Claim Form",
-    q:"A claim presented in Jepson form recites the prior art in the preamble. The transition phrase typically used is:",
-    choices:["comprising","wherein the improvement comprises","consisting of","characterized by"], answer:1,
-    explain:"Jepson claims recite prior art in the preamble, then use 'wherein the improvement comprises' to identify the inventive addition. Treated as an admission of prior art.",
+  {chapter:"600", topic:"Jepson Claim",
+    q:"A claim drafted in Jepson form typically uses the transition phrase:",
+    choices:[
+      "Wherein the improvement comprises",
+      "Comprising the steps of",
+      "Consisting essentially of",
+      "Characterized in that"
+    ], answer:0,
+    explain:"Jepson format recites the prior art in the preamble and transitions to the inventive contribution with 'wherein the improvement comprises.' The preamble is treated as an admission of prior art.",
     cite:"MPEP §2129"},
 
-  {chapter:"600", topic:"Oath/Declaration", highYield:true, aia:"aia",
-    q:"Under the AIA, the inventor's oath or declaration:",
+  {chapter:"600", topic:"Oath / Declaration", highYield:true, aia:"aia",
+    q:"Under the AIA, the inventor's oath or declaration may be postponed until:",
     choices:[
-      "Must be filed on the application filing date",
-      "May be postponed until the application is otherwise in condition for allowance",
-      "Cannot be made by an assignee","Must be notarized"
-    ], answer:1,
-    explain:"AIA §4 — the oath/declaration is required by the time the issue fee is paid. A substitute statement is permitted when the inventor cannot/will not sign.",
+      "The publication date under 35 U.S.C. 122(b)",
+      "The first Office action on the merits is mailed",
+      "The application is otherwise in condition for allowance",
+      "Three months after the filing date, with surcharge"
+    ], answer:2,
+    explain:"AIA §4 — the inventor's oath/declaration may be filed as late as when the application is otherwise in condition for allowance (issue fee due). A surcharge applies if filed after the original filing date.",
     cite:"MPEP §602"},
 
   {chapter:"600", topic:"Substitute Statement", aia:"aia",
-    q:"A substitute statement under 37 CFR 1.64 may be filed by the applicant when the inventor:",
+    q:"A substitute statement under 37 CFR 1.64 may be filed in lieu of an inventor's oath when the inventor:",
     choices:[
-      "Refuses to sign or cannot be reached after diligent effort, is deceased, or is legally incapacitated",
-      "Lives outside the U.S.","Has changed employers","Is on vacation"
-    ], answer:0,
-    explain:"Substitute statements are allowed when the inventor is deceased, legally incapacitated, refuses, or cannot be found/reached after diligent effort.",
+      "Lives outside the United States and cannot sign in person",
+      "Has assigned the entire interest to a corporation that has assumed prosecution",
+      "Is deceased, legally incapacitated, cannot be reached after diligent effort, or refuses to sign",
+      "Has not yet been formally retained by the attorney prosecuting the application"
+    ], answer:2,
+    explain:"1.64 substitute statements are permitted only when the inventor is deceased, legally incapacitated, refuses, or cannot be reached after diligent effort. Foreign residence and unrelated logistical issues are not grounds.",
     cite:"MPEP §604"},
 
   {chapter:"600", topic:"Power of Attorney",
-    q:"A power of attorney signed by less than all inventors but by the assignee of the entire interest:",
-    choices:["Is improper","Is proper if the assignment is recorded","Requires inventor consent","Requires examiner approval"], answer:1,
-    explain:"An assignee of the entire interest may execute a power of attorney; if the assignment is properly documented/recorded (37 CFR 3.71/3.73), they take over prosecution rights.",
+    q:"A power of attorney executed by the assignee of the entire interest is effective when:",
+    choices:[
+      "The chain of assignment is recorded or made of record under 37 CFR 3.71/3.73",
+      "Each inventor has also signed an individual power of attorney",
+      "The examiner verifies the assignee's interest in writing",
+      "The assignee is a U.S. entity with a federal tax identification number"
+    ], answer:0,
+    explain:"37 CFR 3.71 and 3.73 — an assignee of the entire interest may take over prosecution and execute the power of attorney, provided the assignment is recorded or otherwise established of record.",
     cite:"MPEP §402.07"},
 
-  {chapter:"600", topic:"Small Entity", highYield:true,
-    q:"To qualify for small entity status, the applicant must:",
+  {chapter:"600", topic:"Small Entity Status", highYield:true,
+    q:"To qualify for small entity status under 37 CFR 1.27, the applicant must be:",
     choices:[
-      "Have fewer than 500 employees as an independent inventor or small business, and not have assigned/licensed rights to a non-small entity",
-      "Be a sole inventor","Have annual revenue under $1M","Be a U.S. citizen"
+      "An independent inventor, small business (<500 employees), or nonprofit, with no rights conveyed to a non-small entity",
+      "A sole inventor with no rights conveyed to any other person or entity",
+      "A U.S. resident with annual revenue under one million dollars",
+      "A business entity with fewer than 25 employees and no foreign subsidiaries"
     ], answer:0,
-    explain:"Small entity (37 CFR 1.27): independent inventor, small business (<500 employees), or nonprofit, with no rights conveyed to a non-small entity.",
+    explain:"Small entity = independent inventor, small business (<500 employees per SBA), or nonprofit, with no rights conveyed (assigned, licensed, or under obligation) to a non-small entity. No residency, revenue, or subsidiary tests.",
     cite:"MPEP §509.02"},
 
-  {chapter:"600", topic:"Micro Entity",
-    q:"Micro entity status under 37 CFR 1.29 requires the applicant to qualify as a small entity AND:",
+  {chapter:"600", topic:"Micro Entity Status",
+    q:"To qualify for micro entity status under 37 CFR 1.29(a), the applicant must qualify as small entity AND:",
     choices:[
-      "Have fewer than 5 prior applications, gross income under the threshold, and not assigned to a higher-income entity",
-      "Be a sole inventor","Be a university","Have foreign nationality"
+      "Have ≤4 previously filed applications, gross income ≤3× median household income, no transfer to a higher-income entity",
+      "Be a first-time filer who has not previously claimed small entity status",
+      "Be a sole inventor with no prior patent applications of any kind",
+      "Be a U.S. nonprofit or university with annual revenue under $1 million"
     ], answer:0,
-    explain:"Micro entity: small entity + ≤4 previously filed applications (excluding provisionals, foreign, and PCT not entering US) + gross income ≤3× median household income + not assigned to a non-micro entity (or university-employed alternative).",
+    explain:"1.29(a): small entity qualification + ≤4 previously filed applications (excluding provisionals, foreign apps, and PCT apps not entering U.S.) + gross income ≤3× median household income + no transfer of rights to a higher-income entity. (1.29(d) has a separate university-employment basis.)",
     cite:"MPEP §509.04"},
 
-  {chapter:"600", topic:"Sequence Listing",
-    q:"WIPO ST.26 XML sequence listings are required for applications filed on or after July 1, 2022 that disclose nucleotide/amino acid sequences. Failure to comply:",
+  {chapter:"600", topic:"Sequence Listings",
+    q:"WIPO Standard ST.26 XML sequence listings are required for applications filed on or after July 1, 2022 that disclose:",
     choices:[
-      "Is harmless","May result in non-accordance of filing date or other consequences",
-      "Triggers a §101 rejection","Requires CIP"
-    ], answer:1,
-    explain:"ST.26 compliance is required for sequence-containing applications filed after the cutoff; non-compliance may impact filing date accordance.",
+      "Nucleotide or amino acid sequences claimed or disclosed in the specification",
+      "Sequences only when an independent claim requires them",
+      "Any biological material referenced in the specification",
+      "Sequences in chemical compositions of pharmaceutical products"
+    ], answer:0,
+    explain:"ST.26 applies to applications disclosing nucleotide or amino acid sequences. Failure to comply can affect filing-date accordance or require additional submissions.",
     cite:"MPEP §608.05"},
 
   {chapter:"600", topic:"Incorporation by Reference",
-    q:"Material incorporated by reference into the specification:",
+    q:"Essential material may be incorporated by reference only from:",
     choices:[
-      "Cannot be 'essential material' from a non-US patent or publication",
-      "Becomes part of the disclosure for §112(a) purposes if essential, only if incorporated by reference to a U.S. patent, U.S. application publication, or pending U.S. application",
-      "Both A and B","Neither"
-    ], answer:2,
-    explain:"Essential material may be incorporated only from U.S. patents/published U.S. applications/pending U.S. applications (with restrictions). Non-essential material has broader sources.",
+      "Any source that is publicly available at the time of filing",
+      "U.S. patents, U.S. published applications, or pending U.S. applications (with restrictions)",
+      "Foreign patents, U.S. patents, and peer-reviewed journals",
+      "Materials cited in the applicant's information disclosure statement"
+    ], answer:1,
+    explain:"Essential material may be incorporated only from U.S. patents, published U.S. applications, or pending U.S. applications (with restrictions). Non-essential material has broader sources.",
     cite:"MPEP §608.01(p)"},
 
-  {chapter:"600", topic:"Application Number",
-    q:"An application data sheet (ADS) under 37 CFR 1.76:",
+  {chapter:"600", topic:"Application Data Sheet",
+    q:"When the Application Data Sheet and the inventor's oath contain inconsistent bibliographic information, the controlling document is:",
     choices:[
-      "Is required for all applications","Provides bibliographic and benefit/priority claims and controls over inconsistent information in the oath",
-      "Cannot be corrected","Must be filed before filing date"
-    ], answer:1,
-    explain:"ADS supplies bibliographic data, inventor info, foreign/domestic priority claims. When in conflict, ADS generally controls over the oath/declaration.",
+      "The Application Data Sheet, except for information that must be in the oath",
+      "The inventor's oath, as the sworn statement of record",
+      "Whichever document was filed first, by date",
+      "Neither — the examiner must require correction by petition"
+    ], answer:0,
+    explain:"37 CFR 1.76 — the ADS generally controls over the oath/declaration when they conflict, with limited exceptions for information that statute requires in the oath.",
     cite:"MPEP §601.05"},
 
   {chapter:"600", topic:"Reference Filing", aia:"aia",
-    q:"A nonprovisional application may be filed by reference to a previously filed application under 37 CFR 1.57(a) when:",
+    q:"Filing a nonprovisional application by reference under 37 CFR 1.57(a) is accomplished by:",
     choices:[
-      "The reference identifies the prior application and indicates the new application is a copy of it; later a copy must be furnished",
-      "The applicant submits no specification at all","The application is a continuation","The application is a provisional"
-    ], answer:0,
-    explain:"1.57(a) reference filing allows applicants to obtain a filing date by referencing a previously filed application; the actual copy must be submitted within a set time.",
+      "Filing the new application without any specification, claims, or drawings of its own",
+      "Petitioning the Director for permission to file by reference, with fee",
+      "Submitting the prior application's complete file wrapper at the time of filing",
+      "Submitting a paper that identifies the previously filed application and states it is filed by reference"
+    ], answer:3,
+    explain:"1.57(a) reference filing — applicant submits a paper identifying the prior application and indicating filing by reference. A copy of the prior application must be furnished within a set time period to complete the filing.",
     cite:"MPEP §601.01(a)"},
 
-  {chapter:"600", topic:"Translation Required",
-    q:"A non-English application receives a filing date but requires:",
+  {chapter:"600", topic:"Non-English Filing",
+    q:"A non-English-language nonprovisional application is accorded a filing date and then requires applicant to file:",
     choices:[
-      "An English translation, the fee for late filing of translation, and a statement of accuracy, within the time set by the Office",
-      "Examiner approval","A petition","Submission of a foreign attorney"
-    ], answer:0,
-    explain:"Non-English applications get a filing date; applicant must furnish an English translation, the surcharge, and a statement of translator accuracy.",
+      "Only an English translation of the claims and abstract within two months",
+      "A new application in English claiming priority to the foreign-language filing",
+      "An English translation, a statement of accuracy, and the late-translation surcharge",
+      "A petition to convert the application to a U.S. nonprovisional in English"
+    ], answer:2,
+    explain:"Non-English applications get a filing date. Applicant must then furnish an English translation of the entire application, a statement of translator accuracy, and pay the surcharge for late submission.",
     cite:"MPEP §601.01(d)"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 200 — APPLICATION TYPES, BENEFIT & PRIORITY
-  // ══════════════════════════════════════════════════════════════════
-
-  {chapter:"200", topic:"Provisional", highYield:true,
-    q:"A provisional application is automatically abandoned how long after filing?",
-    choices:["6 months","12 months","18 months","It is not automatically abandoned"], answer:1,
-    explain:"Provisional becomes abandoned 12 months after filing — cannot be revived to extend. To preserve benefit, a nonprovisional or PCT must be filed within 12 months (subject to limited restoration in PCT).",
+  {chapter:"200", topic:"Provisional Lifespan", highYield:true,
+    q:"A provisional application:",
+    choices:[
+      "Remains pending indefinitely until applicant elects to convert it",
+      "Is examined on the merits at the applicant's request",
+      "Is automatically abandoned 18 months after filing, the same as publication timing",
+      "Is automatically abandoned 12 months after filing and may not be revived to extend"
+    ], answer:3,
+    explain:"A provisional auto-abandons at 12 months and cannot be revived to extend that period. It is never examined. Benefit must be preserved by filing a nonprovisional or PCT within 12 months.",
     cite:"MPEP §201.04"},
 
-  {chapter:"200", topic:"Provisional",
+  {chapter:"200", topic:"Provisional Limits",
     q:"Which is NOT permitted in a provisional application?",
-    choices:["Drawings","An inventor's oath","A claim of foreign priority","A claim"], answer:2,
-    explain:"A provisional cannot claim priority to any earlier application — provisional, foreign, or PCT. It may have claims (though not required), drawings, and need not be examined.",
+    choices:[
+      "A cover sheet identifying it as a provisional application",
+      "Drawings necessary for the understanding of the invention",
+      "One or more claims, although none are required",
+      "A claim of priority to an earlier foreign or U.S. application"
+    ], answer:3,
+    explain:"A provisional cannot claim priority/benefit of any earlier application — provisional, nonprovisional, foreign, or PCT. Claims, drawings, and the cover sheet are all permitted.",
     cite:"MPEP §201.04(III)"},
 
   {chapter:"200", topic:"Continuation", highYield:true,
     q:"A continuation application under 35 U.S.C. 120 must:",
     choices:[
-      "Add new matter","Be filed before patenting, abandonment, or termination of the parent (co-pendency)",
-      "Have a different inventor","Be a U.S. application"
-    ], answer:1,
-    explain:"Co-pendency is essential — the continuation must be filed while the parent is still pending, at least one inventor must be in common, and no new matter may be added (else CIP).",
+      "Be filed within twelve months of the parent's filing date",
+      "Add at least one new claim not present in the parent application",
+      "Be filed before patenting, abandonment, or termination of the parent",
+      "Name a different inventor than the parent application"
+    ], answer:2,
+    explain:"§120 requires co-pendency — filed while the parent is still pending. No twelve-month deadline; no different-inventor requirement; no new-claim requirement.",
     cite:"MPEP §201.07"},
 
   {chapter:"200", topic:"Continuation-in-Part", highYield:true,
-    q:"A CIP application:",
+    q:"A CIP differs from a continuation in that the CIP:",
     choices:[
-      "May add new matter; claims supported only by new matter receive the CIP filing date",
-      "Must be filed within 6 months of parent","Is the same as a divisional","Cannot share subject matter with parent"
-    ], answer:0,
-    explain:"CIPs are partially new — claims supported only by new matter get the CIP's filing date; claims fully supported by the parent receive the parent's date.",
+      "Cannot claim the benefit of the parent under 35 U.S.C. 120",
+      "Adds new matter; claims supported only by the new matter get the CIP's filing date",
+      "Must be filed within six months of the parent application's filing date",
+      "Receives the earliest priority date for all its claims, regardless of new matter"
+    ], answer:1,
+    explain:"A CIP adds new matter. Claims fully supported by the parent retain the parent's effective date; claims supported only by new matter get the CIP's filing date. CIPs can and do claim §120 benefit.",
     cite:"MPEP §201.08"},
 
   {chapter:"200", topic:"Divisional", highYield:true,
-    q:"A divisional application:",
+    q:"The §121 safe harbor protects a divisional application from:",
     choices:[
-      "Is filed in response to a restriction requirement, claiming a non-elected invention; safe-harbor under §121 protects against double patenting based on the parent",
-      "Is the same as a CIP","Adds new matter","Cannot share inventors with the parent"
-    ], answer:0,
-    explain:"§121 safe harbor: a divisional filed as a result of a restriction requirement is shielded from double-patenting rejections based on the parent's claims.",
+      "Restriction requirements directed to the divisional's claims",
+      "Loss of priority benefit if the parent is later abandoned",
+      "Obviousness-type double patenting based on the parent's claims",
+      "Any §103 rejection based on the parent's published disclosure"
+    ], answer:2,
+    explain:"§121 safe harbor: a divisional filed as a result of a restriction requirement is shielded from double-patenting rejections based on the patent issuing from the parent. Does not shield from §103 generally.",
     cite:"MPEP §201.06"},
 
-  {chapter:"200", topic:"Domestic Benefit", highYield:true, aia:"aia",
-    q:"To claim §120 benefit, the application must:",
+  {chapter:"200", topic:"§120 Domestic Benefit", highYield:true, aia:"aia",
+    q:"To claim the benefit of an earlier-filed nonprovisional under 35 U.S.C. 120, the later application must:",
     choices:[
-      "Be a CIP","Be co-pending with the prior application, name at least one common inventor, and make a specific reference to the prior application in an ADS",
-      "Be filed within 1 year","Have identical claims"
-    ], answer:1,
-    explain:"§120 requires co-pendency, at least one common inventor (or applicant), and a specific reference (in an ADS for applications filed on/after Sept 16, 2012).",
+      "Be filed by the same sole inventor named in the earlier application",
+      "Claim the same invention as the earlier application, without any new claims",
+      "Be co-pending, name at least one common inventor, and make a specific reference in an ADS",
+      "Be filed within twelve months of the earlier application's filing date"
+    ], answer:2,
+    explain:"§120 requires (1) co-pendency, (2) at least one common inventor (or applicant), and (3) a specific reference to the prior application — in the ADS for applications filed on or after September 16, 2012.",
     cite:"MPEP §211"},
 
-  {chapter:"200", topic:"Foreign Priority", highYield:true,
-    q:"Under §119(a), a U.S. utility application claiming Paris Convention priority must be filed within:",
-    choices:["6 months","12 months","18 months","2 years"], answer:1,
-    explain:"12 months for utility, 6 months for design. Priority must be claimed and any required certified copy filed.",
+  {chapter:"200", topic:"§119(a) Foreign Priority", highYield:true,
+    q:"To claim Paris Convention priority under 35 U.S.C. 119(a) in a U.S. utility application, the U.S. application must be filed within:",
+    choices:[
+      "Six months of the foreign filing, with a certified copy filed within twelve months",
+      "The pendency period of the foreign application, with no fixed deadline",
+      "Eighteen months of the foreign filing, the same as publication timing",
+      "Twelve months of the foreign filing — six months for design applications"
+    ], answer:3,
+    explain:"Paris Convention priority: 12 months for utility applications; 6 months for designs. Choice A inverts the design and utility rule.",
     cite:"MPEP §213"},
 
   {chapter:"200", topic:"Priority Restoration", aia:"aia",
-    q:"If a U.S. nonprovisional is filed more than 12 months after a foreign filing, priority may be restored under §119(a) if:",
+    q:"A U.S. nonprovisional filed thirteen months after the foreign priority application may still claim priority if:",
     choices:[
-      "Filed within 14 months and the delay was unintentional, with petition and fee",
-      "Filed within 18 months","No restoration is available","Filed by an inventor's heir"
+      "Filed within fourteen months and the delay was unintentional, with petition and fee",
+      "The foreign office grants a corresponding extension of the priority period",
+      "Filed within eighteen months and the delay was unavoidable",
+      "Restoration is not available; the priority claim is lost"
     ], answer:0,
-    explain:"Under PLT-implementing 37 CFR 1.55(c), priority may be restored if the application is filed within 2 months of the 12-month deadline and the delay was unintentional, with petition and fee.",
+    explain:"37 CFR 1.55(c) — priority may be restored if the application is filed within 2 months of the 12-month deadline (i.e., within 14 months total) and the delay was unintentional, with petition and fee.",
     cite:"MPEP §213.03"},
 
-  {chapter:"200", topic:"Provisional Benefit", aia:"aia",
-    q:"A claim to a provisional under §119(e):",
+  {chapter:"200", topic:"§119(e) Provisional Benefit Timing", aia:"aia",
+    q:"For an application filed on or after September 16, 2012, the specific reference required for a §119(e) provisional benefit claim must be made within:",
     choices:[
-      "Must be made within the later of 4 months from filing or 16 months from the provisional's filing date",
-      "Must be made on the filing date","Can be added any time before issue",
-      "Requires an oath"
-    ], answer:0,
-    explain:"For applications filed on/after Sept 16, 2012, §119(e) benefit claim must be in an ADS within 4 months of filing date or 16 months from provisional filing, whichever is later.",
+      "Eighteen months of the provisional application's filing date",
+      "Twelve months of the provisional application's filing date",
+      "Four months of the U.S. filing date OR 16 months from the provisional, whichever is later",
+      "Two months of the U.S. application's filing date"
+    ], answer:2,
+    explain:"37 CFR 1.78 — the benefit claim must be made within 4 months of the actual filing date or 16 months from the provisional filing, whichever is later. Must appear in the ADS.",
     cite:"MPEP §211.02"},
 
-  {chapter:"200", topic:"Inventorship",
-    q:"Correction of inventorship in a pending nonprovisional application is done by:",
+  {chapter:"200", topic:"Correction of Inventorship",
+    q:"To correct inventorship in a pending nonprovisional application, applicant submits:",
     choices:[
-      "A request under 37 CFR 1.48 with corrected ADS and required statements",
-      "Filing a continuation","Requesting reissue","Petitioning the Director only"
+      "A petition to the Director, a corrected ADS, and the processing fee under 37 CFR 1.48",
+      "A new oath signed by the corrected inventive entity",
+      "An amendment to the cover letter and a small entity declaration",
+      "A continuation application naming the correct inventors"
     ], answer:0,
-    explain:"1.48 — correction in a nonprovisional uses a request, a corrected ADS identifying changes, and the processing fee. Errors are correctable without requiring proof of error in the original.",
+    explain:"37 CFR 1.48 — request to correct inventorship in a nonprovisional uses a corrected ADS identifying the changes plus the processing fee. No new oath is required in most cases.",
     cite:"MPEP §602.01(c)"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 1200 — APPEAL
-  // ══════════════════════════════════════════════════════════════════
-
   {chapter:"1200", topic:"Right to Appeal", highYield:true,
-    q:"An applicant may appeal to the PTAB once any claim has been:",
-    choices:["Rejected once","Twice rejected","Finally rejected only","Allowed and withdrawn"], answer:1,
-    explain:"35 U.S.C. 134 — appeal lies once any claim has been twice rejected, whether or not the rejection is final.",
+    q:"An applicant has the right to appeal to the PTAB once any claim has been:",
+    choices:[
+      "Rejected three times, with at least one rejection final",
+      "Twice rejected, regardless of whether the rejection is final",
+      "Finally rejected, then maintained over an after-final amendment",
+      "Rejected at least once, regardless of whether the rejection is final"
+    ], answer:1,
+    explain:"35 U.S.C. 134 — appeal is available after any claim has been twice rejected. Finality of the second rejection is not required.",
     cite:"MPEP §1204"},
 
-  {chapter:"1200", topic:"Notice of Appeal", highYield:true,
-    q:"A notice of appeal must be filed:",
+  {chapter:"1200", topic:"Notice of Appeal Timing", highYield:true,
+    q:"A notice of appeal must be filed within:",
     choices:[
-      "Within 1 month of the action","Within the period for reply (typically 3 months, extendable up to 6 months)",
-      "Within 2 months","Within 12 months"
-    ], answer:1,
+      "Two months of any final rejection, regardless of the original SSP set",
+      "Six months of any rejection, with the period being non-extendable",
+      "One month of the action being appealed, extendable to two months for cause",
+      "The period for reply to the most recent OA (typically 3 months, extendable to 6)"
+    ], answer:3,
     explain:"Notice of appeal is due within the period for reply to the most recent Office action — usually 3 months, extendable under 1.136(a) up to the 6-month statutory cap.",
     cite:"MPEP §1204"},
 
-  {chapter:"1200", topic:"Appeal Brief", highYield:true,
-    q:"The appeal brief is due:",
+  {chapter:"1200", topic:"Appeal Brief Deadline", highYield:true,
+    q:"The appeal brief must be filed within:",
     choices:[
-      "With the notice of appeal","2 months from the notice of appeal, extendable",
-      "3 months from notice of appeal","6 months, non-extendable"
+      "Two months from the notice of appeal, non-extendable",
+      "Two months from the notice of appeal, extendable under 1.136(a)",
+      "Three months from the notice of appeal, extendable under 1.136(a)",
+      "The remainder of the original period for reply to the appealed action"
     ], answer:1,
-    explain:"Appeal brief due 2 months from the date of the notice of appeal, extendable under 1.136(a).",
+    explain:"Appeal brief is due 2 months from the date of the notice of appeal, extendable under 1.136(a).",
     cite:"MPEP §1205"},
 
-  {chapter:"1200", topic:"Pre-Appeal Brief Conference",
-    q:"A pre-appeal brief request for review is filed:",
+  {chapter:"1200", topic:"Pre-Appeal Brief Request",
+    q:"A pre-appeal brief request for review must be filed:",
     choices:[
-      "With the notice of appeal","With the appeal brief","After examiner's answer","After PTAB decision"
+      "Concurrently with the notice of appeal, limited to five pages of argument",
+      "Only after the examiner issues an answer to the previously filed appeal brief",
+      "After the appeal brief has been filed, as a request for reconsideration",
+      "Within two months of the notice of appeal, limited to ten pages of argument"
     ], answer:0,
-    explain:"Pre-appeal brief request for review is filed concurrently with the notice of appeal — limited to 5 pages of arguments, can resolve clear errors before full briefing.",
+    explain:"Pre-appeal brief request for review is filed concurrently with the notice of appeal — limited to 5 pages of argument. Can resolve clear errors before full briefing.",
     cite:"MPEP §1204.02"},
 
-  {chapter:"1200", topic:"Examiner's Answer",
-    q:"After the appeal brief is filed, the examiner may:",
+  {chapter:"1200", topic:"Post-Brief Examiner Options",
+    q:"After receiving the appeal brief, the examiner may take any of the following actions EXCEPT:",
     choices:[
-      "Issue an examiner's answer, reopen prosecution with supervisor approval, or allow the application",
-      "Only allow the application","Only issue the answer","Refuse to act"
-    ], answer:0,
-    explain:"After the brief, examiner can (a) reopen prosecution (with TC Director/SPE approval, often by issuing a new ground), (b) allow the application, or (c) issue an examiner's answer.",
+      "Allow the application without further substantive examination",
+      "Issue a new final rejection of the appealed claims without supervisor approval",
+      "Reopen prosecution with TC Director or SPE approval to add a new ground",
+      "Issue an Examiner's Answer setting forth the position on appeal"
+    ], answer:1,
+    explain:"After the brief, the examiner may (1) allow, (2) issue an examiner's answer, or (3) reopen prosecution (with TC Director or SPE approval). The examiner cannot unilaterally issue a new final rejection without supervisor approval.",
     cite:"MPEP §1207"},
 
   {chapter:"1200", topic:"New Ground in Examiner's Answer",
-    q:"If the examiner's answer designates a new ground of rejection, applicant must, within 2 months:",
+    q:"If the Examiner's Answer designates a new ground of rejection, applicant must, within two months (non-extendable), either:",
     choices:[
-      "File a reply brief and either (i) reopen prosecution by responding with an amendment/evidence, or (ii) maintain the appeal by addressing the new ground",
-      "Only file a reply brief","Pay the issue fee","Abandon"
-    ], answer:0,
-    explain:"On a new ground in the answer, applicant has 2 months (non-extendable) to either request continued examination (reopen) or continue the appeal as to the new ground.",
+      "File a request for continued examination, or proceed directly to the Federal Circuit",
+      "Reopen prosecution by submitting an amendment/evidence, or maintain the appeal addressing the new ground",
+      "Pay the appeal forwarding fee, or request oral argument before the PTAB",
+      "File a reply brief, or file a petition for reconsideration to the Director"
+    ], answer:1,
+    explain:"On a new ground in the Examiner's Answer, applicant has 2 months (non-extendable) to either (a) reopen prosecution with an amendment/evidence or (b) maintain the appeal by submitting a reply brief addressing the new ground.",
     cite:"MPEP §1207.03"},
 
   {chapter:"1200", topic:"Reply Brief", highYield:true,
-    q:"A reply brief responding to the examiner's answer is due:",
-    choices:["1 month, extendable","2 months from the answer, generally non-extendable","6 months","Whenever applicant wishes"], answer:1,
-    explain:"Reply brief due 2 months from the examiner's answer, non-extendable (except in particular cases such as new grounds).",
+    q:"A reply brief responding to an Examiner's Answer must be filed within:",
+    choices:[
+      "Sixty days from the Examiner's Answer, non-extendable",
+      "Two months from the Examiner's Answer, extendable under 1.136(a)",
+      "Two months from the Examiner's Answer, generally non-extendable",
+      "Three months from the Examiner's Answer, extendable"
+    ], answer:2,
+    explain:"Reply brief is due 2 months from the Examiner's Answer and is generally non-extendable.",
     cite:"MPEP §1208"},
 
-  {chapter:"1200", topic:"PTAB Decision",
-    q:"If the PTAB issues a new ground of rejection, the applicant must within 2 months:",
+  {chapter:"1200", topic:"PTAB New Ground (41.50(b))",
+    q:"If the PTAB issues a new ground of rejection in its decision, applicant has two months to:",
     choices:[
-      "(1) Reopen prosecution by submitting an amendment/evidence, OR (2) request rehearing limited to the existing record",
-      "Pay an additional appeal fee","File a continuation","Pay the issue fee"
-    ], answer:0,
-    explain:"37 CFR 41.50(b) — on a Board new ground, applicant has 2 months to reopen (with amendment/evidence) or request rehearing on the same record.",
+      "Appeal the new ground directly to the U.S. Court of Appeals for the Federal Circuit",
+      "Pay an appeal forwarding fee and request reconsideration by an expanded PTAB panel",
+      "Request that the new ground be withdrawn by petition under 37 CFR 1.181",
+      "Reopen prosecution with an amendment or evidence, OR request rehearing on the existing record"
+    ], answer:3,
+    explain:"37 CFR 41.50(b) — on a Board new ground, applicant has 2 months to (1) reopen prosecution by submitting an amendment/evidence, or (2) request rehearing on the existing record.",
     cite:"MPEP §1214.01"},
 
-  {chapter:"1200", topic:"Rehearing",
+  {chapter:"1200", topic:"Request for Rehearing",
     q:"A request for rehearing of a PTAB decision must be filed within:",
-    choices:["1 month","2 months from the decision","6 months","30 days"], answer:1,
-    explain:"Request for rehearing is due 2 months from the PTAB decision (37 CFR 41.52). Extendable for good cause.",
+    choices:[
+      "Two months of the PTAB decision, extendable for good cause",
+      "Thirty days of the decision, non-extendable",
+      "Sixty days of the decision, non-extendable",
+      "Six months of the PTAB decision, non-extendable"
+    ], answer:0,
+    explain:"37 CFR 41.52 — request for rehearing is due 2 months from the PTAB decision, extendable for good cause.",
     cite:"MPEP §1214.03"},
 
-  {chapter:"1200", topic:"After Board Reversal",
-    q:"After a PTAB reversal of all rejections of a pending claim, examiner action returns to:",
+  {chapter:"1200", topic:"After PTAB Reversal",
+    q:"Following a PTAB reversal of all pending rejections, the examiner may:",
     choices:[
-      "Final allowance of the application","Either allowance or, if the examiner finds another ground, reopening prosecution with TC Director approval",
-      "PTAB jurisdiction","An automatic remand"
-    ], answer:1,
-    explain:"Following a PTAB reversal, examiner may issue a notice of allowance or, if a new rejection is warranted, reopen prosecution with required approval.",
+      "Allow the case only if the Board specifically directs allowance",
+      "Issue a notice of allowance only — reopening is no longer permitted",
+      "Reopen prosecution unilaterally without supervisor approval",
+      "Issue a notice of allowance, or reopen prosecution with TC Director approval on a new ground"
+    ], answer:3,
+    explain:"After a reversal, examiner may (a) issue a NOA or (b) reopen prosecution if a new ground of rejection is warranted, with TC Director or SPE approval.",
     cite:"MPEP §1214.04"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 1800 — PCT
-  // ══════════════════════════════════════════════════════════════════
-
-  {chapter:"1800", topic:"PCT Filing", highYield:true,
-    q:"For an international filing date, the PCT application must include all of the following EXCEPT:",
+  {chapter:"1800", topic:"International Filing Date", highYield:true,
+    q:"To accord an international filing date under PCT Article 11, the application must include all EXCEPT:",
     choices:[
-      "Indication that it is intended as an international application",
-      "Name of the applicant entitled to file","Description and at least one claim",
-      "Payment of the international search fee"
-    ], answer:3,
-    explain:"For an international filing date (Article 11), need: indication; applicant entitled to file; description; claim(s); designation (now automatic). Fees can be paid later.",
+      "Payment of the international filing fee and the international search fee",
+      "Designation of at least one Contracting State (now automatic upon filing)",
+      "An indication that the application is intended as an international application",
+      "The name of an applicant entitled to file, and a description and at least one claim"
+    ], answer:0,
+    explain:"For an international filing date you need an indication, an entitled applicant, a description and claim(s), and a designation (now automatic). Fees can be paid later.",
     cite:"MPEP §1810"},
 
-  {chapter:"1800", topic:"US National Phase", highYield:true,
-    q:"U.S. national stage entry under 35 U.S.C. 371 from a PCT must be made by:",
-    choices:["20 months from priority","30 months from priority","31 months from priority","36 months from priority"], answer:1,
-    explain:"U.S. requires entry by 30 months from the earliest priority date. (Some offices use 31 months; not the U.S.)",
+  {chapter:"1800", topic:"U.S. National Phase", highYield:true,
+    q:"To enter the U.S. national stage under 35 U.S.C. 371 from a PCT application, applicant must do so within:",
+    choices:[
+      "Twenty months from the earliest priority date",
+      "Thirty-one months from the earliest priority date",
+      "Thirty months from the earliest priority date",
+      "Thirty months from the international filing date"
+    ], answer:2,
+    explain:"U.S. national stage entry is 30 months from the earliest priority date. Some PCT offices use 31 months; the U.S. does not. Choice D incorrectly substitutes filing date for priority date.",
     cite:"MPEP §1893"},
 
-  {chapter:"1800", topic:"Demand", highYield:true,
-    q:"To obtain Chapter II preliminary examination (IPRP Chapter II), the Demand must be filed within:",
+  {chapter:"1800", topic:"Demand for Chapter II", highYield:true,
+    q:"A Demand for international preliminary examination (PCT Chapter II) must be filed within:",
     choices:[
-      "3 months from transmittal of the ISR/written opinion OR 22 months from priority, whichever is later",
-      "12 months from filing","30 months from priority","6 months from filing"
+      "Three months from transmittal of the ISR/WO OR 22 months from priority, whichever is later",
+      "Three months from the international filing date",
+      "Twenty months from the earliest priority date",
+      "Twenty-two months from the international filing date"
     ], answer:0,
-    explain:"PCT Rule 54bis — Demand due 3 months from ISR/WO transmittal or 22 months from priority, whichever is later.",
+    explain:"PCT Rule 54bis — Demand is due 3 months from ISR/Written Opinion transmittal OR 22 months from priority, whichever is LATER.",
     cite:"MPEP §1864"},
 
-  {chapter:"1800", topic:"Receiving Office",
-    q:"A U.S. resident may file a PCT application with the USPTO as a Receiving Office:",
-    choices:["Always","Only if the invention was made in the U.S.","Only with a license","Only if the language is English"], answer:0,
-    explain:"U.S. residents/nationals may file with USPTO as RO. (However, certain inventions made in the U.S. require a foreign filing license before filing abroad — usually granted as part of the filing receipt.)",
+  {chapter:"1800", topic:"USPTO as Receiving Office",
+    q:"A U.S. resident filing a PCT application with the USPTO as Receiving Office:",
+    choices:[
+      "May not — the USPTO does not accept PCT filings from U.S. residents",
+      "May do so only after the corresponding U.S. national application has been allowed",
+      "Must obtain a foreign filing license before submission, in every case",
+      "May do so — though inventions made in the U.S. require a foreign filing license before any foreign filing"
+    ], answer:3,
+    explain:"U.S. residents/nationals may file with USPTO as Receiving Office. Inventions made in the U.S. require a foreign filing license under §184 before being filed abroad — typically granted automatically on a U.S. filing receipt.",
     cite:"MPEP §1805"},
 
   {chapter:"1800", topic:"Foreign Filing License", highYield:true,
-    q:"A foreign filing license is required when:",
+    q:"A foreign filing license under 35 U.S.C. 184 is required when:",
     choices:[
-      "An invention was made in the U.S. and is to be filed abroad, before any required waiting period expires",
-      "Any U.S. resident files anywhere","Always","Never"
-    ], answer:0,
-    explain:"35 U.S.C. 184 — inventions made in the U.S. require a license before foreign filing. The 6-month period after U.S. filing may serve as automatic license absent secrecy order; license can also be expedited.",
+      "Any applicant residing anywhere files a patent application outside the U.S.",
+      "An invention was made in the U.S. and is to be filed abroad before the applicable waiting period expires",
+      "An applicant intends to claim Paris Convention priority from a U.S. filing",
+      "An applicant has previously filed any PCT application designating the U.S."
+    ], answer:1,
+    explain:"§184 — inventions made in the U.S. require a foreign filing license before foreign filing. The 6-month period after U.S. filing serves as an automatic license absent a secrecy order.",
     cite:"MPEP §140"},
 
-  {chapter:"1800", topic:"Priority Restoration in PCT",
-    q:"If a PCT application is filed more than 12 months after a priority application, restoration of priority is available by the RO if:",
+  {chapter:"1800", topic:"PCT Priority Restoration",
+    q:"A PCT application filed thirteen months after a priority application may have priority restored by the Receiving Office if:",
     choices:[
-      "Filed within 2 months of the 12-month deadline, with petition and statement that the failure was unintentional (or other RO standard)",
-      "Within 6 months","Never","Only by the applicant in person"
-    ], answer:0,
-    explain:"PCT Rule 26bis.3 — restoration available within 2 months of the 12-month deadline. USPTO/RO applies the 'unintentional' standard; some offices apply 'due care.'",
+      "Restoration is not available in any PCT receiving office",
+      "Filed within fifteen months and the delay was unavoidable",
+      "The IB grants restoration after substantive examination",
+      "Filed within fourteen months and the delay was unintentional, with petition and fee (at USPTO/RO)"
+    ], answer:3,
+    explain:"PCT Rule 26bis.3 — restoration available within 2 months of the 12-month deadline. USPTO/RO applies the 'unintentional' standard; some other ROs apply 'due care.'",
     cite:"MPEP §1828.01"},
 
   {chapter:"1800", topic:"Article 19 Amendments",
-    q:"Under PCT Article 19, the applicant may amend the claims:",
+    q:"Under PCT Article 19, applicant may amend:",
     choices:[
-      "Once, with the IB, within 2 months from transmittal of the ISR or 16 months from priority, whichever expires later (and not after national phase begins)",
-      "Anytime","Only with examiner consent","Only at national phase"
-    ], answer:0,
-    explain:"Article 19 amendments — to claims only, filed with the IB; deadline 2 months from ISR transmittal or 16 months from priority, whichever is later.",
+      "The description, claims, and drawings, filed with the Receiving Office",
+      "Any part of the application, filed at any time before national-stage entry",
+      "The claims only, filed with the International Bureau, within 2 months of ISR transmittal or 16 months from priority (later)",
+      "The claims and abstract, filed with the International Searching Authority"
+    ], answer:2,
+    explain:"Article 19 amendments are CLAIMS ONLY, filed with the International Bureau, within 2 months of ISR transmittal or 16 months from priority — whichever is later.",
     cite:"MPEP §1853"},
 
   {chapter:"1800", topic:"Article 34 Amendments",
-    q:"Article 34 amendments may amend:",
+    q:"Article 34 amendments differ from Article 19 amendments in that Article 34 amendments may amend:",
     choices:[
-      "Claims only","Description, claims, and drawings, filed during Chapter II examination",
-      "Only the abstract","Nothing"
-    ], answer:1,
-    explain:"During Chapter II (after a Demand), the applicant may amend the description, claims, and drawings under Article 34.",
+      "Only the abstract, filed with the International Bureau before national-stage entry",
+      "Only the parts of the description corresponding to amended claims, under PCT Rule 66",
+      "The description, claims, and drawings, during Chapter II preliminary examination",
+      "Only the claims, the same scope of amendment as PCT Article 19 allows"
+    ], answer:2,
+    explain:"During Chapter II preliminary examination (after a Demand), applicant may amend description, claims, and drawings under Article 34 — broader than Article 19's claims-only scope.",
     cite:"MPEP §1871"},
 
-  {chapter:"1800", topic:"Search Fee in National Stage",
-    q:"When entering U.S. national stage, the search fee may be reduced if:",
+  {chapter:"1800", topic:"National Stage Search Fee",
+    q:"The U.S. national stage search fee may be reduced when:",
     choices:[
-      "The USPTO was the ISA for the international application or the applicant supplies the ISR from another ISA the USPTO accepts",
-      "The applicant pays in advance","The applicant is small entity","The applicant has filed a CIP"
-    ], answer:0,
-    explain:"Search fee reductions apply when USPTO was the ISA, or when an ISR was prepared by another ISA the USPTO is willing to credit.",
+      "The application has fewer than twenty total claims and three independent claims",
+      "The applicant pays the basic national fee within twenty months of priority",
+      "The USPTO was the ISA for the international application, or another accepted ISA prepared the ISR",
+      "The applicant qualifies as a small entity, regardless of the ISA"
+    ], answer:2,
+    explain:"Search-fee reductions apply when USPTO was the ISA or when another ISA's ISR is accepted by USPTO. Small entity affects amount but not the underlying basis for reduction.",
     cite:"MPEP §1893.01(c)"},
 
   {chapter:"1800", topic:"Bypass Continuation",
-    q:"A U.S. continuation filed under §111 claiming benefit of a PCT (rather than national stage entry under §371) is called:",
+    q:"A 'bypass' application is best described as:",
     choices:[
-      "A bypass continuation","A divisional","A national stage application","A reissue"
+      "A U.S. nonprovisional under §111(a) claiming §365(c) benefit of a PCT — an alternative to §371 entry",
+      "A divisional filed in response to a unity-of-invention requirement in a PCT",
+      "A reissue application correcting errors in a national-stage U.S. patent",
+      "A continuation filed in a PCT national-stage application after entry"
     ], answer:0,
-    explain:"A 'bypass' application is a §111 nonprovisional that claims §365(c) benefit of a PCT — useful for various procedural reasons (e.g., to file claims as continuation instead of national stage).",
+    explain:"A 'bypass' is a §111(a) U.S. nonprovisional claiming §365(c) benefit of a PCT, used as an alternative procedural route to §371 entry — useful for various reasons (e.g., to use U.S.-style claim drafting).",
     cite:"MPEP §1895"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 800 — RESTRICTION
-  // ══════════════════════════════════════════════════════════════════
-
   {chapter:"800", topic:"Restriction Standard", highYield:true,
-    q:"Restriction is proper when two or more inventions are:",
+    q:"A proper restriction requirement under 35 U.S.C. 121 must demonstrate that the claimed inventions are:",
     choices:[
-      "Independent and distinct, and a serious burden on the examiner exists",
-      "Both broad","Identical","Unclaimed"
-    ], answer:0,
-    explain:"35 U.S.C. 121 — restriction is proper when claims are to independent and distinct inventions; in U.S. practice the examiner must also show a serious burden.",
+      "Drawn to different statutory categories (e.g., apparatus vs. method)",
+      "Independent and distinct, and that a serious examination burden exists",
+      "Independent or distinct, regardless of examination burden",
+      "Supported by different working examples in the specification"
+    ], answer:1,
+    explain:"§121 plus U.S. practice requires (1) independent AND distinct inventions and (2) a serious burden on the examiner if forced to examine them together.",
     cite:"MPEP §803"},
 
-  {chapter:"800", topic:"Election", highYield:true,
-    q:"After a restriction requirement, applicant must:",
+  {chapter:"800", topic:"Election Mechanics", highYield:true,
+    q:"After a restriction requirement, applicant must elect one invention for examination. The election:",
     choices:[
-      "Elect one invention to prosecute, with or without traverse",
-      "Refile as a divisional","Pay an additional fee for each invention","Appeal"
-    ], answer:0,
-    explain:"Election is mandatory to obtain examination. With traverse preserves later petition rights; non-elected claims may be pursued in divisionals (with §121 safe harbor).",
+      "Must be made with traverse, in order to preserve any later challenge",
+      "May be deferred until the first Office action on the merits is mailed",
+      "Must be made without traverse, otherwise prosecution stalls",
+      "May be made with or without traverse; election is required either way"
+    ], answer:3,
+    explain:"Election is required to proceed. May be with or without traverse — with traverse preserves the right to petition the restriction if later made final.",
     cite:"MPEP §818"},
 
   {chapter:"800", topic:"Election by Original Presentation",
-    q:"When a claim that would have been subject to restriction is added later, the examiner may require:",
+    q:"After election of an invention and an Office action on the elected claims, applicant adds a new claim drawn to a non-elected invention. The examiner may:",
     choices:[
-      "Election of the new claim by original presentation",
-      "An RCE","Petition","Reissue"
-    ], answer:0,
-    explain:"Election by original presentation — a later-added claim to a non-elected/different invention can be required to be deleted or treated under new election.",
+      "Enter the claim and proceed to examine all elected and non-elected claims",
+      "Require applicant to file a divisional application immediately",
+      "Reject the claim as new matter under 35 U.S.C. 132(a)",
+      "Require election by original presentation — applicant must elect or cancel the new claim"
+    ], answer:3,
+    explain:"Election by original presentation — when a later-added claim is drawn to a non-elected or different invention, the examiner may require its election or cancellation under MPEP §821.03.",
     cite:"MPEP §821.03"},
 
-  {chapter:"800", topic:"Species Election",
-    q:"When a generic claim is allowable, all claims to non-elected species, drawn to the elected genus, are:",
+  {chapter:"800", topic:"Rejoinder of Species",
+    q:"After election of species, if a generic claim linking the species is found allowable, the examiner generally:",
     choices:[
-      "Rejoined for examination",
-      "Cancelled","Held in abeyance","Subject to restriction"
-    ], answer:0,
-    explain:"Rejoinder — when a linking generic claim is allowable, claims to non-elected species/inventions that are linked may be rejoined.",
+      "Holds the non-elected species claims in abeyance until issue",
+      "Requires applicant to file a divisional for the non-elected species",
+      "Cancels the non-elected species claims as withdrawn",
+      "Rejoins the non-elected species claims for examination on the merits"
+    ], answer:3,
+    explain:"Rejoinder — when a linking generic claim is allowable, non-elected species claims linked by that claim may be rejoined for examination.",
     cite:"MPEP §821.04"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 1400 — CORRECTION (Reissue, Certificate of Correction, Disclaimer)
-  // ══════════════════════════════════════════════════════════════════
-
   {chapter:"1400", topic:"Reissue Basis", highYield:true, aia:"aia",
-    q:"A reissue application under 35 U.S.C. 251 requires:",
+    q:"A reissue application under 35 U.S.C. 251 requires that the original patent be:",
     choices:[
-      "That the original patent is wholly or partly inoperative or invalid through error, without deceptive intention",
-      "That the patent has expired","That the inventor has died","That the assignee consents"
-    ], answer:0,
-    explain:"Reissue requires error (now without 'deceptive intent' language per AIA) that renders the patent wholly or partially inoperative or invalid.",
+      "Owned in its entirety by the original named inventor",
+      "Subject to a pending validity challenge in district court",
+      "Within 18 months of its grant date for any kind of reissue",
+      "Wholly or partly inoperative or invalid through error"
+    ], answer:3,
+    explain:"§251 requires error rendering the patent wholly or partly inoperative or invalid. The AIA removed the prior 'without deceptive intention' language. Broadening reissue has a 2-year window; narrowing reissue has no time limit.",
     cite:"MPEP §1402"},
 
   {chapter:"1400", topic:"Broadening Reissue", highYield:true,
     q:"A broadening reissue must be applied for within:",
-    choices:["1 year of issuance","2 years of issuance","5 years","Anytime"], answer:1,
-    explain:"35 U.S.C. 251(d) — broadening reissue must be applied for within 2 years from the original patent's grant date. Narrowing reissue has no such deadline.",
+    choices:[
+      "Two years of the original patent's grant date",
+      "The patent's enforceability period, with no fixed deadline",
+      "Eighteen months of the original patent's grant date",
+      "Five years of the original patent's grant date"
+    ], answer:0,
+    explain:"35 U.S.C. 251(d) — broadening reissue must be applied for within 2 years from the patent's grant date. Narrowing reissue has no deadline.",
     cite:"MPEP §1412.03"},
 
   {chapter:"1400", topic:"Reissue Oath",
-    q:"A reissue oath/declaration must identify:",
+    q:"The reissue oath or declaration must identify:",
     choices:[
       "At least one error being relied upon as the basis for reissue",
-      "All errors","The original inventor's date of birth","Marketing data"
+      "The intent to broaden, narrow, or otherwise modify the claims",
+      "Every error in the patent, with supporting evidence",
+      "The specific district court litigation prompting the reissue"
     ], answer:0,
-    explain:"The reissue oath/declaration must identify at least one error being corrected; complete listing not required.",
+    explain:"Reissue oath/declaration must identify at least one error being corrected — a complete listing is not required.",
     cite:"MPEP §1414"},
 
   {chapter:"1400", topic:"Certificate of Correction",
-    q:"A Certificate of Correction is used for:",
+    q:"A Certificate of Correction under 35 U.S.C. 254-255 is appropriate for:",
     choices:[
-      "Office mistakes or minor applicant errors that do not require reexamination",
-      "Broadening claims","Substantive errors","Adding new matter"
-    ], answer:0,
-    explain:"Certificate of Correction (35 U.S.C. 254-255) addresses Office mistakes (free) or minor applicant errors (with fee) that don't require new examination.",
+      "Broadening claims to recover surrendered subject matter",
+      "Inventorship corrections after a federal court order",
+      "Office mistakes or minor applicant errors not requiring further examination",
+      "Resolving substantive §103 errors discovered after grant"
+    ], answer:2,
+    explain:"Certificate of Correction addresses Office mistakes (free) or minor applicant errors (with fee) not requiring new examination. Broadening or substantive issues require reissue.",
     cite:"MPEP §1480"},
 
   {chapter:"1400", topic:"Disclaimer",
-    q:"A statutory disclaimer under 35 U.S.C. 253 may be used to:",
+    q:"A statutory disclaimer under 35 U.S.C. 253:",
     choices:[
-      "Disclaim one or more claims of a patent",
-      "Withdraw a published application","Add new claims","Cancel a notice of allowance"
-    ], answer:0,
-    explain:"Statutory disclaimer disclaims one or more claims; terminal disclaimer disclaims the terminal part of the patent term (used to overcome ODP).",
+      "Disclaims the terminal portion of the patent's term to overcome ODP",
+      "Disclaims one or more claims of an issued patent",
+      "Disclaims the patent's geographic enforcement rights",
+      "Disclaims the patent's foreign counterparts and continuations"
+    ], answer:1,
+    explain:"Statutory disclaimer (253) disclaims one or more claims. Terminal disclaimer (different mechanism) disclaims the terminal part of the term — used to cure obviousness-type double patenting.",
     cite:"MPEP §1490"},
 
-  {chapter:"1400", topic:"Reissue Recapture",
-    q:"The recapture rule bars reissue from:",
+  {chapter:"1400", topic:"Recapture Rule",
+    q:"The recapture rule prevents reissue from being used to:",
     choices:[
-      "Recovering subject matter that was surrendered during prosecution to obtain allowance",
-      "Adding any new claims","Narrowing claims","Adding inventors"
+      "Recover subject matter intentionally surrendered to obtain the original patent",
+      "Recover subject matter that was the basis for a §112(a) rejection",
+      "Add any claims broader than the original patent's broadest claim",
+      "Add new matter not present in the original disclosure"
     ], answer:0,
-    explain:"Recapture: a patentee cannot use reissue to broaden claims to recapture subject matter intentionally surrendered (typically by amendment or argument) during prosecution of the original patent.",
+    explain:"Recapture: a patentee cannot use reissue (especially broadening reissue) to recover subject matter that was intentionally surrendered during prosecution — typically by narrowing amendment or argument to overcome prior art.",
     cite:"MPEP §1412.02"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 2700 — PATENT TERM & PTA
-  // ══════════════════════════════════════════════════════════════════
-
-  {chapter:"2700", topic:"Patent Term",
-    q:"A utility patent term is generally:",
+  {chapter:"2700", topic:"Utility Patent Term",
+    q:"A utility patent's term is generally:",
     choices:[
-      "20 years from earliest U.S. non-provisional filing or §365(c) PCT filing",
-      "17 years from issue","14 years from filing","20 years from issue"
-    ], answer:0,
-    explain:"20-year term measured from earliest effective non-provisional U.S. filing date (or §363/365(c) PCT). Provisionals do NOT count for term calculation.",
+      "Twenty years measured from the patent's grant date",
+      "Twenty years measured from the earliest U.S. nonprovisional or §365(c) PCT filing date",
+      "Twenty years measured from the earliest claimed priority, including provisionals",
+      "Seventeen years measured from the patent's grant date"
+    ], answer:1,
+    explain:"§154(a)(2) — 20 years from the earliest effective U.S. nonprovisional filing date (or §365(c) PCT). Provisionals do NOT count toward term calculation. 17-from-grant was the pre-1995 rule.",
     cite:"MPEP §2701"},
 
-  {chapter:"2700", topic:"PTA — Patent Term Adjustment", highYield:true,
-    q:"Patent Term Adjustment compensates for:",
+  {chapter:"2700", topic:"Patent Term Adjustment", highYield:true,
+    q:"Patent Term Adjustment compensates for which of the following USPTO delays?",
     choices:[
-      "USPTO delays beyond statutory deadlines (A delay), 3-year pendency (B delay), or interference/appeals (C delay), minus applicant delay",
-      "Maintenance fee delays","Term reduction due to terminal disclaimer","Foreign delays"
+      "Failure to meet statutory milestones (A), 3-year pendency (B), and interferences/appeals/secrecy (C)",
+      "Foreign-prosecution delay in counterpart applications, where USPTO acted as the ISA",
+      "Maintenance-fee processing delay attributable to the Office (Type A delay)",
+      "Reduction of term attributable to a terminal disclaimer filed during prosecution"
     ], answer:0,
-    explain:"35 U.S.C. 154(b) — A (14-month first action, 4-month response, etc.), B (3-year pendency), C (interferences, appeals, secrecy). Applicant delay reduces PTA.",
+    explain:"§154(b) — A delay (statutory milestones like 14-month first action), B delay (3-year pendency), C delay (interferences, appeals, secrecy). Applicant delays reduce PTA.",
     cite:"MPEP §2731"},
 
-  {chapter:"2700", topic:"PTE — Patent Term Extension",
+  {chapter:"2700", topic:"Patent Term Extension",
     q:"Patent Term Extension under 35 U.S.C. 156 applies to:",
     choices:[
-      "Products subject to a regulatory review period (e.g., drugs, medical devices), up to 5 years extension",
-      "Software patents","All utility patents","Design patents only"
-    ], answer:0,
-    explain:"PTE under §156 — for products that went through regulatory delay (FDA approval, etc.). Up to 5 years extension, and the total term post-approval can't exceed 14 years.",
+      "Software patents subject to extended PTO examination delay",
+      "Any patent whose owner files an extension petition within 60 days of grant",
+      "Products subject to FDA or other regulatory review, up to 5 years extension",
+      "Design patents that have been litigated through the Federal Circuit"
+    ], answer:2,
+    explain:"§156 (Hatch-Waxman) — applies to drugs, medical devices, food/color additives, etc. subject to regulatory review. Up to 5 years extension, total post-approval term ≤ 14 years.",
     cite:"MPEP §2750"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 1500 — DESIGN PATENTS
-  // ══════════════════════════════════════════════════════════════════
-
   {chapter:"1500", topic:"Design Term",
-    q:"The term of a design patent issued from an application filed on/after May 13, 2015 is:",
-    choices:["14 years from issue","15 years from issue","20 years from filing","17 years from issue"], answer:1,
-    explain:"Hague Agreement implementation — 15 years from issuance for applications filed on/after May 13, 2015. Earlier filings: 14 years.",
+    q:"The term of a design patent issued from an application filed on or after May 13, 2015 is:",
+    choices:[
+      "Fifteen years from the patent's grant date",
+      "Fourteen years from the patent's grant date",
+      "Twenty years from the application's filing date",
+      "Twenty years from the earliest U.S. nonprovisional priority"
+    ], answer:0,
+    explain:"Hague Agreement implementation — 15 years from issue for design applications filed on or after May 13, 2015. Earlier-filed designs: 14 years from issue. Designs are not subject to the 20-year utility term.",
     cite:"MPEP §1505"},
 
-  {chapter:"1500", topic:"Design Foreign Priority",
-    q:"Paris Convention priority for a design is:",
-    choices:["3 months","6 months","12 months","18 months"], answer:1,
-    explain:"6 months for design (12 months for utility).",
+  {chapter:"1500", topic:"Design Priority",
+    q:"The Paris Convention priority period for design applications is:",
+    choices:[
+      "Six months from the earliest foreign design filing",
+      "Twelve months from the earliest foreign design filing",
+      "Six months from a foreign utility filing covering the same article",
+      "Eighteen months from the earliest foreign design filing"
+    ], answer:0,
+    explain:"6 months for design (vs. 12 months for utility). Priority is from the earliest design filing; cross-type priority (design from utility, etc.) has its own rules.",
     cite:"MPEP §1504.10"},
 
   {chapter:"1500", topic:"Design Drawings",
-    q:"Design drawings must show:",
-    choices:["A working example","The ornamental appearance of the article — all views necessary","Manufacturing tolerances","Color always"], answer:1,
-    explain:"Drawings define a design patent. All views necessary to show the appearance, with proper surface shading and clarity.",
+    q:"Design patent drawings must show:",
+    choices:[
+      "Sufficient views to fully disclose the ornamental appearance of the article",
+      "All structural functions performed by the claimed article",
+      "Manufacturing tolerances and material specifications",
+      "Both the ornamental appearance and at least one functional embodiment"
+    ], answer:0,
+    explain:"Design drawings define the design — they must include all views necessary to fully disclose the ornamental appearance with appropriate surface shading. Function is not the design subject matter.",
     cite:"MPEP §1503.02"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 1600 — PLANT PATENTS
-  // ══════════════════════════════════════════════════════════════════
-
   {chapter:"1600", topic:"Plant Patent Scope",
-    q:"A plant patent under 35 U.S.C. 161 protects:",
+    q:"A plant patent under 35 U.S.C. 161 protects a plant variety that is:",
     choices:[
-      "An asexually reproduced, distinct and new variety, including cultivated sports and hybrids, other than tuber-propagated or wild plants",
-      "Any plant","GMOs only","Seeds only"
-    ], answer:0,
-    explain:"§161 — asexually reproduced new and distinct plant variety (excluding tuber-propagated and uncultivated wild plants).",
+      "Any new and distinct plant, regardless of how reproduced",
+      "Sexually reproduced and stable across multiple generations",
+      "Asexually reproduced, distinct, and new, excluding tuber-propagated and uncultivated wild plants",
+      "Genetically modified through laboratory-controlled techniques only"
+    ], answer:2,
+    explain:"§161 — asexually reproduced, distinct, and new variety, including cultivated sports and hybrids, but EXCLUDING tuber-propagated plants and plants found in an uncultivated state.",
     cite:"MPEP §1601"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 2000 — DUTY OF DISCLOSURE
-  // ══════════════════════════════════════════════════════════════════
-
   {chapter:"2000", topic:"Duty of Disclosure", highYield:true,
-    q:"The duty of disclosure under 37 CFR 1.56 applies to:",
+    q:"The duty of disclosure under 37 CFR 1.56 extends to:",
     choices:[
-      "Each inventor, each attorney/agent, and every other person substantively involved in the preparation or prosecution of the application",
-      "Only the inventor","Only the attorney","The assignee only"
-    ], answer:0,
-    explain:"1.56(c) — duty extends to inventors, prosecuting attorneys/agents, and others substantively involved. Continues throughout pendency.",
+      "Each named inventor and the prosecuting attorney of record only",
+      "Each assignee, the assignee's officers, and any in-house counsel of the assignee",
+      "Anyone with knowledge of the invention, including consultants who reviewed pre-filing drafts",
+      "Each inventor, each attorney or agent, and each person substantively involved in preparation or prosecution"
+    ], answer:3,
+    explain:"1.56(c) — inventors, attorneys/agents, and others substantively involved in preparation or prosecution. Continues throughout pendency.",
     cite:"MPEP §2001"},
 
-  {chapter:"2000", topic:"Material Information",
-    q:"Information is material under 1.56 when:",
+  {chapter:"2000", topic:"Materiality",
+    q:"Under 37 CFR 1.56(b), information is material to patentability when it is:",
     choices:[
-      "It is not cumulative and it establishes a prima facie case of unpatentability, or refutes/inconsistent with a position taken by applicant",
-      "Any time it relates to the field","If foreign","If commercial"
-    ], answer:0,
-    explain:"1.56(b) — materiality: information that is not cumulative and either alone or in combination establishes a prima facie case of unpatentability, or is inconsistent with applicant's position.",
+      "Cumulative of information already cited in the prosecution history",
+      "Reasonably related to the field of endeavor of the claimed invention",
+      "Cited in any reexamination or post-grant proceeding involving the same field",
+      "Non-cumulative and either establishes a prima facie case of unpatentability OR is inconsistent with applicant's position"
+    ], answer:3,
+    explain:"1.56(b) materiality: non-cumulative AND either (i) establishes prima facie unpatentability alone or in combination, or (ii) refutes/inconsistent with applicant's position.",
     cite:"MPEP §2001.05"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 2200 — REEXAMINATION
-  // ══════════════════════════════════════════════════════════════════
-
-  {chapter:"2200", topic:"Ex Parte Reexam", highYield:true,
-    q:"Ex parte reexamination may be requested by:",
+  {chapter:"2200", topic:"Ex Parte Reexam Requester", highYield:true,
+    q:"A request for ex parte reexamination may be filed by:",
     choices:[
-      "Any person, including the patent owner or a third party, anytime during patent enforceability",
-      "Only the patentee","Only third parties","Only the USPTO"
+      "Anyone, including the patent owner or any third party, anytime during enforceability",
+      "Only the patent owner, after the patent has been challenged",
+      "Only third parties with standing to sue under the patent",
+      "Only the original prosecuting attorney of record"
     ], answer:0,
-    explain:"35 U.S.C. 302 — anyone may request ex parte reexam at any time during patent enforceability, based on patents or printed publications raising a substantial new question of patentability (SNQ).",
+    explain:"35 U.S.C. 302 — anyone may request ex parte reexam during the patent's enforceability period. Based on patents or printed publications raising a substantial new question of patentability.",
     cite:"MPEP §2209"},
 
-  {chapter:"2200", topic:"SNQ",
-    q:"The threshold for ordering ex parte reexamination is:",
+  {chapter:"2200", topic:"Reexam Threshold",
+    q:"The threshold the Office uses to order ex parte reexamination is:",
     choices:[
-      "A reasonable likelihood that requester would prevail","A substantial new question of patentability",
-      "Preponderance of the evidence","Clear and convincing evidence"
-    ], answer:1,
-    explain:"SNQ — 'substantial new question of patentability' is the threshold for ex parte reexam. (RLP — reasonable likelihood — is the IPR/PGR threshold at the PTAB.)",
+      "Reasonable likelihood that the requester would prevail (the PTAB IPR standard)",
+      "Preponderance of the evidence against patentability",
+      "Clear and convincing evidence of invalidity",
+      "Substantial new question of patentability"
+    ], answer:3,
+    explain:"SNQ — substantial new question of patentability — is the ex parte reexam threshold. RLP (reasonable likelihood of prevailing) is the IPR threshold at the PTAB.",
     cite:"MPEP §2242"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 2500 — MAINTENANCE FEES
-  // ══════════════════════════════════════════════════════════════════
-
-  {chapter:"2500", topic:"Maintenance Fees", highYield:true,
-    q:"Maintenance fees for a utility patent are due at:",
+  {chapter:"2500", topic:"Maintenance Schedule", highYield:true,
+    q:"Maintenance fees for utility patents are due at:",
     choices:[
-      "3.5, 7.5, and 11.5 years after issue, with 6-month grace period (with surcharge)",
-      "5 and 10 years","Anytime","Once at issue"
-    ], answer:0,
-    explain:"3.5, 7.5, and 11.5 years after grant. Late payment allowed with surcharge during 6-month grace. Patent lapses if all required fees not paid timely.",
+      "Annual installments measured from the application's filing date",
+      "4 and 8 and 12 years after issuance, payable in advance",
+      "5 and 10 years after issuance, with no grace period",
+      "3.5, 7.5, and 11.5 years after issuance, with a 6-month grace period (with surcharge)"
+    ], answer:3,
+    explain:"3.5, 7.5, and 11.5 years after grant; six-month grace period with surcharge. Failure to pay = lapse.",
     cite:"MPEP §2506"},
 
-  {chapter:"2500", topic:"No Maintenance Fees",
+  {chapter:"2500", topic:"No-Maintenance Patents",
     q:"Maintenance fees are NOT required for:",
     choices:[
-      "Utility patents","Design patents","Plant patents",
-      "Both design and plant patents"
+      "Utility patents whose claims have been amended during a reissue proceeding",
+      "Patents that result from a PCT application entering the U.S. national stage",
+      "Patents that have been subject to a terminal disclaimer with a parent patent",
+      "Design and plant patents, regardless of the application's filing date"
     ], answer:3,
-    explain:"Design and plant patents do not require maintenance fees. Only utility patents do.",
+    explain:"Only utility patents require maintenance fees. Design and plant patents do not — regardless of origin or any disclaimer.",
     cite:"MPEP §2504"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 100 — SECRECY & FOREIGN FILING
-  // ══════════════════════════════════════════════════════════════════
-
   {chapter:"100", topic:"Secrecy Order",
-    q:"A secrecy order issued under 35 U.S.C. 181:",
+    q:"A secrecy order under 35 U.S.C. 181:",
     choices:[
-      "Withholds the grant of a patent and restricts disclosure when publication might be detrimental to national security",
-      "Issues at applicant's request only","Lasts 6 months max","Has no effect on prosecution"
-    ], answer:0,
-    explain:"Secrecy orders prohibit disclosure and withhold grant. Periodically reviewed; affects foreign filing and prosecution.",
+      "Issues only at the applicant's request, to protect competitive sensitive material",
+      "Has no effect on the application's status or examination",
+      "Imposes a maximum 12-month limit on prosecution suspension",
+      "Withholds grant and restricts disclosure when publication might harm national security"
+    ], answer:3,
+    explain:"Secrecy orders restrict disclosure and withhold grant when publication might be detrimental to national security. Reviewed periodically; can be renewed.",
     cite:"MPEP §120"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 300 — OWNERSHIP & ASSIGNMENT
-  // ══════════════════════════════════════════════════════════════════
-
-  {chapter:"300", topic:"Assignment Recordation",
-    q:"To take effect against a subsequent purchaser, an assignment must be:",
+  {chapter:"300", topic:"Recordation",
+    q:"An assignment is void against a subsequent bona fide purchaser without notice unless it is recorded at the USPTO:",
     choices:[
-      "Recorded at the USPTO within 3 months of execution or before the subsequent purchase",
-      "Notarized","Filed with the IRS","Translated"
-    ], answer:0,
-    explain:"35 U.S.C. 261 — assignment is void against a subsequent BFP for value without notice, unless recorded within 3 months of execution or before the subsequent purchase.",
+      "Before issuance of the patent in which the rights are claimed",
+      "Within six months of execution, or before publication of the application",
+      "Within one year of the assignor's execution of the document",
+      "Within three months of execution, or before the date of the subsequent purchase"
+    ], answer:3,
+    explain:"35 U.S.C. 261 — to defeat a subsequent BFP, the prior assignment must be recorded within 3 months of execution OR before the subsequent purchase.",
     cite:"MPEP §302"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 400 — REPRESENTATIVE
-  // ══════════════════════════════════════════════════════════════════
-
-  {chapter:"400", topic:"Practitioner",
-    q:"A registered patent practitioner may:",
+  {chapter:"400", topic:"Practitioner Role",
+    q:"A registered patent agent (non-attorney practitioner) may:",
     choices:[
-      "Represent applicants before the USPTO in patent matters",
-      "Practice in state courts","Sign sworn statements for clients","Give legal opinions on contracts"
-    ], answer:0,
-    explain:"Registration grants the right to practice before the USPTO in patent matters. Patent agents cannot give general legal advice; patent attorneys may.",
+      "Represent applicants before the USPTO and provide opinions on contract enforceability",
+      "Represent applicants before the USPTO in patent matters but not give general legal advice",
+      "Practice before state courts in patent infringement litigation",
+      "Sign declarations under penalty of perjury on behalf of the inventor"
+    ], answer:1,
+    explain:"Patent agents may practice before the USPTO in patent matters but cannot give general legal advice or represent in court. Patent attorneys (also barred in a state) may give legal advice and practice in court.",
     cite:"MPEP §402"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 500 — RECEIPT & HANDLING OF PAPERS
-  // ══════════════════════════════════════════════════════════════════
-
   {chapter:"500", topic:"Certificate of Mailing",
-    q:"A Certificate of Mailing under 37 CFR 1.8 gives an applicant filing date as:",
+    q:"A Certificate of Mailing under 37 CFR 1.8 gives a paper the filing-date credit of the date deposited in U.S. mail, but is NOT available for:",
     choices:[
-      "The date of deposit in U.S. mail as First-Class with a proper certificate, except for certain documents not eligible",
-      "Date of receipt by USPTO","Always issue date","Hand-delivered date only"
-    ], answer:0,
-    explain:"1.8 lets a paper bear the deposit date. Not available for certain documents: new patent applications, national stage entries, papers requiring deposit by 'Priority Mail Express,' etc.",
+      "Information disclosure statements containing references",
+      "Petitions filed under 37 CFR 1.181",
+      "New patent applications and certain other listed documents",
+      "Replies to Office actions filed by First-Class Mail"
+    ], answer:2,
+    explain:"1.8 excludes new applications, national-stage entries, and certain other documents — for those, use Priority Mail Express under 1.10 (or e-file).",
     cite:"MPEP §512"},
 
   {chapter:"500", topic:"Priority Mail Express",
-    q:"Priority Mail Express (formerly Express Mail) under 37 CFR 1.10 gives:",
+    q:"Filing under 37 CFR 1.10 (Priority Mail Express) gives the paper the filing date of:",
     choices:[
-      "Filing date as the date of deposit, including for new applications",
-      "Filing date as USPTO receipt only","Filing date as next business day","No filing-date benefit"
-    ], answer:0,
-    explain:"1.10 'Priority Mail Express' — date of deposit becomes the filing/receipt date, available for new applications and other items not covered by 1.8.",
+      "Whichever is later: deposit date or USPTO mailroom date stamp",
+      "The actual date of receipt at the USPTO",
+      "The next business day after the date of deposit",
+      "The date of deposit with the USPS, including for new applications"
+    ], answer:3,
+    explain:"1.10 — date of deposit becomes the filing/receipt date. Unlike 1.8, this method is available for new applications and items 1.8 excludes.",
     cite:"MPEP §513"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 900 — SEARCH
-  // ══════════════════════════════════════════════════════════════════
-
   {chapter:"900", topic:"Classification",
-    q:"USPTO patent classification currently uses:",
-    choices:["U.S. Patent Classification only","Cooperative Patent Classification (CPC)","IPC only","No classification system"], answer:1,
-    explain:"CPC, jointly developed with EPO, is the primary classification system used by USPTO.",
+    q:"The USPTO's primary patent classification system is:",
+    choices:[
+      "The Cooperative Patent Classification (CPC), jointly developed with the EPO",
+      "The U.S. Patent Classification (USPC) system, retained as the official system",
+      "The International Patent Classification (IPC) used in PCT applications only",
+      "An internal locarno-based system used for design applications only"
+    ], answer:0,
+    explain:"CPC is the primary classification system used by USPTO since 2015, replacing USPC for primary classification.",
     cite:"MPEP §905"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 1000 — DECISIONS BY OFFICIALS
-  // ══════════════════════════════════════════════════════════════════
-
-  {chapter:"1000", topic:"Petitions",
-    q:"Petitions to the Director under 37 CFR 1.181 generally must be filed within:",
+  {chapter:"1000", topic:"Petitions Timing",
+    q:"A petition to the Director under 37 CFR 1.181 must generally be filed within:",
     choices:[
-      "2 months from the action complained of",
-      "1 year","30 days","No time limit"
-    ], answer:0,
+      "One month from the action complained of, non-extendable",
+      "Anytime during the application's pendency",
+      "Six months from the action complained of, extendable for good cause",
+      "Two months from the action complained of (default time)"
+    ], answer:3,
     explain:"1.181(f) — petitions are generally due within 2 months of the mailing date of the action or notice complained of, unless statute or rule provides otherwise.",
     cite:"MPEP §1002"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 1100 — PUBLICATION
-  // ══════════════════════════════════════════════════════════════════
-
-  {chapter:"1100", topic:"Pre-Grant Publication",
+  {chapter:"1100", topic:"Publication",
     q:"A U.S. nonprovisional utility application is generally published:",
     choices:[
-      "Promptly after 18 months from earliest priority/filing date",
-      "Immediately upon filing","At allowance","Never"
-    ], answer:0,
-    explain:"35 U.S.C. 122(b) — publication 18 months from earliest priority/filing date, unless a nonpublication request is filed (and no foreign filing).",
+      "Immediately upon filing, unless the applicant designates it confidential at filing",
+      "Promptly after eighteen months from the earliest priority or filing date claimed",
+      "Concurrently with the Notice of Allowance, in the same Official Gazette issue",
+      "Only after the patent has issued, when the public file becomes accessible"
+    ], answer:1,
+    explain:"35 U.S.C. 122(b) — publication 18 months from earliest priority/filing, unless a nonpublication request is filed at filing (and no foreign filing thereafter).",
     cite:"MPEP §1120"},
 
   {chapter:"1100", topic:"Nonpublication Request",
-    q:"A nonpublication request must be filed:",
+    q:"A nonpublication request under §122(b)(2)(B) requires:",
     choices:[
-      "At the time of filing, with a certification that the invention has not and will not be the subject of a foreign filing requiring publication",
-      "After publication","With the issue fee","Never permitted"
-    ], answer:0,
-    explain:"122(b)(2)(B) — nonpublication request filed at filing, with certification. If foreign filing later occurs, applicant must notify USPTO within 45 days or risk abandonment.",
+      "Examiner approval supported by a showing that the disclosure constitutes trade-secret material",
+      "Filing at the time of application with a certification that no foreign filing will be made requiring publication",
+      "Cancellation of any claim that has been published in a related foreign-counterpart application",
+      "A petition under 37 CFR 1.182 with the petition fee, filed within three months of filing"
+    ], answer:1,
+    explain:"Nonpublication request must be filed at the time of filing with a certification that the application has not been and will not be the subject of a foreign filing requiring publication. If a foreign filing later occurs, notify USPTO within 45 days or risk abandonment.",
     cite:"MPEP §1122"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 1300 — ALLOWANCE & ISSUE
-  // ══════════════════════════════════════════════════════════════════
-
   {chapter:"1300", topic:"Issue Fee", highYield:true,
-    q:"The issue fee period after the Notice of Allowance is:",
-    choices:["3 months, non-extendable","3 months, extendable","6 months","1 year"], answer:0,
-    explain:"35 U.S.C. 151 — 3 months from NOA mailing date, non-extendable. Failure to pay results in abandonment.",
+    q:"The issue fee following a Notice of Allowance must be paid within:",
+    choices:[
+      "Three months of the NOA mailing date, non-extendable under any circumstance",
+      "Six months of the NOA mailing date, non-extendable, per 35 U.S.C. 151",
+      "One month of the NOA mailing date, extendable for good cause shown",
+      "Three months of the NOA mailing date, extendable under 37 CFR 1.136(a)"
+    ], answer:0,
+    explain:"35 U.S.C. 151 — issue fee is due within 3 months of the NOA mailing date, NON-EXTENDABLE. Failure to pay = abandonment.",
     cite:"MPEP §1306"},
 
   {chapter:"1300", topic:"Withdrawal from Issue",
-    q:"After issue fee payment but before issue, withdrawal from issue is available:",
+    q:"After payment of the issue fee but before issuance, an application may be withdrawn from issue:",
     choices:[
-      "On petition for specified reasons (e.g., new prior art, unpatentability, mistake in inventorship, or to permit RCE)",
-      "Automatically","Never","By examiner only"
-    ], answer:0,
-    explain:"37 CFR 1.313(c) — withdrawal from issue (after issue fee paid) requires a petition with one of the listed reasons.",
+      "Only by order of the Patent Trial and Appeal Board after rehearing",
+      "Automatically, upon submission of a written request by the applicant of record",
+      "Only if the assignment has not yet been recorded with the USPTO",
+      "By petition under 1.313(c) for specified reasons (e.g., new prior art, mistake, RCE)"
+    ], answer:3,
+    explain:"1.313(c) — withdrawal from issue requires petition with specified reasons: new prior art making claims unpatentable, mistake in inventorship, to permit RCE, or to permit reexamination.",
     cite:"MPEP §1308"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 1900 — PROTEST
-  // ══════════════════════════════════════════════════════════════════
-
   {chapter:"1900", topic:"Protest",
-    q:"A protest under 37 CFR 1.291 by a third party:",
+    q:"A protest under 37 CFR 1.291 by a third party may be filed:",
     choices:[
-      "May be filed before publication or before the notice of allowance (whichever is earlier), with copies of references and an explanation",
-      "Can be filed any time","Only after publication","Cannot be anonymous"
-    ], answer:0,
-    explain:"1.291 — protest must be filed before publication or before the NOA (whichever is earlier), including identification, copies, and concise explanation.",
+      "Only with the consent of the applicant or assignee of record",
+      "Only after publication has occurred, with copies of the references",
+      "Anytime before the patent issues, with petition and fee",
+      "Before publication of the application or the Notice of Allowance, whichever is earlier"
+    ], answer:3,
+    explain:"1.291 — protest must be filed before the earlier of publication OR Notice of Allowance. Includes copies and concise explanation of relevance.",
     cite:"MPEP §1901"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 2300 — INTERFERENCE / DERIVATION
-  // ══════════════════════════════════════════════════════════════════
-
   {chapter:"2300", topic:"Derivation", aia:"aia",
-    q:"AIA derivation proceedings under 35 U.S.C. 135:",
+    q:"AIA derivation proceedings under 35 U.S.C. 135 must be petitioned for filing within:",
     choices:[
-      "Replace interferences for applications subject to AIA §102, must be filed within 1 year of the earlier publication or issuance of the derived claim",
-      "Continue interferences","Are filed in district court only","Are unavailable"
+      "One year of the earlier publication or issuance of the derived claim",
+      "Two years of the derived patent's grant date",
+      "Six months of the earlier publication of the derived claim",
+      "Eighteen months of the AIA application's filing date"
     ], answer:0,
-    explain:"AIA derivation proceedings replaced interference for AIA-era applications. 1-year window from publication of earlier-filed claim deriving the invention. Heard by PTAB.",
+    explain:"AIA derivation petition window: 1 year from the earlier publication of the derived claim. Replaces pre-AIA interferences for AIA-era applications. Heard by PTAB.",
     cite:"MPEP §2310"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 2400 — BIOTECH
-  // ══════════════════════════════════════════════════════════════════
-
   {chapter:"2400", topic:"Biological Deposit",
-    q:"A biological deposit is required to support an enablement requirement when:",
+    q:"A biological deposit may be required to support enablement when:",
     choices:[
-      "The invention cannot be adequately described in writing or made/obtained by skilled artisans without undue experimentation",
-      "Always for biotech","Only for plants","Never"
+      "Written disclosure alone would not enable skilled artisans to obtain or use the invention without undue experimentation",
+      "The organism has been characterized in any publicly available database",
+      "The application discloses any biotechnology subject matter at all",
+      "The applicant intends to claim methods of using the organism"
     ], answer:0,
-    explain:"Biological deposits are required to satisfy enablement when written disclosure alone is insufficient to enable a skilled person to make/use the invention.",
+    explain:"Biological deposits are required to satisfy §112(a) enablement when the written disclosure is insufficient to enable skilled artisans to make/use the invention.",
     cite:"MPEP §2402"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 2800 — SUPPLEMENTAL EXAMINATION
-  // ══════════════════════════════════════════════════════════════════
-
   {chapter:"2800", topic:"Supplemental Examination", aia:"aia",
-    q:"Supplemental examination under 35 U.S.C. 257:",
+    q:"Supplemental examination under 35 U.S.C. 257 is a procedure available to:",
     choices:[
-      "Is available only to the patent owner to consider, reconsider, or correct information believed relevant to the patent; if a SNQ is found, ex parte reexam is ordered",
-      "Is available to any third party","Cannot lead to reexam","Is unlimited in scope"
-    ], answer:0,
-    explain:"Supplemental exam (post-AIA) — patentee-initiated, allows information to be considered. If SNQ found, ex parte reexam is ordered. Can immunize against inequitable conduct.",
+      "Only the original applicant, before the patent has issued",
+      "Any party, but limited to patents or printed publications",
+      "Third parties challenging a patent's validity on any ground",
+      "Only the patent owner, to consider/reconsider/correct information; if SNQ found, ex parte reexam follows"
+    ], answer:3,
+    explain:"§257 (post-AIA) is patentee-initiated. Allows the patentee to ask the Office to consider information; if SNQ found, the Office orders ex parte reexamination. Can immunize against inequitable conduct.",
     cite:"MPEP §2801"},
 
-  // ══════════════════════════════════════════════════════════════════
-  //  CHAPTER 2900 — INTERNATIONAL DESIGNS
-  // ══════════════════════════════════════════════════════════════════
-
-  {chapter:"2900", topic:"Hague", aia:"aia",
-    q:"An international design application under the Hague Agreement, filed with the USPTO as an office of indirect filing:",
+  {chapter:"2900", topic:"Hague International Designs", aia:"aia",
+    q:"An international design application under the Hague Agreement filed with the USPTO as an office of indirect filing:",
     choices:[
+      "Is examined only by the USPTO in all designated Contracting Parties",
+      "Provides a 14-year U.S. design term regardless of filing date",
       "Is forwarded to WIPO and may designate multiple Contracting Parties, including the U.S.",
-      "Is examined only in the U.S.","Has 14-year term","Requires no fee"
-    ], answer:0,
-    explain:"Hague international design applications may be filed with the USPTO and designate multiple Contracting Parties; the USPTO examines U.S. designations.",
+      "Cannot designate the United States as one of the Contracting Parties"
+    ], answer:2,
+    explain:"Hague international design applications may be filed indirectly via USPTO; the IB processes them and the application may designate multiple Contracting Parties. The USPTO examines U.S. designations.",
     cite:"MPEP §2902"},
+
 
 ];
 
@@ -1591,87 +1777,57 @@ window.MPEP_CHAPTERS = {
   "2900":"International Design Applications",
 };
 
-// Chapters that account for ~75% of the exam — used to weight Random Mix and power "High-Yield" mode.
 window.MPEP_HIGH_YIELD = ["2100","700","600","1200","1800"];
 
 // ─────────────────────────── DEADLINE & NUMBER FLASHCARDS ───────────────────────────
-// Pure recall — the patent bar loves to test whether a date/period/threshold is X or Y.
-// Front (q) → flip → Back (a) with the MPEP cite. Tagged by chapter for drilling per topic.
 window.MPEP_DEADLINES = [
-  // Reply / Office Action timing
-  {q:"Statutory maximum period for reply to an Office Action", a:"6 months (35 U.S.C. 133). NEVER more, regardless of extensions.", cite:"MPEP §710.02", chapter:"700"},
+  {q:"Statutory maximum period for reply to an Office Action", a:"6 months (35 U.S.C. 133). Never more, regardless of extensions.", cite:"MPEP §710.02", chapter:"700"},
   {q:"Typical Shortened Statutory Period (SSP) for non-final OA", a:"3 months, extendable in 1-month increments under 1.136(a) up to the 6-month cap.", cite:"MPEP §710.02", chapter:"700"},
   {q:"SSP for an Ex Parte Quayle action", a:"2 months, extendable under 1.136(a).", cite:"MPEP §714.14", chapter:"700"},
   {q:"Issue fee period after Notice of Allowance", a:"3 months — NON-EXTENDABLE. Miss it = abandonment.", cite:"MPEP §1306", chapter:"1300"},
-
-  // Continuations / Benefit / Priority
   {q:"Provisional application auto-abandons", a:"12 months after filing. Cannot be revived to extend.", cite:"MPEP §201.04", chapter:"200"},
   {q:"Paris Convention priority — utility", a:"12 months from earliest foreign filing.", cite:"MPEP §213", chapter:"200"},
   {q:"Paris Convention priority — design", a:"6 months from earliest foreign filing.", cite:"MPEP §1504.10", chapter:"1500"},
   {q:"Priority restoration deadline after missing 12-month Paris window", a:"Within 2 months of the 12-month deadline, with petition + fee + 'unintentional' statement.", cite:"MPEP §213.03 / 37 CFR 1.55(c)", chapter:"200"},
   {q:"§119(e) provisional benefit claim — deadline to add", a:"4 months from actual filing date OR 16 months from provisional filing, whichever is LATER (for post-9/16/2012 apps).", cite:"MPEP §211.02", chapter:"200"},
-
-  // PCT
   {q:"U.S. national stage entry deadline (PCT)", a:"30 months from earliest priority date. NOT 31.", cite:"MPEP §1893", chapter:"1800"},
   {q:"PCT Demand (Chapter II) deadline", a:"3 months from ISR/Written Opinion transmittal OR 22 months from priority, whichever is LATER.", cite:"MPEP §1864", chapter:"1800"},
   {q:"PCT Article 19 amendment deadline", a:"2 months from ISR transmittal OR 16 months from priority, whichever is LATER. Claims ONLY.", cite:"MPEP §1853", chapter:"1800"},
   {q:"PCT priority restoration deadline", a:"Within 2 months of the 12-month deadline. USPTO/RO uses 'unintentional' standard.", cite:"MPEP §1828.01", chapter:"1800"},
   {q:"Foreign filing license — automatic timing", a:"6 months after U.S. filing (absent secrecy order); license is automatic if no secrecy order issued.", cite:"MPEP §140", chapter:"100"},
-
-  // Appeal
   {q:"Notice of Appeal deadline", a:"Period for reply to most recent OA — typically 3 months, extendable up to 6.", cite:"MPEP §1204", chapter:"1200"},
   {q:"Appeal Brief deadline", a:"2 months from Notice of Appeal, extendable under 1.136(a).", cite:"MPEP §1205", chapter:"1200"},
   {q:"Reply Brief deadline (after Examiner's Answer)", a:"2 months from Examiner's Answer — generally NON-EXTENDABLE.", cite:"MPEP §1208", chapter:"1200"},
   {q:"Deadline to respond to new ground of rejection in Examiner's Answer", a:"2 months — NON-EXTENDABLE. Either reopen prosecution or maintain appeal as to the new ground.", cite:"MPEP §1207.03", chapter:"1200"},
   {q:"Deadline after PTAB issues a new ground of rejection (41.50(b))", a:"2 months — reopen prosecution with amendment/evidence OR request rehearing on the existing record.", cite:"MPEP §1214.01", chapter:"1200"},
   {q:"Request for rehearing of PTAB decision", a:"2 months from PTAB decision (37 CFR 41.52).", cite:"MPEP §1214.03", chapter:"1200"},
-
-  // Petitions / Reissue / Correction
   {q:"Broadening reissue deadline", a:"Within 2 YEARS of the original patent's grant date. Narrowing reissue has no deadline.", cite:"MPEP §1412.03", chapter:"1400"},
   {q:"Petition under 37 CFR 1.181 deadline", a:"2 months from the action complained of (default).", cite:"MPEP §1002", chapter:"1000"},
   {q:"Petition to revive (1.137) standard", a:"'Unintentional' delay + petition + fee + required reply (post-PLT, 2013).", cite:"MPEP §711.03(c)", chapter:"700"},
   {q:"Assignment recordation — to take priority over BFP", a:"Within 3 months of execution OR before subsequent purchase.", cite:"MPEP §302", chapter:"300"},
-
-  // Maintenance / Term
   {q:"Utility patent term", a:"20 years from earliest U.S. nonprovisional filing (or §365(c) PCT). Provisionals do NOT count.", cite:"MPEP §2701", chapter:"2700"},
   {q:"Design patent term (apps filed ≥ May 13, 2015)", a:"15 years from issue.", cite:"MPEP §1505", chapter:"1500"},
   {q:"Design patent term (apps filed before May 13, 2015)", a:"14 years from issue.", cite:"MPEP §1505", chapter:"1500"},
   {q:"Maintenance fee due dates (utility)", a:"3.5, 7.5, and 11.5 years after issue. 6-month grace period with surcharge.", cite:"MPEP §2506", chapter:"2500"},
   {q:"Design and plant patents — maintenance fees?", a:"NONE. Only utility patents pay maintenance fees.", cite:"MPEP §2504", chapter:"2500"},
   {q:"PTE maximum (35 U.S.C. 156)", a:"Up to 5 years extension. Total post-approval term ≤ 14 years.", cite:"MPEP §2750", chapter:"2700"},
-
-  // IDS
   {q:"IDS — free filing window (no fee, no statement)", a:"Within 3 months of U.S. filing date OR before first OA on the merits, whichever is LATER.", cite:"MPEP §609.04(b)", chapter:"700"},
   {q:"IDS after Notice of Allowance", a:"Either 1.97(e) statement + 1.17(p) fee, OR withdraw from issue (typically via RCE).", cite:"MPEP §609.04(b)", chapter:"700"},
-
-  // Restriction
   {q:"Petition to challenge restriction (37 CFR 1.144)", a:"Within 2 months of the action making restriction final. Must have elected with traverse.", cite:"MPEP §818.03", chapter:"800"},
-
-  // Publication
   {q:"Pre-grant publication timing", a:"Promptly after 18 months from earliest priority/filing.", cite:"MPEP §1120", chapter:"1100"},
   {q:"Foreign-filing notice after rescinded non-publication", a:"45 days from foreign filing — else application is abandoned.", cite:"MPEP §1122", chapter:"1100"},
-
-  // Reexam / Supplemental
   {q:"Threshold for ordering ex parte reexamination", a:"Substantial New Question of patentability (SNQ). Based ONLY on patents or printed publications.", cite:"MPEP §2242", chapter:"2200"},
   {q:"Threshold for IPR/PGR (PTAB)", a:"Reasonable Likelihood of Prevailing (RLP).", cite:"AIA §6", chapter:"2200"},
-
-  // Entity status
   {q:"Small entity — employee threshold", a:"Fewer than 500 employees, no rights conveyed to non-small entity.", cite:"MPEP §509.02", chapter:"600"},
   {q:"Micro entity — application history threshold", a:"≤4 previously filed applications (provisionals, foreign, and PCT-not-entering-US excluded).", cite:"MPEP §509.04", chapter:"600"},
   {q:"Micro entity — income threshold", a:"Gross income ≤ 3× median household income. (Alternative: university employment basis.)", cite:"MPEP §509.04", chapter:"600"},
-
-  // Derivation / AIA dates
   {q:"AIA effective date (FITF system)", a:"March 16, 2013. Apps with effective filing date on/after this are AIA; earlier are pre-AIA.", cite:"AIA §3", chapter:"2100"},
   {q:"Derivation proceeding filing window", a:"Within 1 year of the earlier publication of the derived claim.", cite:"MPEP §2310", chapter:"2300"},
-
-  // Number of claim limits
   {q:"Standard claim fee threshold (over X claims)", a:"More than 3 independent or more than 20 total claims triggers excess claim fees.", cite:"37 CFR 1.16", chapter:"600"},
   {q:"Multiple dependent claim — fee treatment", a:"Each claim referenced by an MDC counts separately for fee purposes.", cite:"MPEP §608.01(n)", chapter:"600"},
 ];
 
 // ─────────────────────────── MPEP LOOKUP DRILL ───────────────────────────
-// Train the open-book lookup skill. Present a topic → start stopwatch → user finds the
-// rule in the chapter PDF → click "Found it" → reveal the expected cite for confirmation.
 window.MPEP_LOOKUP = [
   {topic:"After-final amendments that won't be entered as a matter of right", cite:"MPEP §714.13", chapter:"700"},
   {topic:"Request for Continued Examination (RCE) requirements", cite:"MPEP §706.07(h)", chapter:"700"},
@@ -1774,8 +1930,7 @@ window.MPEP_LOOKUP = [
   {topic:"Priority Mail Express filing under 1.10 — date of deposit", cite:"MPEP §513", chapter:"500"},
 ];
 
-
-// Quick-reference study notes per chapter. Plain text, MPEP cite friendly. Used by the Study Guide view.
+// Quick-reference study notes per chapter
 window.MPEP_STUDY = {
   "2100": [
     {h:"§101 Eligibility (2106)", b:"Step 1: statutory category. Step 2A: directed to judicial exception? Prong One identifies the exception; Prong Two asks whether it's integrated into a practical application. Step 2B: if not integrated, do additional elements amount to 'significantly more'? Three exceptions: abstract ideas, laws of nature, natural phenomena."},
