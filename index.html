@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>MPEP Prep · Emma's Patent Bar Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e1a;
+    --bg-2:#0f1422;
+    --card:#131826;
+    --card-2:#1a2033;
+    --border:#222a40;
+    --text:#e6e8ec;
+    --muted:#8b92a8;
+    --dim:#5b6177;
+    --accent:#00d4aa;
+    --accent-2:#7c5cff;
+    --amber:#f59e0b;
+    --green:#10b981;
+    --red:#ef4444;
+    --shadow:0 10px 40px rgba(0,0,0,.4);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  body{
+    min-height:100vh;
+    background-image:
+      radial-gradient(1200px 600px at 80% -10%, rgba(124,92,255,.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 100%, rgba(0,212,170,.08), transparent 60%);
+    background-attachment:fixed;
+  }
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  button{font-family:inherit}
+  ::selection{background:rgba(0,212,170,.3)}
+
+  /* Layout */
+  .app{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+  .sidebar{
+    background:linear-gradient(180deg,rgba(19,24,38,.7),rgba(10,14,26,.7));
+    border-right:1px solid var(--border);
+    padding:24px 20px;
+    position:sticky;top:0;height:100vh;overflow-y:auto;
+    backdrop-filter:blur(10px);
+  }
+  .main{padding:36px 48px;max-width:1100px;margin:0 auto;width:100%}
+
+  /* Brand */
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+  .brand-mark{
+    width:38px;height:38px;border-radius:10px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:16px;color:#0a0e1a;
+    box-shadow:0 4px 20px rgba(0,212,170,.3);
+  }
+  .brand-name{font-weight:700;font-size:16px;letter-spacing:-.01em}
+  .brand-sub{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:2px}
+
+  /* Nav */
+  .nav-group{margin-bottom:24px}
+  .nav-label{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.12em;font-weight:600;margin-bottom:10px;padding:0 8px}
+  .nav-item{
+    display:flex;align-items:center;gap:10px;
+    padding:9px 12px;border-radius:8px;cursor:pointer;
+    color:var(--muted);font-size:14px;font-weight:500;
+    transition:all .15s;
+    border:1px solid transparent;
+  }
+  .nav-item:hover{background:var(--card);color:var(--text)}
+  .nav-item.active{background:var(--card);color:var(--text);border-color:var(--border)}
+  .nav-item.active .dot{background:var(--accent);box-shadow:0 0 12px var(--accent)}
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--dim);transition:all .15s}
+
+  /* Chapter chips */
+  .chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 4px}
+  .chip{
+    font-size:11px;font-weight:600;
+    padding:4px 9px;border-radius:6px;
+    background:var(--card);color:var(--muted);
+    border:1px solid var(--border);
+    cursor:pointer;transition:all .15s;
+    font-family:'JetBrains Mono',monospace;
+  }
+  .chip:hover{color:var(--text);border-color:var(--accent)}
+  .chip.active{background:var(--accent);color:#0a0e1a;border-color:var(--accent)}
+  .chip .ct{opacity:.6;margin-left:4px}
+
+  /* Header */
+  .topbar{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px;gap:24px;flex-wrap:wrap}
+  .title-block h1{margin:0;font-size:28px;font-weight:700;letter-spacing:-.02em}
+  .title-block .subtitle{color:var(--muted);font-size:14px;margin-top:4px}
+  .stat-row{display:flex;gap:12px}
+  .stat{
+    background:var(--card);border:1px solid var(--border);
+    padding:14px 18px;border-radius:12px;min-width:96px;
+  }
+  .stat .num{font-size:22px;font-weight:700;letter-spacing:-.01em;font-family:'JetBrains Mono',monospace}
+  .stat .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
+  .stat.green .num{color:var(--green)}
+  .stat.amber .num{color:var(--amber)}
+  .stat.accent .num{color:var(--accent)}
+
+  /* Quiz card */
+  .quiz-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:36px;
+    box-shadow:var(--shadow);
+    position:relative;overflow:hidden;
+  }
+  .quiz-card::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    opacity:.5;
+  }
+  .q-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+  .q-tag{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    padding:5px 10px;border-radius:6px;
+    background:rgba(0,212,170,.1);color:var(--accent);
+    border:1px solid rgba(0,212,170,.25);
+    font-family:'JetBrains Mono',monospace;
+  }
+  .q-num{font-size:12px;color:var(--dim);font-family:'JetBrains Mono',monospace}
+  .q-topic{font-size:12px;color:var(--muted);margin-bottom:8px}
+  .q-text{font-size:18px;font-weight:500;line-height:1.55;margin-bottom:24px;color:var(--text)}
+
+  .choices{display:flex;flex-direction:column;gap:10px}
+  .choice{
+    display:flex;gap:14px;align-items:flex-start;
+    padding:14px 18px;border-radius:12px;
+    background:var(--bg-2);
+    border:1px solid var(--border);
+    cursor:pointer;transition:all .15s;
+    text-align:left;color:var(--text);font:inherit;
+  }
+  .choice:hover:not(.disabled){border-color:var(--accent);background:var(--card-2);transform:translateY(-1px)}
+  .choice.disabled{cursor:default}
+  .choice .letter{
+    flex:0 0 26px;height:26px;border-radius:7px;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--card-2);color:var(--muted);
+    font-weight:600;font-size:13px;font-family:'JetBrains Mono',monospace;
+    border:1px solid var(--border);
+    transition:all .15s;
+  }
+  .choice.correct{border-color:var(--green);background:rgba(16,185,129,.08)}
+  .choice.correct .letter{background:var(--green);color:#0a0e1a;border-color:var(--green)}
+  .choice.wrong{border-color:var(--red);background:rgba(239,68,68,.08)}
+  .choice.wrong .letter{background:var(--red);color:#fff;border-color:var(--red)}
+  .choice.dimmed{opacity:.5}
+
+  .explain{
+    margin-top:22px;padding:18px 20px;border-radius:12px;
+    background:var(--bg-2);border:1px solid var(--border);
+    display:none;animation:fadeIn .3s ease;
+  }
+  .explain.show{display:block}
+  .explain .label{font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:8px}
+  .explain .text{font-size:14px;line-height:1.6;color:var(--text)}
+  .explain .cite{margin-top:10px;font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+  .explain .cite a{margin-left:8px}
+
+  @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  .controls{display:flex;justify-content:space-between;align-items:center;margin-top:24px;gap:12px;flex-wrap:wrap}
+  .btn{
+    padding:11px 22px;border-radius:10px;
+    background:var(--card-2);border:1px solid var(--border);
+    color:var(--text);font-weight:600;font-size:14px;cursor:pointer;
+    transition:all .15s;display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn:hover{background:var(--card);border-color:var(--accent)}
+  .btn.primary{
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    color:#0a0e1a;border:none;
+    box-shadow:0 4px 20px rgba(0,212,170,.25);
+  }
+  .btn.primary:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(0,212,170,.35)}
+  .btn.ghost{background:transparent;border-color:var(--border);color:var(--muted)}
+  .btn.ghost:hover{color:var(--text)}
+  kbd{
+    font-family:'JetBrains Mono',monospace;font-size:11px;
+    background:rgba(255,255,255,.06);padding:2px 6px;border-radius:4px;
+    border:1px solid var(--border);color:var(--muted);
+  }
+
+  /* Progress bar */
+  .progress-bar{
+    height:4px;background:var(--card-2);border-radius:2px;overflow:hidden;
+    margin-top:24px;
+  }
+  .progress-fill{
+    height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    width:0%;transition:width .3s ease;
+  }
+
+  /* Library view */
+  .lib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+  .lib-card{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:12px;padding:16px;
+    transition:all .15s;cursor:pointer;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .lib-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow)}
+  .lib-card .ch-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);font-weight:600}
+  .lib-card .ch-title{font-size:14px;font-weight:600;color:var(--text);line-height:1.3}
+
+  /* Stats / chapter breakdown */
+  .breakdown{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-top:24px}
+  .breakdown-row{
+    background:var(--card);border:1px solid var(--border);border-radius:12px;
+    padding:14px 16px;
+  }
+  .breakdown-row .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .breakdown-row .name{font-size:13px;font-weight:600;color:var(--text)}
+  .breakdown-row .ch{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent)}
+  .breakdown-row .nums{font-size:12px;color:var(--muted);margin-top:4px}
+  .mini-bar{height:3px;background:var(--card-2);border-radius:2px;overflow:hidden;margin-top:6px}
+  .mini-bar > div{height:100%;background:var(--accent);transition:width .3s}
+
+  /* Done card */
+  .done-card{text-align:center;padding:48px 24px}
+  .done-card .emoji{font-size:42px;margin-bottom:12px}
+  .done-card h2{margin:0 0 8px;font-size:24px}
+  .done-card p{color:var(--muted);margin:0 0 20px}
+
+  /* Empty */
+  .empty{text-align:center;padding:48px 24px;color:var(--muted)}
+
+  /* Mobile */
+  @media (max-width:920px){
+    .app{grid-template-columns:1fr}
+    .sidebar{position:static;height:auto;border-right:none;border-bottom:1px solid var(--border)}
+    .main{padding:24px}
+    .quiz-card{padding:24px}
+    .q-text{font-size:16px}
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">M</div>
+      <div>
+        <div class="brand-name">MPEP Prep</div>
+        <div class="brand-sub">Patent Bar · 9th Ed.</div>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Mode</div>
+      <div class="nav-item active" data-mode="random"><span class="dot"></span>Random Mix</div>
+      <div class="nav-item" data-mode="chapter"><span class="dot"></span>By Chapter</div>
+      <div class="nav-item" data-mode="quick"><span class="dot"></span>Quick 10</div>
+      <div class="nav-item" data-mode="marathon"><span class="dot"></span>Marathon</div>
+      <div class="nav-item" data-mode="review"><span class="dot"></span>Review Mistakes</div>
+    </div>
+
+    <div class="nav-group" id="chapters-group" style="display:none">
+      <div class="nav-label">Chapters</div>
+      <div class="chips" id="chapter-chips"></div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Tools</div>
+      <div class="nav-item" data-view="stats"><span class="dot"></span>Progress</div>
+      <div class="nav-item" data-view="library"><span class="dot"></span>PDF Library</div>
+      <div class="nav-item" id="reset-btn"><span class="dot"></span>Reset Progress</div>
+    </div>
+
+    <div style="position:absolute;bottom:20px;left:20px;right:20px;font-size:11px;color:var(--dim);line-height:1.5">
+      Source: USPTO MPEP, 9th Ed., Rev. 01.2024<br>
+      <span style="color:var(--muted)">Tip: press <kbd>1-4</kbd> to answer, <kbd>Enter</kbd> next</span>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="title-block">
+        <h1 id="page-title">Practice</h1>
+        <div class="subtitle" id="page-sub">Mixed questions from all chapters</div>
+      </div>
+      <div class="stat-row" id="stat-row">
+        <div class="stat accent"><div class="num" id="stat-streak">0</div><div class="lbl">Streak</div></div>
+        <div class="stat green"><div class="num" id="stat-acc">—</div><div class="lbl">Accuracy</div></div>
+        <div class="stat"><div class="num" id="stat-total">0</div><div class="lbl">Answered</div></div>
+      </div>
+    </div>
+
+    <div id="view-quiz">
+      <div class="quiz-card" id="quiz-card">
+        <div class="q-meta">
+          <span class="q-tag" id="q-chapter">Ch. 700</span>
+          <span class="q-num" id="q-num">1 / 50</span>
+        </div>
+        <div class="q-topic" id="q-topic">Examination</div>
+        <div class="q-text" id="q-text">Loading…</div>
+        <div class="choices" id="choices"></div>
+        <div class="explain" id="explain">
+          <div class="label">Explanation</div>
+          <div class="text" id="explain-text"></div>
+          <div class="cite" id="explain-cite"></div>
+        </div>
+        <div class="controls">
+          <button class="btn ghost" id="skip-btn">Skip →</button>
+          <button class="btn primary" id="next-btn" style="display:none">Next Question →</button>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      </div>
+    </div>
+
+    <div id="view-library" style="display:none">
+      <div class="lib-grid" id="lib-grid"></div>
+    </div>
+
+    <div id="view-stats" style="display:none">
+      <div class="breakdown" id="breakdown"></div>
+    </div>
+  </main>
+</div>
+
+<script src="questions.js"></script>
+<script>
+const Q = window.MPEP_QUESTIONS;
+const CHAPTERS = window.MPEP_CHAPTERS;
+const STORAGE_KEY = 'mpep_prep_v1';
+
+const state = {
+  mode:'random',
+  selectedChapter:null,
+  queue:[],
+  current:null,
+  answered:false,
+  selectedChoice:null,
+  stats: loadStats(),
+};
+
+function loadStats(){
+  try{
+    const s = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    return {
+      total:s.total||0, correct:s.correct||0, streak:s.streak||0,
+      byChapter:s.byChapter||{}, mistakes:s.mistakes||[]
+    };
+  }catch{return {total:0,correct:0,streak:0,byChapter:{},mistakes:[]}}
+}
+function saveStats(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state.stats))}
+
+function chapterCounts(){
+  const c={};
+  Q.forEach(q=>c[q.chapter]=(c[q.chapter]||0)+1);
+  return c;
+}
+
+function renderChips(){
+  const root=document.getElementById('chapter-chips');
+  const cts=chapterCounts();
+  const chs=Object.keys(cts).sort((a,b)=>+a-+b);
+  root.innerHTML='';
+  chs.forEach(ch=>{
+    const el=document.createElement('div');
+    el.className='chip'+(state.selectedChapter===ch?' active':'');
+    el.innerHTML=`${ch}<span class="ct">${cts[ch]}</span>`;
+    el.title=CHAPTERS[ch]||'';
+    el.onclick=()=>{state.selectedChapter=(state.selectedChapter===ch?null:ch);renderChips();buildQueue();nextQuestion()};
+    root.appendChild(el);
+  });
+}
+
+function shuffle(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+function buildQueue(){
+  let pool=Q;
+  if(state.mode==='chapter' && state.selectedChapter){
+    pool=Q.filter(q=>q.chapter===state.selectedChapter);
+  }else if(state.mode==='quick'){
+    pool=shuffle(Q).slice(0,10);
+    state.queue=pool;return;
+  }else if(state.mode==='review'){
+    const ids=new Set(state.stats.mistakes);
+    pool=Q.filter((q,i)=>ids.has(i));
+    if(!pool.length){pool=[]}
+  }
+  state.queue=shuffle(pool);
+}
+
+function getQIndex(q){return Q.indexOf(q)}
+
+function nextQuestion(){
+  if(!state.queue.length){buildQueue()}
+  if(!state.queue.length){return renderDone()}
+  state.current=state.queue.shift();
+  state.answered=false;state.selectedChoice=null;
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q=state.current;
+  if(!q){return renderEmpty()}
+  document.getElementById('quiz-card').style.display='';
+  document.getElementById('q-chapter').textContent='Ch. '+q.chapter;
+  document.getElementById('q-topic').textContent=q.topic||'';
+  document.getElementById('q-text').textContent=q.q;
+  document.getElementById('q-num').textContent=`${state.stats.total+1} answered · ${state.queue.length} queued`;
+
+  const choicesEl=document.getElementById('choices');
+  choicesEl.innerHTML='';
+  const letters=['A','B','C','D'];
+  q.choices.forEach((c,i)=>{
+    const btn=document.createElement('button');
+    btn.className='choice';
+    btn.dataset.idx=i;
+    btn.innerHTML=`<span class="letter">${letters[i]}</span><span>${c}</span>`;
+    btn.onclick=()=>answer(i);
+    choicesEl.appendChild(btn);
+  });
+
+  document.getElementById('explain').classList.remove('show');
+  document.getElementById('next-btn').style.display='none';
+  document.getElementById('skip-btn').style.display='';
+  updateProgress();
+}
+
+function answer(idx){
+  if(state.answered)return;
+  state.answered=true;state.selectedChoice=idx;
+  const q=state.current;
+  const correct=idx===q.answer;
+  const choices=document.querySelectorAll('.choice');
+  choices.forEach((el,i)=>{
+    el.classList.add('disabled');
+    if(i===q.answer)el.classList.add('correct');
+    else if(i===idx)el.classList.add('wrong');
+    else el.classList.add('dimmed');
+  });
+  document.getElementById('explain-text').textContent=q.explain;
+  const ch=q.chapter;
+  const pdfName=`pdfs/mpep-${String(ch).padStart(4,'0')}.pdf`;
+  document.getElementById('explain-cite').innerHTML = q.cite ? `<strong>${q.cite}</strong> <a href="${pdfName}" target="_blank">open chapter PDF →</a>` : '';
+  document.getElementById('explain').classList.add('show');
+  document.getElementById('next-btn').style.display='';
+  document.getElementById('skip-btn').style.display='none';
+
+  // Record stats
+  state.stats.total++;
+  state.stats.byChapter[ch]=state.stats.byChapter[ch]||{seen:0,correct:0};
+  state.stats.byChapter[ch].seen++;
+  const qIdx=getQIndex(q);
+  if(correct){
+    state.stats.correct++;
+    state.stats.streak++;
+    state.stats.byChapter[ch].correct++;
+    state.stats.mistakes=state.stats.mistakes.filter(i=>i!==qIdx);
+  }else{
+    state.stats.streak=0;
+    if(!state.stats.mistakes.includes(qIdx))state.stats.mistakes.push(qIdx);
+  }
+  saveStats();renderStats();updateProgress();
+}
+
+function updateProgress(){
+  const max=Math.max(20,state.stats.total+state.queue.length);
+  const pct=Math.min(100,(state.stats.total/max)*100);
+  document.getElementById('progress-fill').style.width=pct+'%';
+}
+
+function renderStats(){
+  document.getElementById('stat-total').textContent=state.stats.total;
+  document.getElementById('stat-streak').textContent=state.stats.streak;
+  const acc=state.stats.total?Math.round(100*state.stats.correct/state.stats.total):null;
+  document.getElementById('stat-acc').textContent=acc===null?'—':acc+'%';
+}
+
+function renderDone(){
+  document.getElementById('quiz-card').innerHTML=`
+    <div class="done-card">
+      <div class="emoji">🎯</div>
+      <h2>Queue complete</h2>
+      <p>You've cycled through the available questions for this mode.</p>
+      <button class="btn primary" onclick="buildQueue();nextQuestion()">Restart →</button>
+    </div>`;
+}
+
+function renderEmpty(){
+  document.getElementById('quiz-card').innerHTML=`
+    <div class="empty">No questions match this selection.<br>Try another chapter or mode.</div>`;
+}
+
+function renderLibrary(){
+  const root=document.getElementById('lib-grid');
+  root.innerHTML='';
+  const items=[
+    {ch:'TOC',title:'Table of Contents',f:'mpep-0000-table-of-contents.pdf'},
+    {ch:'Δ',title:'Change Summary (Rev. 01.2024)',f:'mpep-0005-change-summary.pdf'},
+    {ch:'INTRO',title:'Foreword & Introduction',f:'mpep-0020-introduction.pdf'},
+  ];
+  Object.keys(CHAPTERS).sort((a,b)=>+a-+b).forEach(ch=>{
+    items.push({ch:ch,title:CHAPTERS[ch],f:`mpep-${String(ch).padStart(4,'0')}.pdf`});
+  });
+  items.push({ch:'IDX',title:'Subject Matter Index',f:'mpep-9090-subject-matter-index.pdf'});
+  items.push({ch:'FORMS',title:'Form Paragraphs',f:'mpep-9095-Form-Paragraph-Chapter.pdf'});
+  items.forEach(it=>{
+    const card=document.createElement('a');
+    card.className='lib-card';
+    card.href=`pdfs/${it.f}`;
+    card.target='_blank';
+    card.innerHTML=`<div class="ch-num">${it.ch}</div><div class="ch-title">${it.title}</div>`;
+    root.appendChild(card);
+  });
+}
+
+function renderBreakdown(){
+  const root=document.getElementById('breakdown');
+  root.innerHTML='';
+  const cts=chapterCounts();
+  Object.keys(CHAPTERS).sort((a,b)=>+a-+b).forEach(ch=>{
+    const s=state.stats.byChapter[ch]||{seen:0,correct:0};
+    const total=cts[ch]||0;
+    if(!total)return;
+    const acc=s.seen?Math.round(100*s.correct/s.seen):0;
+    const seenPct=total?Math.round(100*s.seen/total):0;
+    const card=document.createElement('div');
+    card.className='breakdown-row';
+    card.innerHTML=`
+      <div class="head">
+        <div class="name">${CHAPTERS[ch]}</div>
+        <div class="ch">Ch.${ch}</div>
+      </div>
+      <div class="nums">${s.seen}/${total} seen · ${s.seen?acc+'% accuracy':'untouched'}</div>
+      <div class="mini-bar"><div style="width:${seenPct}%"></div></div>
+    `;
+    root.appendChild(card);
+  });
+  if(!Object.keys(CHAPTERS).length)root.innerHTML='<div class="empty">No data yet — start answering questions.</div>';
+}
+
+function switchView(v){
+  document.getElementById('view-quiz').style.display=(v==='quiz'?'':'none');
+  document.getElementById('view-library').style.display=(v==='library'?'':'none');
+  document.getElementById('view-stats').style.display=(v==='stats'?'':'none');
+  if(v==='library'){renderLibrary();document.getElementById('page-title').textContent='PDF Library';document.getElementById('page-sub').textContent='Full MPEP, Ninth Edition, Revision 01.2024'}
+  if(v==='stats'){renderBreakdown();document.getElementById('page-title').textContent='Progress';document.getElementById('page-sub').textContent='Per-chapter performance'}
+}
+
+function setMode(m){
+  state.mode=m;state.queue=[];
+  document.querySelectorAll('.nav-item[data-mode]').forEach(el=>el.classList.toggle('active',el.dataset.mode===m));
+  document.getElementById('chapters-group').style.display = (m==='chapter'?'':'none');
+  const titles={
+    random:['Random Mix','Mixed questions from all chapters'],
+    chapter:['By Chapter','Select chapters from the sidebar'],
+    quick:['Quick 10','A focused 10-question set'],
+    marathon:['Marathon','Cycle through everything'],
+    review:['Review Mistakes',`${state.stats.mistakes.length} questions to retry`],
+  };
+  document.getElementById('page-title').textContent=titles[m][0];
+  document.getElementById('page-sub').textContent=titles[m][1];
+  switchView('quiz');
+  buildQueue();nextQuestion();
+}
+
+// Wire up
+document.querySelectorAll('.nav-item[data-mode]').forEach(el=>{
+  el.onclick=()=>setMode(el.dataset.mode);
+});
+document.querySelectorAll('.nav-item[data-view]').forEach(el=>{
+  el.onclick=()=>{
+    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+    el.classList.add('active');
+    switchView(el.dataset.view);
+  };
+});
+document.getElementById('next-btn').onclick=nextQuestion;
+document.getElementById('skip-btn').onclick=nextQuestion;
+document.getElementById('reset-btn').onclick=()=>{
+  if(confirm('Reset all progress?')){
+    state.stats={total:0,correct:0,streak:0,byChapter:{},mistakes:[]};
+    saveStats();renderStats();renderBreakdown();
+    state.queue=[];nextQuestion();
+  }
+};
+document.addEventListener('keydown',e=>{
+  if(['INPUT','TEXTAREA'].includes(document.activeElement?.tagName))return;
+  if(['1','2','3','4'].includes(e.key)){
+    const i=+e.key-1;
+    const chs=document.querySelectorAll('.choice');
+    if(chs[i] && !state.answered)answer(i);
+  }
+  if(e.key==='Enter' || e.key===' '){
+    if(state.answered){e.preventDefault();nextQuestion()}
+  }
+});
+
+// Init
+renderChips();
+renderStats();
+buildQueue();
+nextQuestion();
+</script>
+</body>
+</html>
