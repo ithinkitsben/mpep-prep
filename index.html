@@ -38,18 +38,16 @@
   button{font-family:inherit}
   ::selection{background:rgba(0,212,170,.3)}
 
-  /* Layout */
   .app{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
   .sidebar{
     background:linear-gradient(180deg,rgba(19,24,38,.7),rgba(10,14,26,.7));
     border-right:1px solid var(--border);
-    padding:24px 20px;
+    padding:24px 20px 100px;
     position:sticky;top:0;height:100vh;overflow-y:auto;
     backdrop-filter:blur(10px);
   }
   .main{padding:36px 48px;max-width:1100px;margin:0 auto;width:100%}
 
-  /* Brand */
   .brand{display:flex;align-items:center;gap:12px;margin-bottom:28px}
   .brand-mark{
     width:38px;height:38px;border-radius:10px;
@@ -61,8 +59,7 @@
   .brand-name{font-weight:700;font-size:16px;letter-spacing:-.01em}
   .brand-sub{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:2px}
 
-  /* Nav */
-  .nav-group{margin-bottom:24px}
+  .nav-group{margin-bottom:22px}
   .nav-label{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.12em;font-weight:600;margin-bottom:10px;padding:0 8px}
   .nav-item{
     display:flex;align-items:center;gap:10px;
@@ -74,9 +71,13 @@
   .nav-item:hover{background:var(--card);color:var(--text)}
   .nav-item.active{background:var(--card);color:var(--text);border-color:var(--border)}
   .nav-item.active .dot{background:var(--accent);box-shadow:0 0 12px var(--accent)}
+  .nav-item .badge{
+    margin-left:auto;font-size:10px;padding:2px 6px;border-radius:5px;
+    background:rgba(245,158,11,.15);color:var(--amber);
+    font-family:'JetBrains Mono',monospace;font-weight:600;
+  }
   .dot{width:6px;height:6px;border-radius:50%;background:var(--dim);transition:all .15s}
 
-  /* Chapter chips */
   .chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 4px}
   .chip{
     font-size:11px;font-weight:600;
@@ -85,12 +86,14 @@
     border:1px solid var(--border);
     cursor:pointer;transition:all .15s;
     font-family:'JetBrains Mono',monospace;
+    position:relative;
   }
   .chip:hover{color:var(--text);border-color:var(--accent)}
   .chip.active{background:var(--accent);color:#0a0e1a;border-color:var(--accent)}
+  .chip.hy{border-color:rgba(245,158,11,.4)}
+  .chip.hy::after{content:"★";position:absolute;top:-6px;right:-4px;font-size:9px;color:var(--amber)}
   .chip .ct{opacity:.6;margin-left:4px}
 
-  /* Header */
   .topbar{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px;gap:24px;flex-wrap:wrap}
   .title-block h1{margin:0;font-size:28px;font-weight:700;letter-spacing:-.02em}
   .title-block .subtitle{color:var(--muted);font-size:14px;margin-top:4px}
@@ -103,9 +106,9 @@
   .stat .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
   .stat.green .num{color:var(--green)}
   .stat.amber .num{color:var(--amber)}
+  .stat.red .num{color:var(--red)}
   .stat.accent .num{color:var(--accent)}
 
-  /* Quiz card */
   .quiz-card{
     background:var(--card);
     border:1px solid var(--border);
@@ -119,7 +122,7 @@
     background:linear-gradient(90deg,var(--accent),var(--accent-2));
     opacity:.5;
   }
-  .q-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+  .q-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:8px;flex-wrap:wrap}
   .q-tag{
     display:inline-flex;align-items:center;gap:8px;
     font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
@@ -128,6 +131,7 @@
     border:1px solid rgba(0,212,170,.25);
     font-family:'JetBrains Mono',monospace;
   }
+  .q-tag.hy{background:rgba(245,158,11,.12);color:var(--amber);border-color:rgba(245,158,11,.3)}
   .q-num{font-size:12px;color:var(--dim);font-family:'JetBrains Mono',monospace}
   .q-topic{font-size:12px;color:var(--muted);margin-bottom:8px}
   .q-text{font-size:18px;font-weight:500;line-height:1.55;margin-bottom:24px;color:var(--text)}
@@ -139,7 +143,7 @@
     background:var(--bg-2);
     border:1px solid var(--border);
     cursor:pointer;transition:all .15s;
-    text-align:left;color:var(--text);font:inherit;
+    text-align:left;color:var(--text);font:inherit;width:100%;
   }
   .choice:hover:not(.disabled){border-color:var(--accent);background:var(--card-2);transform:translateY(-1px)}
   .choice.disabled{cursor:default}
@@ -151,6 +155,8 @@
     border:1px solid var(--border);
     transition:all .15s;
   }
+  .choice.selected{border-color:var(--accent-2);background:rgba(124,92,255,.08)}
+  .choice.selected .letter{background:var(--accent-2);color:#fff;border-color:var(--accent-2)}
   .choice.correct{border-color:var(--green);background:rgba(16,185,129,.08)}
   .choice.correct .letter{background:var(--green);color:#0a0e1a;border-color:var(--green)}
   .choice.wrong{border-color:var(--red);background:rgba(239,68,68,.08)}
@@ -184,6 +190,7 @@
     box-shadow:0 4px 20px rgba(0,212,170,.25);
   }
   .btn.primary:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(0,212,170,.35)}
+  .btn.warn{background:linear-gradient(135deg,#ef4444,#f59e0b);color:#fff;border:none}
   .btn.ghost{background:transparent;border-color:var(--border);color:var(--muted)}
   .btn.ghost:hover{color:var(--text)}
   kbd{
@@ -192,7 +199,6 @@
     border:1px solid var(--border);color:var(--muted);
   }
 
-  /* Progress bar */
   .progress-bar{
     height:4px;background:var(--card-2);border-radius:2px;overflow:hidden;
     margin-top:24px;
@@ -202,7 +208,7 @@
     width:0%;transition:width .3s ease;
   }
 
-  /* Library view */
+  /* Library / Study guide */
   .lib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
   .lib-card{
     background:var(--card);border:1px solid var(--border);
@@ -211,35 +217,106 @@
     display:flex;flex-direction:column;gap:6px;
   }
   .lib-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow)}
+  .lib-card.hy{border-color:rgba(245,158,11,.3)}
   .lib-card .ch-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);font-weight:600}
+  .lib-card.hy .ch-num{color:var(--amber)}
   .lib-card .ch-title{font-size:14px;font-weight:600;color:var(--text);line-height:1.3}
+  .lib-card .ch-meta{font-size:11px;color:var(--muted);margin-top:auto}
 
-  /* Stats / chapter breakdown */
   .breakdown{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-top:24px}
   .breakdown-row{
     background:var(--card);border:1px solid var(--border);border-radius:12px;
     padding:14px 16px;
   }
+  .breakdown-row.hy{border-color:rgba(245,158,11,.3)}
   .breakdown-row .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
   .breakdown-row .name{font-size:13px;font-weight:600;color:var(--text)}
   .breakdown-row .ch{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent)}
+  .breakdown-row.hy .ch{color:var(--amber)}
   .breakdown-row .nums{font-size:12px;color:var(--muted);margin-top:4px}
   .mini-bar{height:3px;background:var(--card-2);border-radius:2px;overflow:hidden;margin-top:6px}
   .mini-bar > div{height:100%;background:var(--accent);transition:width .3s}
+  .mini-bar.warn > div{background:var(--amber)}
+  .mini-bar.danger > div{background:var(--red)}
 
-  /* Done card */
+  .study-section{
+    background:var(--card);border:1px solid var(--border);border-radius:14px;
+    padding:24px;margin-bottom:18px;
+  }
+  .study-section .sec-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .study-section .sec-head .ch{
+    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;
+    padding:4px 8px;border-radius:6px;
+    background:rgba(0,212,170,.1);color:var(--accent);
+    border:1px solid rgba(0,212,170,.25);
+  }
+  .study-section.hy .sec-head .ch{background:rgba(245,158,11,.12);color:var(--amber);border-color:rgba(245,158,11,.3)}
+  .study-section .sec-head h3{margin:0;font-size:17px;font-weight:600}
+  .study-rule{padding:10px 0;border-top:1px solid var(--border)}
+  .study-rule .rh{font-size:13px;font-weight:600;color:var(--accent);margin-bottom:4px;font-family:'JetBrains Mono',monospace}
+  .study-section.hy .study-rule .rh{color:var(--amber)}
+  .study-rule .rb{font-size:14px;line-height:1.6;color:var(--text)}
+
   .done-card{text-align:center;padding:48px 24px}
   .done-card .emoji{font-size:42px;margin-bottom:12px}
   .done-card h2{margin:0 0 8px;font-size:24px}
   .done-card p{color:var(--muted);margin:0 0 20px}
 
-  /* Empty */
+  /* Mock exam */
+  .mock-intro{
+    background:var(--card);border:1px solid var(--border);border-radius:18px;
+    padding:36px;box-shadow:var(--shadow);
+  }
+  .mock-intro h2{margin-top:0}
+  .mock-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:20px 0}
+  .mock-grid .cell{background:var(--bg-2);border:1px solid var(--border);border-radius:10px;padding:14px}
+  .mock-grid .cell .v{font-size:20px;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--accent)}
+  .mock-grid .cell .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
+
+  .mock-bar{
+    position:sticky;top:0;z-index:5;
+    background:var(--bg);
+    border-bottom:1px solid var(--border);
+    padding:12px 0;margin-bottom:18px;
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  }
+  .mock-bar .timer{
+    font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;
+    padding:6px 14px;border-radius:8px;background:var(--card-2);border:1px solid var(--border);
+  }
+  .mock-bar .timer.warn{color:var(--amber);border-color:var(--amber)}
+  .mock-bar .timer.danger{color:var(--red);border-color:var(--red)}
+  .mock-bar .progress{flex:1;font-size:13px;color:var(--muted)}
+
+  .mock-grid-nav{display:grid;grid-template-columns:repeat(auto-fill,minmax(34px,1fr));gap:6px;margin-top:14px}
+  .mock-grid-nav .gn{
+    aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;
+    background:var(--card-2);border:1px solid var(--border);border-radius:6px;
+    cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;
+    transition:all .15s;
+  }
+  .mock-grid-nav .gn:hover{border-color:var(--accent)}
+  .mock-grid-nav .gn.answered{background:rgba(0,212,170,.15);border-color:var(--accent);color:var(--accent)}
+  .mock-grid-nav .gn.flagged{background:rgba(245,158,11,.15);border-color:var(--amber);color:var(--amber)}
+  .mock-grid-nav .gn.current{outline:2px solid var(--accent-2);outline-offset:1px}
+
+  .mock-result{
+    background:var(--card);border:1px solid var(--border);border-radius:18px;
+    padding:36px;box-shadow:var(--shadow);
+  }
+  .score-hero{display:flex;align-items:center;gap:24px;margin-bottom:24px;flex-wrap:wrap}
+  .score-hero .big{font-size:64px;font-weight:700;font-family:'JetBrains Mono',monospace;line-height:1}
+  .score-hero .big.pass{color:var(--green)}
+  .score-hero .big.fail{color:var(--red)}
+  .score-hero .meta{flex:1}
+  .score-hero .meta .label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+  .score-hero .meta .num{font-size:18px;font-weight:600}
+
   .empty{text-align:center;padding:48px 24px;color:var(--muted)}
 
-  /* Mobile */
   @media (max-width:920px){
     .app{grid-template-columns:1fr}
-    .sidebar{position:static;height:auto;border-right:none;border-bottom:1px solid var(--border)}
+    .sidebar{position:static;height:auto;border-right:none;border-bottom:1px solid var(--border);padding-bottom:24px}
     .main{padding:24px}
     .quiz-card{padding:24px}
     .q-text{font-size:16px}
@@ -259,37 +336,61 @@
     </div>
 
     <div class="nav-group">
-      <div class="nav-label">Mode</div>
-      <div class="nav-item active" data-mode="random"><span class="dot"></span>Random Mix</div>
+      <div class="nav-label">Practice Modes</div>
+      <div class="nav-item" data-mode="highyield"><span class="dot"></span>High-Yield Drill <span class="badge">75%</span></div>
+      <div class="nav-item active" data-mode="random"><span class="dot"></span>Weighted Mix</div>
       <div class="nav-item" data-mode="chapter"><span class="dot"></span>By Chapter</div>
       <div class="nav-item" data-mode="quick"><span class="dot"></span>Quick 10</div>
       <div class="nav-item" data-mode="marathon"><span class="dot"></span>Marathon</div>
       <div class="nav-item" data-mode="review"><span class="dot"></span>Review Mistakes</div>
     </div>
 
+    <div class="nav-group">
+      <div class="nav-label">Exam Simulation</div>
+      <div class="nav-item" data-view="mock50"><span class="dot"></span>Mock 50 (½ exam)</div>
+      <div class="nav-item" data-view="mock100"><span class="dot"></span>Full Mock 100</div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Speed Drills</div>
+      <div class="nav-item" data-view="lookup"><span class="dot"></span>MPEP Lookup Drill</div>
+      <div class="nav-item" data-view="deadlines"><span class="dot"></span>Deadlines &amp; Numbers</div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">AIA Filter</div>
+      <div class="chips">
+        <div class="chip active" data-aia="all">All</div>
+        <div class="chip" data-aia="aia">AIA only</div>
+        <div class="chip" data-aia="pre-aia">Pre-AIA</div>
+      </div>
+    </div>
+
     <div class="nav-group" id="chapters-group" style="display:none">
-      <div class="nav-label">Chapters</div>
+      <div class="nav-label">Chapters · ★ = high-yield</div>
       <div class="chips" id="chapter-chips"></div>
     </div>
 
     <div class="nav-group">
-      <div class="nav-label">Tools</div>
+      <div class="nav-label">Reference</div>
+      <div class="nav-item" data-view="study"><span class="dot"></span>Study Guide</div>
       <div class="nav-item" data-view="stats"><span class="dot"></span>Progress</div>
       <div class="nav-item" data-view="library"><span class="dot"></span>PDF Library</div>
       <div class="nav-item" id="reset-btn"><span class="dot"></span>Reset Progress</div>
     </div>
 
-    <div style="position:absolute;bottom:20px;left:20px;right:20px;font-size:11px;color:var(--dim);line-height:1.5">
-      Source: USPTO MPEP, 9th Ed., Rev. 01.2024<br>
-      <span style="color:var(--muted)">Tip: press <kbd>1-4</kbd> to answer, <kbd>Enter</kbd> next</span>
+    <div style="margin-top:32px;font-size:11px;color:var(--dim);line-height:1.6;padding:0 4px">
+      Source: USPTO MPEP 9th Ed., Rev. 01.2024<br>
+      Exam: 100 Qs · 6 hrs (2×3) · 70% to pass<br>
+      <span style="color:var(--muted)">Keys: <kbd>1-4</kbd> answer · <kbd>Enter</kbd> next · <kbd>F</kbd> flag</span>
     </div>
   </aside>
 
   <main class="main">
     <div class="topbar">
       <div class="title-block">
-        <h1 id="page-title">Practice</h1>
-        <div class="subtitle" id="page-sub">Mixed questions from all chapters</div>
+        <h1 id="page-title">Weighted Mix</h1>
+        <div class="subtitle" id="page-sub">Random questions, weighted ~75% to the most-tested chapters</div>
       </div>
       <div class="stat-row" id="stat-row">
         <div class="stat accent"><div class="num" id="stat-streak">0</div><div class="lbl">Streak</div></div>
@@ -298,6 +399,7 @@
       </div>
     </div>
 
+    <!-- PRACTICE -->
     <div id="view-quiz">
       <div class="quiz-card" id="quiz-card">
         <div class="q-meta">
@@ -320,10 +422,24 @@
       </div>
     </div>
 
+    <!-- MOCK EXAM -->
+    <div id="view-mock" style="display:none"></div>
+
+    <!-- LOOKUP DRILL -->
+    <div id="view-lookup" style="display:none"></div>
+
+    <!-- DEADLINES FLASHCARDS -->
+    <div id="view-deadlines" style="display:none"></div>
+
+    <!-- STUDY GUIDE -->
+    <div id="view-study" style="display:none"></div>
+
+    <!-- LIBRARY -->
     <div id="view-library" style="display:none">
       <div class="lib-grid" id="lib-grid"></div>
     </div>
 
+    <!-- STATS -->
     <div id="view-stats" style="display:none">
       <div class="breakdown" id="breakdown"></div>
     </div>
@@ -334,26 +450,46 @@
 <script>
 const Q = window.MPEP_QUESTIONS;
 const CHAPTERS = window.MPEP_CHAPTERS;
-const STORAGE_KEY = 'mpep_prep_v1';
+const HY = new Set(window.MPEP_HIGH_YIELD || []);
+const STUDY = window.MPEP_STUDY || {};
+const DEADLINES = window.MPEP_DEADLINES || [];
+const LOOKUP = window.MPEP_LOOKUP || [];
+const STORAGE_KEY = 'mpep_prep_v2';
 
 const state = {
   mode:'random',
   selectedChapter:null,
+  aiaFilter:'all',  // 'all' | 'aia' | 'pre-aia'
   queue:[],
   current:null,
   answered:false,
   selectedChoice:null,
   stats: loadStats(),
+  mock:null,
+  lookup:null,   // {idx, startTime, queue, results:[]}
+  deck:null,     // {idx, deck, flipped, results}
 };
+
+function aiaMatch(q){
+  if(state.aiaFilter==='all')return true;
+  if(state.aiaFilter==='aia')return q.aia==='aia' || !q.aia; // 'aia' or untagged (mostly AIA-applicable)
+  if(state.aiaFilter==='pre-aia')return q.aia==='pre-aia';
+  return true;
+}
+function applyAiaFilter(arr){
+  if(state.aiaFilter==='all')return arr;
+  return arr.filter(aiaMatch);
+}
 
 function loadStats(){
   try{
     const s = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
     return {
       total:s.total||0, correct:s.correct||0, streak:s.streak||0,
-      byChapter:s.byChapter||{}, mistakes:s.mistakes||[]
+      byChapter:s.byChapter||{}, mistakes:s.mistakes||[],
+      mockHistory:s.mockHistory||[]
     };
-  }catch{return {total:0,correct:0,streak:0,byChapter:{},mistakes:[]}}
+  }catch{return {total:0,correct:0,streak:0,byChapter:{},mistakes:[],mockHistory:[]}}
 }
 function saveStats(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state.stats))}
 
@@ -370,7 +506,7 @@ function renderChips(){
   root.innerHTML='';
   chs.forEach(ch=>{
     const el=document.createElement('div');
-    el.className='chip'+(state.selectedChapter===ch?' active':'');
+    el.className='chip'+(state.selectedChapter===ch?' active':'')+(HY.has(ch)?' hy':'');
     el.innerHTML=`${ch}<span class="ct">${cts[ch]}</span>`;
     el.title=CHAPTERS[ch]||'';
     el.onclick=()=>{state.selectedChapter=(state.selectedChapter===ch?null:ch);renderChips();buildQueue();nextQuestion()};
@@ -380,24 +516,47 @@ function renderChips(){
 
 function shuffle(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 
+// Weighted sample — favors high-yield chapters at ~75% probability for "random" mode.
+function weightedSample(n){
+  const hy = Q.filter(q=>HY.has(q.chapter));
+  const lo = Q.filter(q=>!HY.has(q.chapter));
+  const want = Math.min(n, Q.length);
+  const wantHY = Math.round(want * 0.75);
+  const wantLO = want - wantHY;
+  const a = shuffle(hy).slice(0, Math.min(wantHY, hy.length));
+  const b = shuffle(lo).slice(0, Math.min(wantLO, lo.length));
+  let out = shuffle(a.concat(b));
+  // pad if we don't have enough HY questions
+  if(out.length < want){
+    const extra = shuffle(Q).filter(q=>!out.includes(q)).slice(0, want - out.length);
+    out = out.concat(extra);
+  }
+  return out;
+}
+
 function buildQueue(){
-  let pool=Q;
   if(state.mode==='chapter' && state.selectedChapter){
-    pool=Q.filter(q=>q.chapter===state.selectedChapter);
+    state.queue=shuffle(applyAiaFilter(Q.filter(q=>q.chapter===state.selectedChapter)));
   }else if(state.mode==='quick'){
-    pool=shuffle(Q).slice(0,10);
-    state.queue=pool;return;
+    state.queue=applyAiaFilter(weightedSample(20)).slice(0,10);
+  }else if(state.mode==='highyield'){
+    state.queue=shuffle(applyAiaFilter(Q.filter(q=>HY.has(q.chapter))));
   }else if(state.mode==='review'){
     const ids=new Set(state.stats.mistakes);
-    pool=Q.filter((q,i)=>ids.has(i));
-    if(!pool.length){pool=[]}
+    state.queue=shuffle(applyAiaFilter(Q.filter((q,i)=>ids.has(i))));
+  }else if(state.mode==='random'){
+    state.queue=applyAiaFilter(weightedSample(40)).slice(0,30);
+  }else{
+    state.queue=shuffle(applyAiaFilter(Q));
   }
-  state.queue=shuffle(pool);
 }
 
 function getQIndex(q){return Q.indexOf(q)}
 
 function nextQuestion(){
+  if(state.mode==='random' && state.queue.length<6){
+    state.queue=state.queue.concat(applyAiaFilter(weightedSample(30)));
+  }
   if(!state.queue.length){buildQueue()}
   if(!state.queue.length){return renderDone()}
   state.current=state.queue.shift();
@@ -408,29 +567,45 @@ function nextQuestion(){
 function renderQuestion(){
   const q=state.current;
   if(!q){return renderEmpty()}
-  document.getElementById('quiz-card').style.display='';
-  document.getElementById('q-chapter').textContent='Ch. '+q.chapter;
-  document.getElementById('q-topic').textContent=q.topic||'';
-  document.getElementById('q-text').textContent=q.q;
-  document.getElementById('q-num').textContent=`${state.stats.total+1} answered · ${state.queue.length} queued`;
-
+  const card = document.getElementById('quiz-card');
+  card.style.display='';
+  const aiaBadge = q.aia==='aia' ? '<span class="q-tag" style="background:rgba(124,92,255,.12);color:var(--accent-2);border-color:rgba(124,92,255,.3)">AIA</span>' :
+                   q.aia==='pre-aia' ? '<span class="q-tag" style="background:rgba(91,97,119,.15);color:var(--muted);border-color:var(--border)">PRE-AIA</span>' : '';
+  card.innerHTML = `
+    <div class="q-meta">
+      <span class="q-tag ${HY.has(q.chapter)?'hy':''}" id="q-chapter">Ch. ${q.chapter}${HY.has(q.chapter)?' · high-yield':''}</span>
+      ${aiaBadge}
+      <span class="q-num" id="q-num">${state.stats.total+1} answered · ${state.queue.length} queued</span>
+    </div>
+    <div class="q-topic">${q.topic||''}</div>
+    <div class="q-text">${escapeHtml(q.q)}</div>
+    <div class="choices" id="choices"></div>
+    <div class="explain" id="explain">
+      <div class="label">Explanation</div>
+      <div class="text" id="explain-text"></div>
+      <div class="cite" id="explain-cite"></div>
+    </div>
+    <div class="controls">
+      <button class="btn ghost" id="skip-btn">Skip →</button>
+      <button class="btn primary" id="next-btn" style="display:none">Next Question →</button>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  `;
   const choicesEl=document.getElementById('choices');
-  choicesEl.innerHTML='';
   const letters=['A','B','C','D'];
   q.choices.forEach((c,i)=>{
     const btn=document.createElement('button');
     btn.className='choice';
-    btn.dataset.idx=i;
-    btn.innerHTML=`<span class="letter">${letters[i]}</span><span>${c}</span>`;
+    btn.innerHTML=`<span class="letter">${letters[i]}</span><span>${escapeHtml(c)}</span>`;
     btn.onclick=()=>answer(i);
     choicesEl.appendChild(btn);
   });
-
-  document.getElementById('explain').classList.remove('show');
-  document.getElementById('next-btn').style.display='none';
-  document.getElementById('skip-btn').style.display='';
+  document.getElementById('skip-btn').onclick=nextQuestion;
+  document.getElementById('next-btn').onclick=nextQuestion;
   updateProgress();
 }
+
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]))}
 
 function answer(idx){
   if(state.answered)return;
@@ -452,7 +627,6 @@ function answer(idx){
   document.getElementById('next-btn').style.display='';
   document.getElementById('skip-btn').style.display='none';
 
-  // Record stats
   state.stats.total++;
   state.stats.byChapter[ch]=state.stats.byChapter[ch]||{seen:0,correct:0};
   state.stats.byChapter[ch].seen++;
@@ -472,7 +646,8 @@ function answer(idx){
 function updateProgress(){
   const max=Math.max(20,state.stats.total+state.queue.length);
   const pct=Math.min(100,(state.stats.total/max)*100);
-  document.getElementById('progress-fill').style.width=pct+'%';
+  const el=document.getElementById('progress-fill');
+  if(el)el.style.width=pct+'%';
 }
 
 function renderStats(){
@@ -500,22 +675,23 @@ function renderEmpty(){
 function renderLibrary(){
   const root=document.getElementById('lib-grid');
   root.innerHTML='';
+  const cts=chapterCounts();
   const items=[
     {ch:'TOC',title:'Table of Contents',f:'mpep-0000-table-of-contents.pdf'},
     {ch:'Δ',title:'Change Summary (Rev. 01.2024)',f:'mpep-0005-change-summary.pdf'},
     {ch:'INTRO',title:'Foreword & Introduction',f:'mpep-0020-introduction.pdf'},
   ];
   Object.keys(CHAPTERS).sort((a,b)=>+a-+b).forEach(ch=>{
-    items.push({ch:ch,title:CHAPTERS[ch],f:`mpep-${String(ch).padStart(4,'0')}.pdf`});
+    items.push({ch:ch,title:CHAPTERS[ch],f:`mpep-${String(ch).padStart(4,'0')}.pdf`,hy:HY.has(ch),qs:cts[ch]||0});
   });
   items.push({ch:'IDX',title:'Subject Matter Index',f:'mpep-9090-subject-matter-index.pdf'});
   items.push({ch:'FORMS',title:'Form Paragraphs',f:'mpep-9095-Form-Paragraph-Chapter.pdf'});
   items.forEach(it=>{
     const card=document.createElement('a');
-    card.className='lib-card';
+    card.className='lib-card'+(it.hy?' hy':'');
     card.href=`pdfs/${it.f}`;
     card.target='_blank';
-    card.innerHTML=`<div class="ch-num">${it.ch}</div><div class="ch-title">${it.title}</div>`;
+    card.innerHTML=`<div class="ch-num">${it.ch}${it.hy?' ★':''}</div><div class="ch-title">${it.title}</div>${it.qs?`<div class="ch-meta">${it.qs} question${it.qs===1?'':'s'} in bank</div>`:''}`;
     root.appendChild(card);
   });
 }
@@ -524,45 +700,120 @@ function renderBreakdown(){
   const root=document.getElementById('breakdown');
   root.innerHTML='';
   const cts=chapterCounts();
-  Object.keys(CHAPTERS).sort((a,b)=>+a-+b).forEach(ch=>{
+  // sort: high-yield first, then by chapter number
+  const allChs = Object.keys(CHAPTERS).sort((a,b)=>{
+    const aHy=HY.has(a)?0:1, bHy=HY.has(b)?0:1;
+    if(aHy!==bHy)return aHy-bHy;
+    return +a - +b;
+  });
+  let anySeen=false;
+  allChs.forEach(ch=>{
     const s=state.stats.byChapter[ch]||{seen:0,correct:0};
     const total=cts[ch]||0;
     if(!total)return;
     const acc=s.seen?Math.round(100*s.correct/s.seen):0;
     const seenPct=total?Math.round(100*s.seen/total):0;
     const card=document.createElement('div');
-    card.className='breakdown-row';
+    card.className='breakdown-row'+(HY.has(ch)?' hy':'');
+    const accCls = acc>=80?'':(acc>=70?'warn':'danger');
     card.innerHTML=`
       <div class="head">
-        <div class="name">${CHAPTERS[ch]}</div>
+        <div class="name">${CHAPTERS[ch]}${HY.has(ch)?' ★':''}</div>
         <div class="ch">Ch.${ch}</div>
       </div>
       <div class="nums">${s.seen}/${total} seen · ${s.seen?acc+'% accuracy':'untouched'}</div>
-      <div class="mini-bar"><div style="width:${seenPct}%"></div></div>
+      <div class="mini-bar ${s.seen?accCls:''}"><div style="width:${s.seen?Math.max(seenPct, acc):seenPct}%"></div></div>
     `;
     root.appendChild(card);
+    if(s.seen)anySeen=true;
   });
-  if(!Object.keys(CHAPTERS).length)root.innerHTML='<div class="empty">No data yet — start answering questions.</div>';
+  // mock exam history
+  if(state.stats.mockHistory && state.stats.mockHistory.length){
+    const h=document.createElement('div');
+    h.style.gridColumn='1/-1';
+    h.style.marginTop='12px';
+    h.innerHTML=`<h3 style="margin:6px 0 10px;font-size:15px;color:var(--muted)">Mock Exam History</h3>`;
+    root.appendChild(h);
+    state.stats.mockHistory.slice(-6).reverse().forEach(m=>{
+      const row=document.createElement('div');
+      row.className='breakdown-row';
+      const pass=m.score>=70;
+      row.innerHTML=`
+        <div class="head">
+          <div class="name">${m.kind} · ${new Date(m.date).toLocaleDateString()}</div>
+          <div class="ch" style="color:${pass?'var(--green)':'var(--red)'}">${m.score}%</div>
+        </div>
+        <div class="nums">${m.correct}/${m.total} correct · ${pass?'PASS':'FAIL'} (70% threshold)</div>
+      `;
+      root.appendChild(row);
+    });
+  }
+  if(!anySeen && (!state.stats.mockHistory || !state.stats.mockHistory.length))root.innerHTML='<div class="empty">No data yet — start answering questions.</div>';
+}
+
+function renderStudy(){
+  const root=document.getElementById('view-study');
+  // chapter ordering by high-yield first
+  const order=Object.keys(STUDY).sort((a,b)=>{
+    const aHy=HY.has(a)?0:1, bHy=HY.has(b)?0:1;
+    if(aHy!==bHy)return aHy-bHy;
+    return +a - +b;
+  });
+  root.innerHTML=`<div style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:12px;padding:14px 18px;margin-bottom:18px;font-size:13px;color:var(--text)">
+    <strong style="color:var(--amber)">★ Focus first on the high-yield chapters</strong> — Ch. 2100, 700, 600, 1200, 1800 account for ~75% of the exam. Each rule below is paired with the MPEP cite you can search in the open PDF during the actual test.
+  </div>`;
+  order.forEach(ch=>{
+    const sec=document.createElement('div');
+    sec.className='study-section'+(HY.has(ch)?' hy':'');
+    sec.innerHTML=`
+      <div class="sec-head">
+        <span class="ch">Ch. ${ch}${HY.has(ch)?' ★':''}</span>
+        <h3>${CHAPTERS[ch]}</h3>
+      </div>
+      ${STUDY[ch].map(r=>`<div class="study-rule"><div class="rh">${escapeHtml(r.h)}</div><div class="rb">${escapeHtml(r.b)}</div></div>`).join('')}
+    `;
+    root.appendChild(sec);
+  });
 }
 
 function switchView(v){
-  document.getElementById('view-quiz').style.display=(v==='quiz'?'':'none');
-  document.getElementById('view-library').style.display=(v==='library'?'':'none');
-  document.getElementById('view-stats').style.display=(v==='stats'?'':'none');
-  if(v==='library'){renderLibrary();document.getElementById('page-title').textContent='PDF Library';document.getElementById('page-sub').textContent='Full MPEP, Ninth Edition, Revision 01.2024'}
-  if(v==='stats'){renderBreakdown();document.getElementById('page-title').textContent='Progress';document.getElementById('page-sub').textContent='Per-chapter performance'}
+  const target = (v==='mock50'||v==='mock100') ? 'mock' : v;
+  ['view-quiz','view-library','view-stats','view-study','view-mock','view-lookup','view-deadlines'].forEach(id=>{
+    document.getElementById(id).style.display=(id===`view-${target}`?'':'none');
+  });
+  const titles={
+    library:['PDF Library','Full MPEP, Ninth Edition, Revision 01.2024'],
+    stats:['Progress','Per-chapter performance · mock-exam history'],
+    study:['Study Guide','High-yield rules per chapter — open the PDFs to dig deeper'],
+    mock50:['Mock Exam — 50 questions','Simulates one 3-hour session of the real exam'],
+    mock100:['Full Mock Exam — 100 questions','Two 3-hour sessions back-to-back, like exam day'],
+    lookup:['MPEP Lookup Drill','Train the open-book lookup skill — find the section, fast'],
+    deadlines:['Deadlines & Numbers','Flashcard drill of every date, period, and threshold'],
+  };
+  if(titles[v]){
+    document.getElementById('page-title').textContent=titles[v][0];
+    document.getElementById('page-sub').textContent=titles[v][1];
+  }
+  if(v==='library')renderLibrary();
+  if(v==='stats')renderBreakdown();
+  if(v==='study')renderStudy();
+  if(v==='mock50' || v==='mock100')renderMockIntro(v==='mock100'?100:50);
+  if(v==='lookup')startLookupDrill();
+  if(v==='deadlines')startDeckDrill();
 }
 
 function setMode(m){
   state.mode=m;state.queue=[];
   document.querySelectorAll('.nav-item[data-mode]').forEach(el=>el.classList.toggle('active',el.dataset.mode===m));
+  document.querySelectorAll('.nav-item[data-view]').forEach(el=>el.classList.remove('active'));
   document.getElementById('chapters-group').style.display = (m==='chapter'?'':'none');
   const titles={
-    random:['Random Mix','Mixed questions from all chapters'],
+    random:['Weighted Mix','Random questions, weighted ~75% to the most-tested chapters'],
     chapter:['By Chapter','Select chapters from the sidebar'],
-    quick:['Quick 10','A focused 10-question set'],
+    quick:['Quick 10','A focused 10-question set, weighted to high-yield chapters'],
     marathon:['Marathon','Cycle through everything'],
-    review:['Review Mistakes',`${state.stats.mistakes.length} questions to retry`],
+    review:['Review Mistakes',`${state.stats.mistakes.length} question${state.stats.mistakes.length===1?'':'s'} to retry`],
+    highyield:['High-Yield Drill','Only Ch. 2100, 700, 600, 1200, 1800 — the ~75% chapters'],
   };
   document.getElementById('page-title').textContent=titles[m][0];
   document.getElementById('page-sub').textContent=titles[m][1];
@@ -570,7 +821,400 @@ function setMode(m){
   buildQueue();nextQuestion();
 }
 
-// Wire up
+// ─────────────────────────── MOCK EXAM ───────────────────────────
+function renderMockIntro(size){
+  const root=document.getElementById('view-mock');
+  const minutes = size===100 ? 360 : 180;
+  const lastSame = (state.stats.mockHistory||[]).filter(m=>m.total===size).slice(-1)[0];
+  root.innerHTML=`
+    <div class="mock-intro">
+      <h2 style="margin-top:0">${size===100?'Full Mock Exam':'Mock Exam · ½ Session'}</h2>
+      <p style="color:var(--muted);margin-top:4px">${size===100?'Two 3-hour sessions, 50 questions each — exactly the real exam format.':'A single 3-hour session of 50 questions — half of the real exam.'} Questions are sampled with the same ~75% high-yield weighting as the actual test.</p>
+      <div class="mock-grid">
+        <div class="cell"><div class="v">${size}</div><div class="l">Questions</div></div>
+        <div class="cell"><div class="v">${Math.round(minutes/60)}h${minutes%60?' '+minutes%60+'m':''}</div><div class="l">Time limit</div></div>
+        <div class="cell"><div class="v">70%</div><div class="l">Passing score</div></div>
+        <div class="cell"><div class="v">${size===100?'2':'1'}</div><div class="l">Session${size===100?'s':''}</div></div>
+      </div>
+      <p style="font-size:13px;color:var(--muted)">
+        <strong style="color:var(--text)">How it works:</strong> Answers are not graded until you finish. You can flag questions (<kbd>F</kbd>) and jump around. The MPEP PDF library stays accessible in a new tab — the real exam is open-book.
+      </p>
+      ${lastSame?`<div style="margin-top:14px;font-size:13px;padding:12px 14px;background:var(--bg-2);border:1px solid var(--border);border-radius:10px">
+        Last attempt: <strong style="color:${lastSame.score>=70?'var(--green)':'var(--red)'}">${lastSame.score}%</strong> · ${lastSame.correct}/${lastSame.total} on ${new Date(lastSame.date).toLocaleDateString()}
+      </div>`:''}
+      <div style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn primary" onclick="startMock(${size})">Start ${size===100?'Full Exam':'Session'} →</button>
+        <a class="btn" href="pdfs/mpep-9090-subject-matter-index.pdf" target="_blank">Open MPEP Index ↗</a>
+      </div>
+    </div>
+  `;
+}
+
+function startMock(size){
+  const minutes = size===100 ? 360 : 180;
+  // Sample with realistic chapter weighting
+  let pool;
+  if(size===100){
+    // mirror weighting more carefully — aim for the same proportional shape
+    pool = weightedSample(size);
+  } else {
+    pool = weightedSample(size);
+  }
+  state.mock = {
+    kind: size===100?'Full Mock 100':'Mock Half 50',
+    total: pool.length,
+    qs: pool,
+    answers: new Array(pool.length).fill(null),
+    flagged: new Set(),
+    current: 0,
+    startTime: Date.now(),
+    durationSec: minutes*60,
+    finished: false,
+  };
+  renderMock();
+  // start timer
+  if(state.mockTimer)clearInterval(state.mockTimer);
+  state.mockTimer = setInterval(()=>{
+    if(!state.mock || state.mock.finished){clearInterval(state.mockTimer);return}
+    const elapsed = Math.floor((Date.now()-state.mock.startTime)/1000);
+    if(elapsed >= state.mock.durationSec){finishMock(true);return}
+    updateMockTimer();
+  }, 1000);
+}
+
+function updateMockTimer(){
+  if(!state.mock)return;
+  const el = document.getElementById('mock-timer');
+  if(!el)return;
+  const remaining = state.mock.durationSec - Math.floor((Date.now()-state.mock.startTime)/1000);
+  const m = Math.floor(remaining/60);
+  const s = remaining%60;
+  el.textContent = `${String(Math.floor(m/60)).padStart(1,'0')}:${String(m%60).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  el.classList.toggle('warn', remaining<=900 && remaining>300);
+  el.classList.toggle('danger', remaining<=300);
+}
+
+function renderMock(){
+  if(!state.mock)return;
+  const m=state.mock;
+  const q=m.qs[m.current];
+  const root=document.getElementById('view-mock');
+  const answered=m.answers.filter(a=>a!==null).length;
+  root.innerHTML=`
+    <div class="mock-bar">
+      <div class="timer" id="mock-timer">3:00:00</div>
+      <div class="progress">Question ${m.current+1} of ${m.total} · ${answered} answered · ${m.flagged.size} flagged</div>
+      <button class="btn ghost" onclick="if(confirm('Exit and discard this exam?')){state.mock=null;clearInterval(state.mockTimer);switchView('mock50')}">Exit</button>
+      <button class="btn warn" onclick="if(confirm('Submit your answers and see your score?'))finishMock(false)">Submit</button>
+    </div>
+    <div class="quiz-card">
+      <div class="q-meta">
+        <span class="q-tag ${HY.has(q.chapter)?'hy':''}">Ch. ${q.chapter}</span>
+        <span class="q-num">Q ${m.current+1} / ${m.total}</span>
+      </div>
+      <div class="q-topic">${q.topic||''}</div>
+      <div class="q-text">${escapeHtml(q.q)}</div>
+      <div class="choices" id="mock-choices"></div>
+      <div class="controls">
+        <div>
+          <button class="btn ghost" onclick="mockNav(-1)" ${m.current===0?'disabled style="opacity:.4"':''}>← Prev</button>
+          <button class="btn ghost" onclick="mockNav(1)" ${m.current===m.total-1?'disabled style="opacity:.4"':''}>Next →</button>
+        </div>
+        <button class="btn ${m.flagged.has(m.current)?'warn':''}" onclick="toggleFlag()">${m.flagged.has(m.current)?'★ Flagged':'☆ Flag for review'}</button>
+      </div>
+      <div class="mock-grid-nav" id="mock-nav"></div>
+    </div>
+  `;
+  const choicesEl=document.getElementById('mock-choices');
+  const letters=['A','B','C','D'];
+  q.choices.forEach((c,i)=>{
+    const btn=document.createElement('button');
+    btn.className='choice'+(m.answers[m.current]===i?' selected':'');
+    btn.innerHTML=`<span class="letter">${letters[i]}</span><span>${escapeHtml(c)}</span>`;
+    btn.onclick=()=>mockAnswer(i);
+    choicesEl.appendChild(btn);
+  });
+  const nav=document.getElementById('mock-nav');
+  for(let i=0;i<m.total;i++){
+    const cell=document.createElement('div');
+    cell.className='gn'+(m.answers[i]!==null?' answered':'')+(m.flagged.has(i)?' flagged':'')+(i===m.current?' current':'');
+    cell.textContent=i+1;
+    cell.onclick=()=>{m.current=i;renderMock()};
+    nav.appendChild(cell);
+  }
+  updateMockTimer();
+}
+
+function mockAnswer(i){
+  if(!state.mock)return;
+  state.mock.answers[state.mock.current]=i;
+  renderMock();
+}
+function mockNav(d){
+  if(!state.mock)return;
+  state.mock.current = Math.max(0, Math.min(state.mock.total-1, state.mock.current+d));
+  renderMock();
+}
+function toggleFlag(){
+  if(!state.mock)return;
+  if(state.mock.flagged.has(state.mock.current))state.mock.flagged.delete(state.mock.current);
+  else state.mock.flagged.add(state.mock.current);
+  renderMock();
+}
+
+function finishMock(timedOut){
+  if(!state.mock)return;
+  state.mock.finished=true;
+  clearInterval(state.mockTimer);
+  const m=state.mock;
+  let correct=0;
+  const wrongByCh={};
+  m.qs.forEach((q,i)=>{
+    if(m.answers[i]===q.answer)correct++;
+    else{
+      wrongByCh[q.chapter]=(wrongByCh[q.chapter]||0)+1;
+      // record to mistakes for review mode
+      const idx=getQIndex(q);
+      if(idx>=0 && !state.stats.mistakes.includes(idx))state.stats.mistakes.push(idx);
+    }
+  });
+  const score = Math.round(100*correct/m.total);
+  state.stats.mockHistory = state.stats.mockHistory || [];
+  state.stats.mockHistory.push({
+    kind:m.kind, total:m.total, correct, score, date:Date.now(),
+    durationSec: Math.floor((Date.now()-m.startTime)/1000),
+  });
+  saveStats();renderStats();
+  renderMockResult(score, correct, m, wrongByCh, timedOut);
+}
+
+function renderMockResult(score, correct, m, wrongByCh, timedOut){
+  const root=document.getElementById('view-mock');
+  const pass = score>=70;
+  const elapsed = Math.floor((Date.now()-m.startTime)/1000);
+  const eh = Math.floor(elapsed/3600), em = Math.floor((elapsed%3600)/60);
+  const wrongChs = Object.keys(wrongByCh).sort((a,b)=>wrongByCh[b]-wrongByCh[a]);
+  root.innerHTML=`
+    <div class="mock-result">
+      ${timedOut?'<p style="color:var(--amber);margin-top:0">⏰ Time expired — submitted automatically.</p>':''}
+      <div class="score-hero">
+        <div class="big ${pass?'pass':'fail'}">${score}%</div>
+        <div class="meta">
+          <div class="label">${pass?'PASS — above 70% threshold':'BELOW 70% — keep drilling'}</div>
+          <div class="num">${correct} of ${m.total} correct</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:6px">Took ${eh}h ${em}m · ${m.kind}</div>
+        </div>
+      </div>
+      ${wrongChs.length?`<h3 style="font-size:14px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin:24px 0 12px">Weakest chapters</h3>
+      <div class="breakdown">${wrongChs.slice(0,8).map(ch=>`
+        <div class="breakdown-row ${HY.has(ch)?'hy':''}">
+          <div class="head"><div class="name">${CHAPTERS[ch]||'Ch.'+ch}${HY.has(ch)?' ★':''}</div><div class="ch">Ch.${ch}</div></div>
+          <div class="nums">${wrongByCh[ch]} wrong</div>
+        </div>`).join('')}</div>`:''}
+      <h3 style="font-size:14px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin:24px 0 12px">Question review</h3>
+      <div id="mock-review"></div>
+      <div style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn primary" onclick="renderMockIntro(${m.total})">New attempt →</button>
+        <button class="btn" onclick="setMode('review')">Drill mistakes →</button>
+        <button class="btn ghost" onclick="switchView('stats')">View progress</button>
+      </div>
+    </div>
+  `;
+  const rev=document.getElementById('mock-review');
+  const letters=['A','B','C','D'];
+  m.qs.forEach((q,i)=>{
+    const userIdx=m.answers[i];
+    const ok=userIdx===q.answer;
+    const row=document.createElement('details');
+    row.style.cssText='background:var(--bg-2);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;padding:0;';
+    row.innerHTML=`
+      <summary style="cursor:pointer;padding:12px 16px;font-size:14px;display:flex;gap:10px;align-items:center;list-style:none">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:${ok?'var(--green)':'var(--red)'};font-weight:700;min-width:28px">${ok?'✓':'✗'} ${i+1}</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:${HY.has(q.chapter)?'var(--amber)':'var(--accent)'}">Ch.${q.chapter}</span>
+        <span style="flex:1;color:var(--text);font-weight:500">${escapeHtml(q.q.slice(0,90))}${q.q.length>90?'…':''}</span>
+      </summary>
+      <div style="padding:14px 16px;border-top:1px solid var(--border);font-size:13px">
+        <div style="margin-bottom:10px;line-height:1.5">${escapeHtml(q.q)}</div>
+        ${q.choices.map((c,ci)=>`
+          <div style="padding:6px 10px;margin:4px 0;border-radius:6px;font-size:13px;
+            background:${ci===q.answer?'rgba(16,185,129,.08)':ci===userIdx&&!ok?'rgba(239,68,68,.08)':'transparent'};
+            border:1px solid ${ci===q.answer?'var(--green)':ci===userIdx&&!ok?'var(--red)':'transparent'};
+            color:${ci===q.answer||ci===userIdx?'var(--text)':'var(--muted)'}">
+            <strong>${letters[ci]}.</strong> ${escapeHtml(c)} ${ci===q.answer?'✓':''}${ci===userIdx&&!ok?' ← your answer':''}${userIdx===null&&ci===q.answer?'':''}
+          </div>`).join('')}
+        ${userIdx===null?`<div style="color:var(--amber);font-size:12px;margin-top:6px">(unanswered)</div>`:''}
+        <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);color:var(--text)">${escapeHtml(q.explain)}</div>
+        <div style="margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)"><strong>${q.cite||''}</strong> <a href="pdfs/mpep-${String(q.chapter).padStart(4,'0')}.pdf" target="_blank">open chapter ↗</a></div>
+      </div>
+    `;
+    rev.appendChild(row);
+  });
+}
+
+// ─────────────────────────── MPEP LOOKUP DRILL ───────────────────────────
+function startLookupDrill(){
+  state.lookup = {
+    queue: shuffle(LOOKUP.slice()),
+    idx: 0,
+    startTime: 0,
+    results: [],   // {topic, ms, rating}
+    revealed: false,
+  };
+  renderLookup();
+}
+
+function renderLookup(){
+  const L = state.lookup;
+  if(!L)return;
+  const root = document.getElementById('view-lookup');
+  if(L.idx >= L.queue.length){
+    const avg = L.results.length ? Math.round(L.results.reduce((a,r)=>a+r.ms,0)/L.results.length/1000) : 0;
+    const fast = L.results.filter(r=>r.rating==='fast').length;
+    const slow = L.results.filter(r=>r.rating==='slow').length;
+    root.innerHTML = `
+      <div class="mock-intro">
+        <h2 style="margin-top:0">Lookup drill complete</h2>
+        <div class="mock-grid">
+          <div class="cell"><div class="v">${L.results.length}</div><div class="l">Lookups</div></div>
+          <div class="cell"><div class="v">${avg}s</div><div class="l">Avg time</div></div>
+          <div class="cell"><div class="v" style="color:var(--green)">${fast}</div><div class="l">Fast</div></div>
+          <div class="cell"><div class="v" style="color:var(--red)">${slow}</div><div class="l">Slow</div></div>
+        </div>
+        <p style="color:var(--muted);font-size:13px">Aim for &lt;30s per lookup on exam day. Anything over a minute = drill that chapter's structure until you know where to land.</p>
+        <button class="btn primary" onclick="startLookupDrill()">Run again →</button>
+      </div>`;
+    return;
+  }
+  const item = L.queue[L.idx];
+  const elapsed = L.startTime ? Math.floor((Date.now()-L.startTime)/1000) : 0;
+  root.innerHTML = `
+    <div class="quiz-card">
+      <div class="q-meta">
+        <span class="q-tag ${HY.has(item.chapter)?'hy':''}">Ch. ${item.chapter}${HY.has(item.chapter)?' · high-yield':''}</span>
+        <span class="q-num">Lookup ${L.idx+1} / ${L.queue.length}</span>
+      </div>
+      <div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Find the MPEP section governing</div>
+      <div class="q-text">${escapeHtml(item.topic)}</div>
+      <div style="margin:18px 0;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+        <a class="btn primary" href="pdfs/mpep-${String(item.chapter).padStart(4,'0')}.pdf" target="_blank" onclick="if(!state.lookup.startTime)state.lookup.startTime=Date.now();renderLookup()">Open Ch. ${item.chapter} PDF ↗</a>
+        <div id="lookup-timer" style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--accent)">${L.startTime?elapsed+'s':'--'}</div>
+      </div>
+      ${L.revealed ? `
+        <div class="explain show" style="margin-top:0">
+          <div class="label">Expected section</div>
+          <div class="text" style="font-family:'JetBrains Mono',monospace">${escapeHtml(item.cite)}</div>
+        </div>
+        <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn" onclick="rateLookup('fast')" style="border-color:var(--green);color:var(--green)">⚡ Found it fast (&lt;30s)</button>
+          <button class="btn" onclick="rateLookup('ok')">✓ Found it (30-60s)</button>
+          <button class="btn" onclick="rateLookup('slow')" style="border-color:var(--red);color:var(--red)">⚠ Too slow (&gt;60s)</button>
+        </div>
+      ` : `
+        <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn primary" onclick="revealLookup()">I found it → reveal answer</button>
+          <button class="btn ghost" onclick="skipLookup()">Skip →</button>
+        </div>
+      `}
+    </div>`;
+  if(L.startTime && !L.revealed){
+    if(state.lookupTimer)clearInterval(state.lookupTimer);
+    state.lookupTimer = setInterval(()=>{
+      const el = document.getElementById('lookup-timer');
+      if(!el || !state.lookup || state.lookup.revealed){clearInterval(state.lookupTimer);return}
+      const s = Math.floor((Date.now()-state.lookup.startTime)/1000);
+      el.textContent = s+'s';
+      el.style.color = s<30?'var(--green)':s<60?'var(--amber)':'var(--red)';
+    },500);
+  }
+}
+
+function revealLookup(){
+  const L = state.lookup;
+  if(!L || !L.startTime)L.startTime = Date.now();
+  L.elapsed = Date.now() - L.startTime;
+  L.revealed = true;
+  clearInterval(state.lookupTimer);
+  renderLookup();
+}
+function rateLookup(rating){
+  const L = state.lookup;
+  L.results.push({topic:L.queue[L.idx].topic, ms:L.elapsed||0, rating});
+  L.idx++; L.startTime = 0; L.revealed = false;
+  renderLookup();
+}
+function skipLookup(){
+  state.lookup.idx++;
+  state.lookup.startTime = 0;
+  state.lookup.revealed = false;
+  renderLookup();
+}
+
+// ─────────────────────────── DEADLINE FLASHCARDS ───────────────────────────
+function startDeckDrill(){
+  state.deck = {
+    queue: shuffle(DEADLINES.slice()),
+    idx: 0,
+    flipped: false,
+    results: {known:0, fuzzy:0, unknown:0},
+  };
+  renderDeck();
+}
+
+function renderDeck(){
+  const D = state.deck;
+  if(!D)return;
+  const root = document.getElementById('view-deadlines');
+  if(D.idx >= D.queue.length){
+    const total = D.results.known + D.results.fuzzy + D.results.unknown;
+    root.innerHTML = `
+      <div class="mock-intro">
+        <h2 style="margin-top:0">Deck complete</h2>
+        <div class="mock-grid">
+          <div class="cell"><div class="v" style="color:var(--green)">${D.results.known}</div><div class="l">Knew it</div></div>
+          <div class="cell"><div class="v" style="color:var(--amber)">${D.results.fuzzy}</div><div class="l">Fuzzy</div></div>
+          <div class="cell"><div class="v" style="color:var(--red)">${D.results.unknown}</div><div class="l">Missed</div></div>
+          <div class="cell"><div class="v">${total?Math.round(100*D.results.known/total):0}%</div><div class="l">Solid</div></div>
+        </div>
+        <p style="color:var(--muted);font-size:13px">Patent bar fact patterns hinge on these numbers — every "missed" card is one you need to over-learn before exam day.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn primary" onclick="startDeckDrill()">Shuffle &amp; run again →</button>
+          <button class="btn" onclick="startDeckDrill();state.deck.queue=state.deck.queue.filter((_,i)=>i<10)">Quick 10 →</button>
+        </div>
+      </div>`;
+    return;
+  }
+  const item = D.queue[D.idx];
+  root.innerHTML = `
+    <div class="quiz-card" style="cursor:pointer" onclick="if(!state.deck.flipped){state.deck.flipped=true;renderDeck()}">
+      <div class="q-meta">
+        <span class="q-tag ${HY.has(item.chapter)?'hy':''}">Ch. ${item.chapter}</span>
+        <span class="q-num">Card ${D.idx+1} / ${D.queue.length}</span>
+      </div>
+      <div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">${D.flipped?'Answer':'Question'}</div>
+      <div class="q-text" style="font-size:${D.flipped?'17':'18'}px;min-height:80px">${escapeHtml(D.flipped?item.a:item.q)}</div>
+      ${D.flipped?`<div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:18px"><strong>${escapeHtml(item.cite)}</strong> <a href="pdfs/mpep-${String(item.chapter).padStart(4,'0')}.pdf" target="_blank" onclick="event.stopPropagation()">open chapter ↗</a></div>`:''}
+      <div style="display:flex;gap:10px;flex-wrap:wrap" onclick="event.stopPropagation()">
+        ${D.flipped ? `
+          <button class="btn" onclick="rateCard('known')" style="border-color:var(--green);color:var(--green)">✓ Knew it</button>
+          <button class="btn" onclick="rateCard('fuzzy')" style="border-color:var(--amber);color:var(--amber)">~ Fuzzy</button>
+          <button class="btn" onclick="rateCard('unknown')" style="border-color:var(--red);color:var(--red)">✗ Missed</button>
+        ` : `
+          <button class="btn primary" onclick="state.deck.flipped=true;renderDeck()">Flip card →</button>
+          <button class="btn ghost" onclick="state.deck.idx++;state.deck.flipped=false;renderDeck()">Skip →</button>
+        `}
+      </div>
+      ${!D.flipped?'<div style="margin-top:14px;font-size:12px;color:var(--dim)">(click anywhere to flip)</div>':''}
+    </div>`;
+}
+
+function rateCard(rating){
+  state.deck.results[rating]++;
+  state.deck.idx++;
+  state.deck.flipped = false;
+  renderDeck();
+}
+
+// ─────────────────────────── WIRE UP ───────────────────────────
 document.querySelectorAll('.nav-item[data-mode]').forEach(el=>{
   el.onclick=()=>setMode(el.dataset.mode);
 });
@@ -581,17 +1225,53 @@ document.querySelectorAll('.nav-item[data-view]').forEach(el=>{
     switchView(el.dataset.view);
   };
 });
-document.getElementById('next-btn').onclick=nextQuestion;
-document.getElementById('skip-btn').onclick=nextQuestion;
+document.querySelectorAll('.chip[data-aia]').forEach(el=>{
+  el.onclick=()=>{
+    document.querySelectorAll('.chip[data-aia]').forEach(c=>c.classList.remove('active'));
+    el.classList.add('active');
+    state.aiaFilter = el.dataset.aia;
+    buildQueue();
+    if(document.getElementById('view-quiz').style.display!=='none')nextQuestion();
+  };
+});
+
 document.getElementById('reset-btn').onclick=()=>{
-  if(confirm('Reset all progress?')){
-    state.stats={total:0,correct:0,streak:0,byChapter:{},mistakes:[]};
+  if(confirm('Reset all progress, including mock exam history?')){
+    state.stats={total:0,correct:0,streak:0,byChapter:{},mistakes:[],mockHistory:[]};
     saveStats();renderStats();renderBreakdown();
     state.queue=[];nextQuestion();
   }
 };
 document.addEventListener('keydown',e=>{
   if(['INPUT','TEXTAREA'].includes(document.activeElement?.tagName))return;
+  if(state.mock && !state.mock.finished){
+    if(['1','2','3','4'].includes(e.key)){mockAnswer(+e.key-1);return}
+    if(e.key==='ArrowRight')mockNav(1);
+    if(e.key==='ArrowLeft')mockNav(-1);
+    if(e.key==='f' || e.key==='F')toggleFlag();
+    return;
+  }
+  // Deadline deck keys
+  if(document.getElementById('view-deadlines').style.display!=='none' && state.deck){
+    if(e.key===' ' || e.key==='Enter'){e.preventDefault(); if(!state.deck.flipped){state.deck.flipped=true;renderDeck()} return}
+    if(state.deck.flipped){
+      if(e.key==='1')rateCard('known');
+      if(e.key==='2')rateCard('fuzzy');
+      if(e.key==='3')rateCard('unknown');
+    }
+    return;
+  }
+  // Lookup drill keys
+  if(document.getElementById('view-lookup').style.display!=='none' && state.lookup){
+    if((e.key===' '||e.key==='Enter') && !state.lookup.revealed){e.preventDefault();revealLookup();return}
+    if(state.lookup.revealed){
+      if(e.key==='1')rateLookup('fast');
+      if(e.key==='2')rateLookup('ok');
+      if(e.key==='3')rateLookup('slow');
+    }
+    return;
+  }
+  // Standard practice
   if(['1','2','3','4'].includes(e.key)){
     const i=+e.key-1;
     const chs=document.querySelectorAll('.choice');
