@@ -592,7 +592,7 @@ function renderQuestion(){
     <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
   `;
   const choicesEl=document.getElementById('choices');
-  const letters=['A','B','C','D'];
+  const letters=['A','B','C','D','E'];
   q.choices.forEach((c,i)=>{
     const btn=document.createElement('button');
     btn.className='choice';
@@ -926,7 +926,7 @@ function renderMock(){
     </div>
   `;
   const choicesEl=document.getElementById('mock-choices');
-  const letters=['A','B','C','D'];
+  const letters=['A','B','C','D','E'];
   q.choices.forEach((c,i)=>{
     const btn=document.createElement('button');
     btn.className='choice'+(m.answers[m.current]===i?' selected':'');
